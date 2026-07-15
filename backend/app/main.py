@@ -1,12 +1,12 @@
-from fastapi import FastAPI, Depends
-from sqlmodel import Session
+from fastapi import FastAPI, Depends, APIRouter
+from sqlmodel import Session, select
 from app.database import get_db, engine
-from app.models import SQLModel
-# from app.routers import users
+from app.models import Question, SQLModel
+from app.routers import questions
 
 # Khởi tạo backend
 app = FastAPI(title="bkti")
-
+app.include_router(questions.router)
 
 @app.get("/")
 def read_root():
