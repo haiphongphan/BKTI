@@ -48,7 +48,6 @@ class Answer(SQLModel, table = True):
 
 class User_ans(SQLModel, table = True):
     session_id: int = Field(primary_key=True, foreign_key="session.id", ondelete="CASCADE")
-    question_id: int = Field(foreign_key="question.id", ondelete="CASCADE")
-    answer_id: int = Field(foreign_key="answer.id", ondelete="CASCADE")
+    trait_code: int = Field(foreign_key="trait.code", ondelete="CASCADE")
     user_ans_id: Optional[int] = Field(default=None, primary_key=True)
 
