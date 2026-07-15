@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends
 from sqlmodel import Session
 from app.database import get_db, engine
 from app.models import SQLModel
-# from app.routers import users
+from app.routers import quiz
 
 # Khởi tạo backend
 app = FastAPI(title="bkti")
@@ -18,3 +18,5 @@ def test_db(db: Session = Depends(get_db)):
 
 # Khởi tạo database
 SQLModel.metadata.create_all(engine)
+
+app.include_router(quiz.router)
