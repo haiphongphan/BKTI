@@ -23,7 +23,7 @@ SQLModel.metadata.create_all(engine)
 #Bật CORS để xài figma
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["LINK"] # domain thì để đây,
+    allow_origins=["LINK"], # domain thì để đây
     allow_credentials=True,
     allow_methods=['*'],
     allow_headers=['*']
