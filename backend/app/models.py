@@ -12,8 +12,8 @@ class Personality(SQLModel, table = True):
     name: str = Field()
     description: str = Field()
 
-class Session(SQLModel, table = True):
-    __tablename__ = "session"
+class Task_Session(SQLModel, table = True):
+    __tablename__ = "task_session"
     id: Optional[int] = Field(default=None, primary_key=True)
     start: datetime = Field(default_factory = datetime.now)
     end: datetime = Field(default_factory = datetime.now)
@@ -23,7 +23,6 @@ class Session(SQLModel, table = True):
 class Dimension(SQLModel, table = True):
     __tablename__ = "dimension"
     id: Optional[int] = Field(default=None, primary_key=True)
-    description: str = Field()
     name: str = Field()
 
 class Question(SQLModel, table = True):
