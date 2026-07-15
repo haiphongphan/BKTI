@@ -46,6 +46,7 @@ class Answer(SQLModel, table = True):
     question_id: int = Field(foreign_key="question.id", ondelete="CASCADE")
 
 class User_ans(SQLModel, table = True):
+    __tablename__ = "user_ans"
     p_code: str = Field(foreign_key="personality.code", ondelete="CASCADE")
     user_ans_id: Optional[int] = Field(default=None, primary_key=True)
 
