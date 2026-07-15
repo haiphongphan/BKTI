@@ -12,5 +12,6 @@ Cài xong chạy các lệnh dưới:
 `CREATE DATABASE bkti_db;`
 
 ## Chạy backend
+`cd backend`  
 Chạy lệnh `uvicorn app.main:app --reload`  
 Mở đường dẫn `http://127.0.0.1:8000/`
