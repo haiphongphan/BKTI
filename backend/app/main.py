@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session, select
 from app.database import get_db, engine
 from app.models import SQLModel, Question
@@ -20,3 +21,18 @@ def test_db(db: Session = Depends(get_db)):
 SQLModel.metadata.create_all(engine)
 
 app.include_router(quiz.router)
+
+# Khai báo danh sách các địa chỉ fe được phép gọi vào be
+origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:5500",
+    "*", # Để test, xóa khi public
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], # Cho phép tất cả các lệnh GET, POST, PUT, DELETE...
+    allow_headers=["*"], # Cho phép tất cả các loại dữ liệu truyền lên
+)
