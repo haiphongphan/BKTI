@@ -11,7 +11,7 @@
 
 BEGIN;
 
-INSERT INTO dimension (id, name) VALUES
+INSERT INTO Dimension (id, name) VALUES
     (0, 'Trung lập'),
     (1, 'Giao tiếp'),
     (2, 'Chuyên môn'),
