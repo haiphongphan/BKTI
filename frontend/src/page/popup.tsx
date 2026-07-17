@@ -6,7 +6,7 @@ import Ins from "/image/ins.svg";
 import "./popupstyle.css";
 
 
-function Popup(){
+function Popup({onClose, onConfirm} : any){
   return (
     <div className="popup">
       <img className="ellipse" alt="Ellipse" src={CSEMul} />
