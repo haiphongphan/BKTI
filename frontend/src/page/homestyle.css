@@ -199,6 +199,7 @@
   justify-content: center;
   position: absolute;
   top: 333px;
+  cursor: pointer;
 }
 
 .homepage .frame-2 {
@@ -206,6 +207,7 @@
   border-radius: 91px;
   left: calc(50.00% - 192px);
   width: 384px;
+  border: none;
 }
 
 .homepage .text-wrapper-6 {
