@@ -17,4 +17,11 @@ Cài xong chạy các lệnh dưới:
 `python3 seed_data.py`  
 ### Khởi tạo
 Chạy lệnh `uvicorn app.main:app --reload`  
-Mở đường dẫn `http://127.0.0.1:8000/`
+
+## Chạy frontend
+`cd frontend`  
+### Tải thư viện
+`npm install`
+### Chạy frontend
+`npm run dev`  
+Mở đường dẫn và khen: `http://localhost:5173/`
