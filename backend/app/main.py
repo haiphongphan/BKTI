@@ -11,11 +11,11 @@ app.include_router(questions.router)
 
 @app.get("/")
 def read_root():
-    return {"message:" "Chào mừng đến với BKTI"}
+    return {"message": "Chào mừng đến với BKTI"}
 
 @app.get("/test-db")
 def test_db(db: Session = Depends(get_db)):
-    return {"status:" "Kết nối PostgreSQL bằng SQLModel thành công!"}
+    return {"status": "Kết nối PostgreSQL bằng SQLModel thành công!"}
 
 # Khởi tạo database
 SQLModel.metadata.create_all(engine)
@@ -24,7 +24,7 @@ app.include_router(quiz.router)
 
 # Khai báo danh sách các địa chỉ fe được phép gọi vào be
 origins = [
-    "http://localhost:3000",
+    "http://localhost:5173",
     "http://127.0.0.1:5500",
     "*", # Để test, xóa khi public
 ]
