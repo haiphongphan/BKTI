@@ -8,6 +8,7 @@ function Answer(){
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true)
+  const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
 
   useEffect(()=> {
     const getQuestionFromBackend = async () => {
@@ -104,14 +105,26 @@ function Answer(){
           const btnClassMap = ["answer-a group", "answer-b group-4", "answer-c group-5"];
           const currentClass = btnClassMap[index] || "answer-a group";
 
+          const isSelected = userAnswers[currentQuestion.id.toString()] === opt.id;
+
           return (
-            <button key={index} className={`answer-btn ${currentClass}`}>
-              <div className="answer-highlight rectangle-2" />
+            <button key={index} className={`answer-btn ${currentClass}`}
+            onClick={() => {
+              setUserAnswers(prev => ({
+                ...prev,
+                [currentQuestion.id.toString()]: opt.id
+              }));
+            }}
+            >
+              <div 
+                className="answer-highlight rectangle-2" 
+                style={isSelected ? { backgroundColor: '#bb9fe0', border: '2px solid #6f42c1' } : {}}
+              />
               <span className="answer-label text-wrapper">
                 {String.fromCharCode(65 + index)} {/* Tự sinh chữ A, B, C */}
               </span>
               <div className="answer-text lorem-ipsum-dolor">
-                {opt.content} {/* 🌟 BẮT BUỘC PHẢI LÀ opt.content, TUYỆT ĐỐI KHÔNG ĐỂ CHỮ opt TRƠN TRỌI */}
+                {opt.content} {}
               </div>
             </button>
           );

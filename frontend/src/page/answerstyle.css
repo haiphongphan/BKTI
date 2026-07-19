@@ -594,3 +594,10 @@
   top: 443px !important;
 }
 */
+
+
+/* Khi nút được chọn, cho nó dịch lên một chút hoặc đổi màu viền tùy bạn */
+
+.answer-highlight.active-bg {
+  background-color: #bb9fe0 !important;
+}
