@@ -5,23 +5,52 @@ import Mail from "/image/mail.svg";
 import Ins from "/image/ins.svg";
 import "./popupstyle.css";
 
-
-function Popup({onClose, onConfirm} : any){
+function Popup({onClose} : any){
   return (
     <div className="popup">
       <img className="ellipse" alt="Ellipse" src={CSEMul} />
       <div className="text-wrapper">@csemultimedia</div>
-      <div className="group" >
-        <img className="facebook" alt="Vector" src={FB} />
-        <img className="tiktok" alt="Vector" src={TT} />
-        <img className="mail" alt="Vector" src={Mail} />
-        <img className="insta" alt="Vector" src={Ins} />
+      <div className="group">
+        <a 
+          href="https://www.facebook.com/BKCSE.Multimedia" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-btn"
+        >
+          <img className="facebook" alt="Facebook" src={FB} />
+        </a>
+        <a 
+          href="https://www.tiktok.com/@csemultimedia" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-btn"
+        >
+          <img className="tiktok" alt="TikTok" src={TT} />
+        </a>
+        <a 
+          href="mailto:dtn-ktmt@hcmut.edu.vn" 
+          className="social-btn"
+        >
+          <img className="mail" alt="Mail" src={Mail} />
+        </a>
+        <a 
+          href="https://cse.hcmut.edu.vn/en" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="social-btn"
+        >
+          <img className="insta" alt="Instagram" src={Ins} />
+        </a>
       </div>
+
+      {/* ── Follow button — điều hướng về Home ── */}
       <div className="button">
-        <div className="rectangle" />
-        <p className="div">Bấm follow page để có thể làm bài</p>
+        <button className="follow-btn" onClick={onClose}>
+          Bấm follow page để có thể làm bài
+        </button>
       </div>
     </div>
   );
 };
-export default Popup
+
+export default Popup;
