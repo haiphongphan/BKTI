@@ -1,18 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import shape from "/image/shape.svg";
 import { ProgressBar } from "../elements/progressbar";
-import { QUESTIONS } from "../data/questions";
-import { ANSWER } from "../data/answer";
 import "./answerstyle.css";
 
 function Answer(){
+  const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const currentQuestion = QUESTIONS[currentIndex];
-  const totalQuestions = QUESTIONS.length;
+  const [loading, setLoading] = useState(true)
 
-  const answerA = ANSWER[currentIndex * 3];
-  const answerB = ANSWER[currentIndex * 3 + 1];
-  const answerC = ANSWER[currentIndex * 3 + 2];
+  useEffect(()=> {
+    const getQuestionFromBackend = async () => {
+      try {
+        const respond = await axios.get("http://127.0.0.1:8000/questions");
+        setQuestions(respond.data);
+      } catch (error) {
+        console.error("Lỗi kết nối API lấy câu hỏi:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    getQuestionFromBackend();
+  },[])
+
+  if (loading) return <div style={{ padding: "50px", alignContent: "center" }}>Đang cập nhật câu hỏi</div>;
+  if (questions.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy câu hỏi nào!</div>;
+
+  const currentQuestion = questions[currentIndex];
+  const totalQuestions = questions.length;
+
+  const answers = currentQuestion.answers || [];
 
   const goToPreviousQuestion = () => {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
@@ -23,7 +40,7 @@ function Answer(){
       setCurrentIndex((prev) => prev + 1);
       return;
     }
-    (window as any).navigateToResult?.();
+    // Thêm nút chuyển kết quả
   };
 
   return (
@@ -70,7 +87,7 @@ function Answer(){
         <div className="question-highlight rectangle-9" />
         <div className="question-label-wrap">
           <div className="question-label text-wrapper-7">
-            Câu {currentQuestion.id}
+            Câu {currentIndex + 1}
           </div>
         </div>
         <div className="question-text-wrap">
@@ -80,7 +97,28 @@ function Answer(){
         </div>
       </div>
 
-      {/* ── Đáp án A  ── */}
+      {/* --- Cụm hiển thị Đáp án --- */}
+      <div className="answers-container">
+        {answers.map((opt: any, index: number) => {
+          // Giữ nguyên cách map class CSS của Figma
+          const btnClassMap = ["answer-a group", "answer-b group-4", "answer-c group-5"];
+          const currentClass = btnClassMap[index] || "answer-a group";
+
+          return (
+            <button key={index} className={`answer-btn ${currentClass}`}>
+              <div className="answer-highlight rectangle-2" />
+              <span className="answer-label text-wrapper">
+                {String.fromCharCode(65 + index)} {/* Tự sinh chữ A, B, C */}
+              </span>
+              <div className="answer-text lorem-ipsum-dolor">
+                {opt.content} {/* 🌟 BẮT BUỘC PHẢI LÀ opt.content, TUYỆT ĐỐI KHÔNG ĐỂ CHỮ opt TRƠN TRỌI */}
+              </div>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* ── Đáp án A  ──
       {answerA && (
         <button key={`ans-a-${currentIndex}`} className="answer-btn answer-a group">
           <div className="answer-highlight rectangle-2" />
@@ -89,9 +127,9 @@ function Answer(){
               {answerA.content}
           </div>
         </button>
-      )}
+      )} */}
 
-      {/* ── Đáp án B  ── */}
+      {/* ── Đáp án B  ──
       {answerB && (
         <button key={`ans-b-${currentIndex}`} className="answer-btn answer-b group-4">
           <div className="answer-highlight rectangle-8" />
@@ -100,9 +138,9 @@ function Answer(){
             {answerB.content}
           </p>
         </button>
-      )}
+      )} */}
 
-      {/* ── Đáp án C  ── */}
+      {/* ── Đáp án C  ──
       {answerC && (
         <button key={`ans-c-${currentIndex}`} className="answer-btn answer-c group-5">
           <div className="answer-highlight rectangle-8" />
@@ -111,7 +149,7 @@ function Answer(){
             {answerC.content}
           </p>
         </button>
-      )}
+      )} */}
 
       {/* ── Đáp án D ──  option bỏ*/}
       {/* <button className="answer-btn answer-d group-6">
@@ -126,12 +164,8 @@ function Answer(){
         </p>
       </button> */}
 
-      {/* ── Navigation buttons ── */}
-      <button
-        className="nav-btn div-wrapper"
-        onClick={goToPreviousQuestion}
-        disabled={currentIndex === 0}
-      >
+      {/* ── Điều hướng câu hỏi ── */}
+      <button className="nav-btn div-wrapper" onClick={goToPreviousQuestion} disabled={currentIndex === 0}>
         <span className="text-wrapper-2">Câu trước</span>
       </button>
       <button className="nav-btn frame" onClick={goToNextQuestion}>
@@ -141,4 +175,4 @@ function Answer(){
   );
 };
 
-export default Answer
+export default Answer;
