@@ -601,3 +601,10 @@
 .answer-highlight.active-bg {
   background-color: #bb9fe0 !important;
 }
+
+/* Khóa nút */
+.nav-btn.disabled-btn {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none; /* Khóa hoàn toàn mọi tương tác chuột */
+}

@@ -29,6 +29,7 @@ function Answer(){
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = questions.length;
+  const isCurrentQuestionAnswered = !!userAnswers[currentQuestion.id.toString()];
 
   const answers = currentQuestion.answers || [];
 
@@ -131,57 +132,20 @@ function Answer(){
         })}
       </div>
 
-      {/* ── Đáp án A  ──
-      {answerA && (
-        <button key={`ans-a-${currentIndex}`} className="answer-btn answer-a group">
-          <div className="answer-highlight rectangle-2" />
-          <span className="answer-label text-wrapper">A</span>
-          <div className="answer-text lorem-ipsum-dolor">
-              {answerA.content}
-          </div>
-        </button>
-      )} */}
-
-      {/* ── Đáp án B  ──
-      {answerB && (
-        <button key={`ans-b-${currentIndex}`} className="answer-btn answer-b group-4">
-          <div className="answer-highlight rectangle-8" />
-          <span className="answer-label text-wrapper-6">B</span>
-          <p className="answer-text p">
-            {answerB.content}
-          </p>
-        </button>
-      )} */}
-
-      {/* ── Đáp án C  ──
-      {answerC && (
-        <button key={`ans-c-${currentIndex}`} className="answer-btn answer-c group-5">
-          <div className="answer-highlight rectangle-8" />
-          <span className="answer-label text-wrapper-6">C</span>
-          <p className="answer-text lorem-ipsum-dolor-2">
-            {answerC.content}
-          </p>
-        </button>
-      )} */}
-
-      {/* ── Đáp án D ──  option bỏ*/}
-      {/* <button className="answer-btn answer-d group-6">
-        <div className="answer-highlight rectangle-8" />
-        <span className="answer-label text-wrapper-6">D</span>
-        <p className="answer-text lorem-ipsum-dolor-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-          rhoncus, quam vel lobortis fermentum,
-          <br />
-          sem ipsum suscipit turpis, eleifend luctus nibh turpis et nulla. Sed
-          luctus purus orci,
-        </p>
-      </button> */}
 
       {/* ── Điều hướng câu hỏi ── */}
       <button className="nav-btn div-wrapper" onClick={goToPreviousQuestion} disabled={currentIndex === 0}>
         <span className="text-wrapper-2">Câu trước</span>
       </button>
-      <button className="nav-btn frame" onClick={goToNextQuestion}>
+      <button 
+        // Chưa chọn đáp án
+        className={`nav-btn frame ${!isCurrentQuestionAnswered ? 'disabled-btn' : ''}`} 
+        
+        // Không cho chọn nút
+        disabled={!isCurrentQuestionAnswered} 
+        
+        onClick={goToNextQuestion}
+      >
         <span className="text-wrapper-2">Câu kế tiếp</span>
       </button>
     </div>
