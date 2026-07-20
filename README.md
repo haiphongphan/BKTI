@@ -14,7 +14,7 @@ Cài xong chạy các lệnh dưới:
 ## Chạy backend
 `cd backend`  
 ### Nạp data
-`python3 seed_data.py`  
+`python3 app/seed_data.py`  
 ### Khởi tạo
 Chạy lệnh `uvicorn app.main:app --reload`  
 
