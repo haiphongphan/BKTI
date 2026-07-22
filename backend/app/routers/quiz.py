@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlmodel import Session, select
+from sqlmodel import Session, select, func
 from app.database import get_db
 from app.models import User_ans, Personality
 from app.schemas import QuizSubmit
@@ -87,4 +87,31 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
         "name": existing_personality.name,
         "description": existing_personality.description
     }
-     
+
+
+@router.get("/ranking")
+def ranking(db: Session = Depends(get_db)):
+    rank = (
+        select(User_ans.p_code, Personality.name, Personality.description, func.count())
+        .join(Personality, User_ans.p_code == Personality.code)
+        .group_by(User_ans.p_code, Personality.name, Personality.description)
+        .order_by(func.count().desc())
+    )
+
+    result = db.exec(rank).all()
+
+    total_count = sum(res[3] for res in result)
+
+    return {
+        "message": "Ranking hiện tại",
+        "ranking": [
+            {
+                "code": res[0], 
+                "name": res[1],
+                "description": res[2],
+                "count": res[3], 
+                "percentage": round((res[3] / total_count) * 100, 2) if total_count > 0 else 0,
+                "rank": i   
+            } for i, res in enumerate(result, start = 1)
+        ]
+    }   
