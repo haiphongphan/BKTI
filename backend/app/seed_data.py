@@ -1,6 +1,5 @@
 import csv
 from sqlmodel import Session, create_engine, SQLModel, text
-# Import các Model từ file models.py của bạn
 from models import Trait, Personality, Dimension, Question, Answer
 from config import settings
 

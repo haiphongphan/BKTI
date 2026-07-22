@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Dict
+from typing import Dict
 
 class QuizSubmit(BaseModel):
     session_id: int

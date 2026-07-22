@@ -2,54 +2,52 @@ id,content,trait_code,question_id
 1,"Ừ thì trân châu nào cũng là trân châu mà, chịu khó uống trân châu trắng một bữa...",G,1
 2,"Tổ chức vote nhanh với những người anh em, chọn ý kiến của số đông.",F_G,1
 3,"""Các bạn đi nấu trân châu đen ngay cho mình.""",G,1
-4,"Ôi ngại lắm, bật làm gì, cay thì chat thôi là được rồi.",G,1
-5,"Khi chơi với bạn bè thì sẽ bật, với người lạ thì không.",F_G,1
-6,"Biết nguyên tắc vàng làm nên chiến thắng là gì không? LÀ GIAO TIẾP, GIAO TIẾP ĐÓ!",G,1
-7,Đồng ý,G,1
-8,"Thỉnh thoảng thôi, không có nhiều lắm đâu.",F_G,1
-9,Không đồng ý.,G,1
-10,"Cũng không cần căng thẳng quá, lên tới lớp chậm một chút cũng được.",G,1
-11,"Lườm nhẹ đối phương, sau đó phốt họ trên group HCMUT.",F_G,1
-12,"Nhẹ nhàng vỗ vai đối phương ""bạn ơi chưa tày đâu, mình tới trước bạn đấy nhé""",G,1
-13,Larp larp larp 67 67 67 gogogogooggg,G,1
-14,Chạm cỏ là cái jz...,F_G,1
-15,Ở trong nhà cả ngày không thấy chán à?,G,1
-16,"Thì chắc người ta cũng áp lực, kiểu gì cũng sẽ có một người nào đó lên tiếng thôi...",G,1
-17,"""Mọi người ơi mình có nên làm gì đó không nhỉ...""",F_G,1
-18,"Phá băng, nắm quyền nhóm trưởng, đưa mọi thứ vào khuôn khổ. Tất cả cũng là vì mình thôi!",G,1
-19,Sao không nghĩ là sinh viên ngày nay giỏi hơn trước mà cứ đổ lỗi cho hệ thống?,V,2
-20,"Mình không biết nữa, thấy phe nào cũng đúng.",V_H,2
-21,Đồng ý. Không thể phủ nhận là dạo này bằng giỏi bằng xuất sắc nhiều hơn hẳn.,H,2
-22,"Đồng ý, biết AI làm gì để nó không quay ngược lại điều khiển mình là ok rồi.",V,2
-23,Trung lập,V_H,2
-24,"Không đồng ý, dù gì nắm vững nền vẫn hơn.",H,2
-25,Vào cơ sở vật chất và các hoạt động chăm sóc đời sống tinh thần cho sinh viên,V,2
-26,"Cái gì cũng được, cải thiện thì đều là điều tốt.",V_H,2
-27,Vào học bổng khuyến khích học tập và các phần mềm bản quyền.,H,2
-28,"Đi thử xem sao, có Google Map hỗ trợ mà.",V,2
-29,X (câu này chỉ có 2 đáp án),V_H,2
-30,"Thôi ngại lắm, đường nào chả là đường tới trường là được rồi, đi xong lạc thì lại khổ.",H,2
-31,"Có, chính là mình đây! 10 group thì 9 group có mặt mình rồi",V,2
-32,Mình có tham gia nhưng không nhiều và cũng không hóng mấy.,V_H,2
-33,Ý là tại sao phải làm như vậy ý?,H,2
-34,Khai phóng,V,2
-35,Sáng tạo,V_H,2
-36,Tiên phong,H,2
-37,"Chuẩn sách giáo khoa, xuất phát từ sớm, không vội vàng",C,3
-38,"Tùy, cứ học thôi, chiến lược gì giờ...",C_M,3
-39,"""CHI MOT DEM LA DU🔥""",M,3
-40,"Không có thành công nào là dễ dàng, để được vậy chắc các bạn cũng đánh đổi thời gian và sức khỏe nhiều lắm, thôi mình cứ học tốt sống khỏe là được không cần cố quá hihi.",C,3
-41,"Ôi học bổng dù gì cũng là trò chơi may rủi mà, gặp giáo viên dễ thì điểm lại cao thôi chả bù cho mình.",C_M,3
-42,"Không có lời bào chữa nào ngoài việc mình chưa đủ cố gắng và chưa dám đánh đổi, kì sau mình sẽ cố gắng hơn nữa!",M,3
-43,Hóa cô tiên thiện lành hòa giải cả 2 bên.,C,3
-44,Bật chế độ ngồi xem chứ can dự vào khói lửa chiến trường làm gì...,C_M,3
-45,"Chọn về phe mà lý trí bạn thấy là đúng. Dù gì thì kết quả đầu ra vẫn là ưu tiên số 1, không nên ngại việc tranh cãi.",M,3
-46,"Không đồng ý lắm, mình vào vì nó hot/ được người thân khuyên/ vì điểm nó cao flex nó đã...",C,3
-47,Trung lập,C_M,3
-48,Đồng ý.,M,3
-49,"Thôi nộp đi, còn một tiếng nữa fix vội vội vàng vàng rồi lại sai thêm lại khổ.",C,3
-50,X (câu này chỉ có 2 đáp án),C_M,3
-51,Không có gì là không thể. Bật chế độ Max Verstappen lên!,M,3
-52,"Ừ chắc là do mình tồi thật, mình nên dành thời gian cho cô ấy nhiều hơn.",C,3
-53,Người đang làm bài test này là nữ bạn ơi...,C_M,3
-54,Nhưng mà tôi cũng đâu có muốn học nhiều? Sao có thể kết luận chụp mũ như thế?,M,3
+4,"Ôi ngại lắm, bật làm gì, cay thì chat thôi là được rồi.",G,2
+5,"Khi chơi với bạn bè thì sẽ bật, với người lạ thì không.",F_G,2
+6,"Biết nguyên tắc vàng làm nên chiến thắng là gì không? LÀ GIAO TIẾP, GIAO TIẾP ĐÓ!",G,2
+7,Đồng ý,G,3
+8,"Thỉnh thoảng thôi, không có nhiều lắm đâu.",F_G,3
+9,Không đồng ý.,G,3
+10,"Cũng không cần căng thẳng quá, lên tới lớp chậm một chút cũng được.",G,4
+11,"Lườm nhẹ đối phương, sau đó phốt họ trên group HCMUT.",F_G,4
+12,"Nhẹ nhàng vỗ vai đối phương ""bạn ơi chưa tày đâu, mình tới trước bạn đấy nhé""",G,4
+13,Larp larp larp 67 67 67 gogogogooggg,G,5
+14,Chạm cỏ là cái jz...,F_G,5
+15,Ở trong nhà cả ngày không thấy chán à?,G,5
+16,"Thì chắc người ta cũng áp lực, kiểu gì cũng sẽ có một người nào đó lên tiếng thôi...",G,6
+17,"""Mọi người ơi mình có nên làm gì đó không nhỉ...""",F_G,6
+18,"Phá băng, nắm quyền nhóm trưởng, đưa mọi thứ vào khuôn khổ. Tất cả cũng là vì mình thôi!",G,6
+19,Sao không nghĩ là sinh viên ngày nay giỏi hơn trước mà cứ đổ lỗi cho hệ thống?,V,7
+20,"Mình không biết nữa, thấy phe nào cũng đúng.",V_H,7
+21,Đồng ý. Không thể phủ nhận là dạo này bằng giỏi bằng xuất sắc nhiều hơn hẳn.,H,7
+22,"Đồng ý, biết AI làm gì để nó không quay ngược lại điều khiển mình là ok rồi.",V,8
+23,Trung lập,V_H,8
+24,"Không đồng ý, dù gì nắm vững nền vẫn hơn.",H,8
+25,Vào cơ sở vật chất và các hoạt động chăm sóc đời sống tinh thần cho sinh viên,V,9
+26,"Cái gì cũng được, cải thiện thì đều là điều tốt.",V_H,9
+27,Vào học bổng khuyến khích học tập và các phần mềm bản quyền.,H,9
+28,"Đi thử xem sao, có Google Map hỗ trợ mà.",V,10
+29,"Thôi ngại lắm, đường nào chả là đường tới trường là được rồi, đi xong lạc thì lại khổ.",H,10
+30,"Có, chính là mình đây! 10 group thì 9 group có mặt mình rồi",V,11
+31,Mình có tham gia nhưng không nhiều và cũng không hóng mấy.,V_H,11
+32,Ý là tại sao phải làm như vậy ý?,H,11
+33,Khai phóng,V,12
+34,Sáng tạo,V_H,12
+35,Tiên phong,H,12
+36,"Chuẩn sách giáo khoa, xuất phát từ sớm, không vội vàng",C,13
+37,"Tùy, cứ học thôi, chiến lược gì giờ...",C_M,13
+38,"""CHI MOT DEM LA DU🔥""",M,13
+39,"Không có thành công nào là dễ dàng, để được vậy chắc các bạn cũng đánh đổi thời gian và sức khỏe nhiều lắm, thôi mình cứ học tốt sống khỏe là được không cần cố quá hihi.",C,14
+40,"Ôi học bổng dù gì cũng là trò chơi may rủi mà, gặp giáo viên dễ thì điểm lại cao thôi chả bù cho mình.",C_M,14
+41,"Không có lời bào chữa nào ngoài việc mình chưa đủ cố gắng và chưa dám đánh đổi, kì sau mình sẽ cố gắng hơn nữa!",M,14
+42,Hóa cô tiên thiện lành hòa giải cả 2 bên.,C,15
+43,Bật chế độ ngồi xem chứ can dự vào khói lửa chiến trường làm gì...,C_M,15
+44,"Chọn về phe mà lý trí bạn thấy là đúng. Dù gì thì kết quả đầu ra vẫn là ưu tiên số 1, không nên ngại việc tranh cãi.",M,15
+45,"Không đồng ý lắm, mình vào vì nó hot/ được người thân khuyên/ vì điểm nó cao flex nó đã...",C,16
+46,Trung lập,C_M,16
+47,Đồng ý.,M,16
+48,"Thôi nộp đi, còn một tiếng nữa fix vội vội vàng vàng rồi lại sai thêm lại khổ.",C,17
+49,Không có gì là không thể. Bật chế độ Max Verstappen lên!,M,17
+50,"Ừ chắc là do mình tồi thật, mình nên dành thời gian cho cô ấy nhiều hơn.",C,18
+51,Người đang làm bài test này là nữ bạn ơi...,C_M,18
+52,Nhưng mà tôi cũng đâu có muốn học nhiều? Sao có thể kết luận chụp mũ như thế?,M,18
