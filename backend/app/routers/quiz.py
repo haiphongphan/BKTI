@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlmodel import Session, select
 from app.database import get_db
-from app.models import User_ans
+from app.models import User_ans, Personality
 from app.schemas import QuizSubmit
 import random
 
@@ -76,8 +76,15 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(result_db)
 
+    # Tìm thông tin của personality đó
+    statement = select(Personality).where(Personality.code == personality)
+    existing_personality = db.exec(statement=statement).first()
+
+
     return {
         "message": "Nộp bài thành công!",
-        "personality": personality,
+        "code": existing_personality.code,
+        "name": existing_personality.name,
+        "description": existing_personality.description
     }
      
