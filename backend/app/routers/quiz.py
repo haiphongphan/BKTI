@@ -69,9 +69,9 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
         if state_3 == "C_M":
             state_3 = random.choice(['C', 'M'])
 
-    personality = state_1 + state_2 + state_3
+        personality = state_1 + state_2 + state_3
 
-    result_db = User_ans(session_id=submission.session_id, p_code=personality)
+    result_db = User_ans(p_code=personality)
     db.add(result_db)
     db.commit()
     db.refresh(result_db)

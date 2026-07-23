@@ -8,7 +8,9 @@ function Answer(){
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true)
-  const [userAnswers, setUserAnswers] = useState<Record<string, number>>({});
+  const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
+  const [resultData, setResultData] = useState<any>(null);
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(()=> {
     const getQuestionFromBackend = async () => {
@@ -42,7 +44,33 @@ function Answer(){
       setCurrentIndex((prev) => prev + 1);
       return;
     }
-    // Thêm nút chuyển kết quả
+  };
+
+  const handleSubmitQuiz = async () => {
+    setSubmitting(true);
+    try {
+      const payload = {
+        answers: userAnswers
+      }; 
+
+      // Gọi API POST nộp bài lên Backend
+      const response = await axios.post("http://127.0.0.1:8000/quiz/submit", payload);
+
+      if (response.data) {
+        // Lưu kết quả tính cách vào localStorage để trang Result hiển thị
+        localStorage.setItem("quiz_result", JSON.stringify(response.data));
+        
+        // Chuyển sang trang Result
+        if ((window as any).navigateToResult) {
+          (window as any).navigateToResult();
+        }
+      }
+    } catch (error) {
+      console.error("Lỗi khi nộp bài:", error);
+      alert("Đã xảy ra lỗi hệ thống khi nộp bài, vui lòng thử lại!");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -102,18 +130,20 @@ function Answer(){
       {/* --- Cụm hiển thị Đáp án --- */}
       <div className="answers-container">
         {answers.map((opt: any, index: number) => {
-          // Giữ nguyên cách map class CSS của Figma
           const btnClassMap = ["answer-a group", "answer-b group-4", "answer-c group-5"];
           const currentClass = btnClassMap[index] || "answer-a group";
 
-          const isSelected = userAnswers[currentQuestion.id.toString()] === opt.id;
+          const currentLetter = String.fromCharCode(65 + index);
+
+          const isSelected = userAnswers[currentQuestion.id.toString()] === currentLetter;
+
 
           return (
             <button key={index} className={`answer-btn ${currentClass}`}
             onClick={() => {
               setUserAnswers(prev => ({
                 ...prev,
-                [currentQuestion.id.toString()]: opt.id
+                [currentQuestion.id.toString()]: currentLetter
               }));
             }}
             >
@@ -134,20 +164,47 @@ function Answer(){
 
 
       {/* ── Điều hướng câu hỏi ── */}
-      <button className="nav-btn div-wrapper" onClick={goToPreviousQuestion} disabled={currentIndex === 0}>
+      <button 
+        className="nav-btn div-wrapper" 
+        onClick={goToPreviousQuestion} 
+        disabled={currentIndex === 0}
+        style={{ opacity: currentIndex === 0 ? 0.5 : 1 }}
+      >
         <span className="text-wrapper-2">Câu trước</span>
       </button>
-      <button 
-        // Chưa chọn đáp án
-        className={`nav-btn frame ${!isCurrentQuestionAnswered ? 'disabled-btn' : ''}`} 
-        
-        // Không cho chọn nút
-        disabled={!isCurrentQuestionAnswered} 
-        
-        onClick={goToNextQuestion}
-      >
-        <span className="text-wrapper-2">Câu kế tiếp</span>
-      </button>
+
+      {currentIndex < totalQuestions - 1 ? (
+        // Các câu hỏi bình thường
+        <button 
+          className="nav-btn frame" 
+          onClick={goToNextQuestion}
+          disabled={!isCurrentQuestionAnswered} // Khóa nút nếu chưa chọn đáp án
+          style={{ 
+            opacity: isCurrentQuestionAnswered ? 1 : 0.4,
+            cursor: isCurrentQuestionAnswered ? 'pointer' : 'not-allowed'
+          }}
+        >
+          <div className="text-wrapper-2" style={{ color: '#000', textAlign: 'center', width: '100%' }}>
+            Câu kế tiếp
+          </div>
+        </button>
+      ) : (
+        // Câu hỏi cuối
+        <button 
+          className="nav-btn frame" 
+          onClick={handleSubmitQuiz}
+          disabled={!isCurrentQuestionAnswered || submitting}
+          style={{ 
+            backgroundColor: isCurrentQuestionAnswered ? '#28a745' : '#ccc',
+            opacity: isCurrentQuestionAnswered ? 1 : 0.4,
+            cursor: isCurrentQuestionAnswered ? 'pointer' : 'not-allowed'
+          }}
+        >
+          <div className="text-wrapper-2" style={{ color: '#fff', textAlign: 'center', width: '100%', fontWeight: 'bold' }}>
+            {submitting ? "Đang chấm..." : "Nộp bài làm"}
+          </div>
+        </button>
+      )}
     </div>
   );
 };
