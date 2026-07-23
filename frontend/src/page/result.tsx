@@ -1,7 +1,19 @@
 import { Chart } from "../elements/spiderchart.tsx";
+import React, { useEffect, useState } from 'react';
 import "./resultStyle.css";
 
 export default function Result() {
+  const [result, setResult] = useState<any>(null);
+
+  useEffect(() => {
+    // Lấy dữ liệu kết quả đã lưu từ localStorage khi trang Result vừa mở lên
+    const savedResult = localStorage.getItem("quiz_result");
+    if (savedResult) {
+      setResult(JSON.parse(savedResult));
+    }
+  }, []);
+
+  if (!result) return <div style={{ padding: '50px' }}>Đang tải kết quả...</div>;
   return (
     <div className="resultpage">
         <header className="header">
@@ -22,22 +34,29 @@ export default function Result() {
       <main className="result-card">
         <div className="result-info">
           <span className="subtitle">Kiểu tính cách của bạn</span>
-          <h1 className="title">Nhóm nhân sự ưu tú</h1>
+          
+          {/* Hiển thị Tên nhóm tính cách + Mã Code (Ví dụ: Nhóm nhân sự ưu tú - INTJ) */}
+          <h1 className="title">
+            {result.name} {result.code ? `(${result.code})` : ''}
+          </h1>
+          
+          {/* Hiển thị đoạn Mô tả tính cách thực tế từ Backend */}
           <p className="desc">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            rhoncus, quam vel lobortis fermentum, sem ipsum suscipit turpis,
-            eleifend luctus nibh turpis et nulla. Sed luctus purus orci, vel porta
-            turpis viverra ut. Sed dignissim mi eget lorem tincidunt, et iaculis
-            mauris vestibulum. Morbi sit amet pellentesque turpis. Cras vulputate
-            laoreet blandit.
+            {result.description}
           </p>
-          <button className="back-btn" onClick={() => (window as any).navigateToHome?.()}>
+
+          <button className="back-btn" onClick={() => {
+            // Dọn dẹp dữ liệu cũ khi quay về trang chủ
+            localStorage.removeItem("quiz_result");
+            (window as any).navigateToHome?.();
+          }}>
             Quay lại Trang chủ
           </button>
         </div>
 
         <div className="result-chart">
-          <Chart />
+          {/* Nếu linh kiện Chart của bạn cần truyền dữ liệu vào, hãy nhớ truyền qua prop */}
+          <Chart /> 
         </div>
       </main>
     </div>
