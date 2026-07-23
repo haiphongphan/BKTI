@@ -2,7 +2,7 @@ import CSEMul from "/image/CSE-mul.png";
 import FB from "/image/facebook.svg";
 import TT from "/image/tiktok.svg";
 import Mail from "/image/mail.svg";
-import Ins from "/image/ins.svg";
+import Web from "/image/web.svg";
 import "./popupstyle.css";
 
 function Popup({onClose} : any){
@@ -39,16 +39,19 @@ function Popup({onClose} : any){
           rel="noopener noreferrer" 
           className="social-btn"
         >
-          <img className="insta" alt="Instagram" src={Ins} />
+          <img className="web" alt="Web" src={Web} />
         </a>
       </div>
 
       {/* ── Follow button — điều hướng về Home ── */}
       <div className="button">
         <button className="follow-btn" onClick={onClose}>
-          Bấm follow page để có thể làm bài
+          Follow để cập nhật thông tin mới nhất của khoa KH-KT Máy tính nhé
         </button>
       </div>
+      <button className="close-btn" onClick={onClose}>
+        &times;
+      </button>
     </div>
   );
 };

@@ -79,7 +79,7 @@
   width: 33.61px;
 }
 
-.popup .insta {
+.popup .web {
   height: 27.56px;
   width: 30.56px;
 }
@@ -88,7 +88,7 @@
 .popup .button {
   display: flex;
   justify-content: center;
-  margin-top: 40.3px;
+  margin-top: 20px;
   margin-bottom: 40px;
 }
 
@@ -96,8 +96,9 @@
 .popup .follow-btn {
   background-color: #d9d9d9;
   border-radius: 30px;
-  height: 46px;
-  width: 302px;
+  height: 60px;
+  width: 310px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
   font-family: "Inter-SemiBold", Helvetica;
@@ -113,6 +114,25 @@
   background-color: #c4c4c4;
   transform: scale(1.03);
 }
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
+
 
 @keyframes popupShow {
   0% {
