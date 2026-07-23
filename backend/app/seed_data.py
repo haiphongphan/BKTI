@@ -101,7 +101,7 @@ def import_traits_csv(file_path: str):
 
 def clear_all_tables():
     """Xóa sạch toàn bộ dữ liệu của tất cả các bảng trong database"""
-    print("--- 🧹 Đang dọn dẹp toàn bộ dữ liệu cũ trong Database ---")
+    print("--- Đang dọn dẹp toàn bộ dữ liệu cũ trong Database ---")
     
     tables = [
         "answer", 
