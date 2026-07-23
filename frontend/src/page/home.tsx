@@ -35,7 +35,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
             <div className="nav-text nav-label-hashtag">#BKTI</div>
           </button>
           <button className="nav-logo">
-            <img src="/image/CSE-small.png" alt="CSE Multimedia" className="nav-logo-img" />
+            <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
           </button>
           <button className="nav-frame nav-btn-lang">
             <span className="nav-text nav-label-lang">ENG/VIE</span>

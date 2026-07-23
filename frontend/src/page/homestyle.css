@@ -6,6 +6,7 @@
   position: relative;
   width: 1440px;
   margin: 0 auto;
+  z-index: 10;
 }
 
 .homepage .header {
@@ -13,6 +14,7 @@
   position: relative;
   top: 0;
   width: auto;
+  z-index: 10;
 }
 
 .homepage .rectangle {
@@ -21,12 +23,13 @@
     rgba(249, 248, 251, 1) 0%,
     rgba(235, 221, 255, 1) 100%
   );
-  height: auto;
+  height: 100%;
 
   left: 0;
   position: absolute;
   top: -7px;
   width: 1440px;
+  z-index: 0;
 }
 
 /* ══════════════════════════════════════════
@@ -351,20 +354,24 @@
   border: none;
   outline: none;
   cursor: pointer;
+  z-index: 10;
 }
 
 .homepage .nav-btn-social {
   left: calc(50.00% - 486px);
   box-shadow: 0 0 0 2px #998fc7;
+  z-index: 10;
 }
 
 .homepage .nav-btn-hashtag {
   left: calc(50.00% - 308px);
+  z-index: 10;
 }
 
 .homepage .nav-btn-lang {
   left: calc(50.00% + 380px);
   transition: background-color 0.25s ease, color 0.25s ease;
+  z-index: 10;
 }
 
 .homepage .nav-btn-lang:hover {
@@ -386,6 +393,7 @@
   padding: 0;
   cursor: pointer;
   transition: opacity 0.25s ease;
+  z-index: 10;
 }
 
 .homepage .nav-logo:hover {

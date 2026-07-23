@@ -16,7 +16,8 @@
     rgba(249, 248, 251, 1) 0%,
     rgba(235, 221, 255, 1) 100%
   );
-  height:auto;
+  height:100%;
+  width: 100%;
   left: 0;
   position: absolute;
   top: 0;
@@ -30,6 +31,7 @@
   position: absolute;
   top: 541px;
   width: 251px;
+  rotate: 180deg;
 }
 
 .test-page .shape-right {
