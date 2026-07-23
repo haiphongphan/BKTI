@@ -16,20 +16,20 @@ export default function Result() {
   if (!result) return <div style={{ padding: '50px' }}>Đang tải kết quả...</div>;
   return (
     <div className="resultpage">
-        <header className="header">
-          <button className="nav-frame frame-5">
-            <div className="nav-text text-wrapper-12">@cse-multimedia</div>
-          </button>
-          <button className="nav-frame frame-6">
-            <div className="nav-text text-wrapper-13">#BKTI</div>
-          </button>
-          <button className="nav-logo">
-            <img src="/image/CSE-small.png" alt="CSE Multimedia" className="nav-logo-img" />
-          </button>
-          <button className="nav-frame frame-7">
-            <span className="nav-text text-wrapper-14">ENG/VIE</span>
-          </button>
-        </header>
+      <header className="header">
+        <button className="nav-frame frame-5">
+          <div className="nav-text text-wrapper-12">@cse-multimedia</div>
+        </button>
+        <button className="nav-frame frame-6">
+          <div className="nav-text text-wrapper-13">#BKTI</div>
+        </button>
+        <button className="nav-logo">
+          <img src="/image/CSE-small.png" alt="CSE Multimedia" className="nav-logo-img" />
+        </button>
+        <button className="nav-frame frame-7">
+          <span className="nav-text text-wrapper-14">ENG/VIE</span>
+        </button>
+      </header>
 
       <main className="result-card">
         <div className="result-info">
