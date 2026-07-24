@@ -1,6 +1,6 @@
 import { Chart } from "../elements/spiderchart.tsx";
 import React, { useEffect, useState } from 'react';
-import "./resultStyle.css";
+import "./resultstyle.css";
 
 export default function Result() {
   const [result, setResult] = useState<any>(null);
