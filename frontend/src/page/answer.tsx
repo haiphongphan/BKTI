@@ -89,7 +89,7 @@ function Answer(){
           <div className="nav-text text-wrapper-9">#BKTI</div>
         </button>
         <button className="nav-logo">
-          <img src="/image/CSE-small.png" alt="CSE Multimedia" className="nav-logo-img" />
+          <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
         </button>
         <button className="nav-frame frame-4">
           <span className="nav-text text-wrapper-10">ENG/VIE</span>

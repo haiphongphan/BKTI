@@ -2,10 +2,14 @@
 
 ## Cài đặt
 
+## Chạy backend
+
+`cd backend`  
+
 ### venv
 
-`python3 -m venv env`  
-`source backend/env/bin/activate`
+`python3 -m venv .venv`  
+`source backend/.venv/bin/activate`
 
 ### Thư viện
 
@@ -17,10 +21,6 @@ Cài postgre trước ((gemini đi t quên r :))
 Cài xong chạy các lệnh dưới:  
 `psql -d postgres`  
 `CREATE DATABASE bkti_db;`
-
-## Chạy backend
-
-`cd backend`  
 
 ### Nạp data
 
