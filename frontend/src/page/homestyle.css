@@ -1,12 +1,25 @@
 .homepage {
-  background-color: #ffffff;
+  background-color: transparent;
   min-height: 1813px;
   max-width: 1440px;
   overflow: hidden;
   position: relative;
-  width: 1440px;
+  width: 100%;
   margin: 0 auto;
   z-index: 10;
+}
+
+.home-container {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    252deg,
+    rgba(249, 248, 251, 1) 0%,
+    rgba(235, 221, 255, 1) 100%
+  );
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .homepage .header {
@@ -15,21 +28,6 @@
   top: 0;
   width: auto;
   z-index: 10;
-}
-
-.homepage .rectangle {
-  background: linear-gradient(
-    252deg,
-    rgba(249, 248, 251, 1) 0%,
-    rgba(235, 221, 255, 1) 100%
-  );
-  height: 100%;
-
-  left: 0;
-  position: absolute;
-  top: -7px;
-  width: 1440px;
-  z-index: 0;
 }
 
 /* ══════════════════════════════════════════
@@ -263,9 +261,9 @@
    Khối 2 - Bảng xếp hạng
    ══════════════════════════════════════════ */
 .homepage .group {
-  height: 40px;
   /* Căn giữa ngang*/
   left: calc(50.00% - 485px + 69.5px);
+  height: 40px;
   position: absolute;
   top: 512px;
   width: 395px;
@@ -279,14 +277,27 @@
   font-size: 13px;
   font-weight: 600;
   height: 16px;
-  justify-content: center;
+  justify-content: flex-start;
   left: 43px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  text-align: center;
+  text-align: left;
   top: 4px;
   width: 115px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.homepage .ranking-progress {
+  position: absolute;
+  left: 159px;
+  top: 17px;
+  width: 202px;
+  height: 6px;
+  background-color: #d9d9d9;
+  border-radius: 20px;
 }
 
 /* ══════════════════════════════════════════
@@ -309,6 +320,7 @@
 }
 
 .homepage .ranking-subtitle {
+  justify-content: flex-start;
   left: 44px;
   top: 20px;
 }

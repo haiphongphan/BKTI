@@ -2,6 +2,7 @@ import "./homestyle.css";
 import Popup from "./popup";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ProgressBar } from "../elements/progressbar";
 
 const RANKING_TOP_POSITIONS = [512, 562, 613, 668, 723];
 
@@ -71,9 +72,6 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           </button>
         </header>
 
-        {/* ── Background gradient ── */}
-        <div className="rectangle" />
-
         {/* ── Khối 1: Giới thiệu ── */}
         <div className="card-rect card-intro" />
         <div className="intro-heading-frame">
@@ -104,11 +102,13 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         <p className="block-title title-ranking">Bảng xếp hạng</p>
         {ranking.slice(0, 5).map((item, idx) => (
           <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-            <div className="ranking-name">{item.name}</div>
+            <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
             <div className="ranking-light-text ranking-subtitle">{item.code}</div>
             <div className="ranking-light-text ranking-score">{item.percentage}%</div>
             <div className="ellipse" />
-            <div className="rectangle-7" />
+            <div className="ranking-progress">
+              <ProgressBar current={item.percentage} total={100} showText = {false} />
+            </div>
           </div>
         ))}
 
