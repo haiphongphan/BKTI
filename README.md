@@ -13,7 +13,7 @@
 
 ### Thư viện
 
-`pip3 install -r requirement.txt`
+`pip3 install -r app/requirement.txt`
 
 ### PostgreSQL
 
