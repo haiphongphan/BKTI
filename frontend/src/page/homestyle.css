@@ -176,7 +176,7 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-SemiBold", "Inter-Bold";
+  font-family: Helvetica;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0;
@@ -232,7 +232,25 @@
   width: 217px;
 }
 
-.homepage .btn-opt-label {
+.homepage .btn-opt-label-1 {
+  align-items: center;
+  color: #000000;
+  display: flex;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  height: 36px;
+  justify-content: center;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -47px;
+  margin-right: -47px;
+  position: relative;
+  text-align: center;
+  width: 311px;
+}
+
+.homepage .btn-opt-label-2 {
   align-items: center;
   color: #000000;
   display: flex;
@@ -365,7 +383,6 @@
   top: 44px;
   border: none;
   outline: none;
-  cursor: pointer;
   z-index: 10;
 }
 
@@ -373,26 +390,18 @@
   left: calc(50.00% - 486px);
   box-shadow: 0 0 0 2px #998fc7;
   z-index: 10;
+  cursor: pointer;
 }
+
 
 .homepage .nav-btn-hashtag {
-  left: calc(50.00% - 308px);
-  z-index: 10;
-}
-
-.homepage .nav-btn-lang {
   left: calc(50.00% + 380px);
   transition: background-color 0.25s ease, color 0.25s ease;
+  box-shadow: 0 0 0 2px #998fc7;
   z-index: 10;
 }
 
-.homepage .nav-btn-lang:hover {
-  background-color: #998fc7;
-}
 
-.homepage .nav-btn-lang:hover .nav-label-lang {
-  color: #ffffff;
-}
 
 .homepage .nav-logo {
   position: absolute;

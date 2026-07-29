@@ -61,14 +61,11 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           <button className="nav-frame nav-btn-social">
             <div className="nav-text nav-label-social">@cse-multimedia</div>
           </button>
-          <button className="nav-frame nav-btn-hashtag">
-            <div className="nav-text nav-label-hashtag">#BKTI</div>
-          </button>
           <button className="nav-logo">
             <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
           </button>
-          <button className="nav-frame nav-btn-lang">
-            <span className="nav-text nav-label-lang">ENG/VIE</span>
+          <button className="nav-frame nav-btn-hashtag">
+            <div className="nav-text nav-label-hashtag">#BKTI</div>
           </button>
         </header>
 
@@ -79,22 +76,18 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         </div>
         <div className="intro-desc-frame">
           <p className="intro-desc-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            rhoncus, quam vel lobortis fermentum, sem ipsum suscipit turpis,
-            eleifend luctus nibh turpis et nulla. Sed luctus purus orci, vel porta
-            turpis viverra ut. Sed dignissim mi eget lorem tincidunt, et iaculis
-            mauris vestibulum. Morbi sit amet pellentesque turpis. Cras vulputate
-            laoreet blandit. Vesti
+            BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 18 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
+
           </p>
         </div>
         <div className="action-btn btn-opt1">
-          <div className="btn-opt-label">opt 1</div>
+          <div className="btn-opt-label-1">Các kiểu tính cách</div>
         </div>
         <button className="action-btn btn-start" onClick={onStartQuiz}>
           <div className="btn-start-label">Bắt đầu làm bài</div>
         </button>
         <div className="action-btn btn-opt2">
-          <div className="btn-opt-label">opt 1</div>
+          <div className="btn-opt-label-2">FAQ</div>
         </div>
 
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}

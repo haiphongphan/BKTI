@@ -33,7 +33,6 @@
   top: 44px;
   border: none;
   outline: none;
-  cursor: pointer;
 }
 
 .resultpage .frame-5 {
@@ -41,16 +40,10 @@
   box-shadow: 0 0 0 2px #998fc7;
 }
 
-.resultpage .frame-6 {
-  left: calc(50.00% - 308px);
-}
 
-.resultpage .frame-7 {
+.resultpage .frame-6 {
   left: calc(50.00% + 380px);
-  border: none;
-  outline: none;
-  cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  box-shadow: 0 0 0 2px #998fc7;
 }
 
 .resultpage .frame-7:hover {
@@ -110,9 +103,6 @@
   width: 73px;
 }
 
-.resultpage .text-wrapper-14 {
-  width: 105px;
-}
 
 /* Main Card Container */
 .result-card {

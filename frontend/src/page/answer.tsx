@@ -9,7 +9,6 @@ function Answer(){
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true)
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
-  const [resultData, setResultData] = useState<any>(null);
   const [submitting, setSubmitting] = useState<boolean>(false);
 
   useEffect(()=> {
@@ -85,14 +84,11 @@ function Answer(){
         <button className="nav-frame frame-2">
           <div className="nav-text text-wrapper-8">@cse-multimedia</div>
         </button>
-        <button className="nav-frame frame-3">
-          <div className="nav-text text-wrapper-9">#BKTI</div>
-        </button>
         <button className="nav-logo">
           <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
         </button>
-        <button className="nav-frame frame-4">
-          <span className="nav-text text-wrapper-10">ENG/VIE</span>
+        <button className="nav-frame frame-3">
+          <div className="nav-text text-wrapper-9">#BKTI</div>
         </button>
       </header>
 
