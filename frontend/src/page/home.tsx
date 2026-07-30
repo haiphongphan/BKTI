@@ -3,6 +3,7 @@ import Popup from "./popup";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
+import Footer from "../elements/footer";
 
 const RANKING_TOP_POSITIONS = [512, 562, 613, 668, 723];
 
@@ -40,7 +41,8 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
 
   if (loading) return <div style={{ padding: "50px", alignContent: "center" }}>Đang cập nhật bảng xếp hạng</div>;
-  if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
+  // Cũ:
+  // if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
 
   return (
     <div className="home-container">
@@ -61,14 +63,11 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           <button className="nav-frame nav-btn-social">
             <div className="nav-text nav-label-social">@cse-multimedia</div>
           </button>
-          <button className="nav-frame nav-btn-hashtag">
-            <div className="nav-text nav-label-hashtag">#BKTI</div>
-          </button>
           <button className="nav-logo">
             <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
           </button>
           <button className="nav-frame nav-btn-lang">
-            <span className="nav-text nav-label-lang">ENG/VIE</span>
+            <span className="nav-text nav-label-lang">#BKTI</span>
           </button>
         </header>
 
@@ -79,38 +78,41 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         </div>
         <div className="intro-desc-frame">
           <p className="intro-desc-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-            rhoncus, quam vel lobortis fermentum, sem ipsum suscipit turpis,
-            eleifend luctus nibh turpis et nulla. Sed luctus purus orci, vel porta
-            turpis viverra ut. Sed dignissim mi eget lorem tincidunt, et iaculis
-            mauris vestibulum. Morbi sit amet pellentesque turpis. Cras vulputate
-            laoreet blandit. Vesti
+            BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 18 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
           </p>
         </div>
         <div className="action-btn btn-opt1">
-          <div className="btn-opt-label">opt 1</div>
+          <div className="btn-opt-label">Kiểu tính cách</div>
         </div>
         <button className="action-btn btn-start" onClick={onStartQuiz}>
           <div className="btn-start-label">Bắt đầu làm bài</div>
         </button>
         <div className="action-btn btn-opt2">
-          <div className="btn-opt-label">opt 1</div>
+          <div className="btn-opt-label">FAQ</div>
         </div>
 
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
         <p className="block-title title-ranking">Bảng xếp hạng</p>
-        {ranking.slice(0, 5).map((item, idx) => (
-          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-            <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
-            <div className="ranking-light-text ranking-subtitle">{item.code}</div>
-            <div className="ranking-light-text ranking-score">{item.percentage}%</div>
-            <div className="ellipse" />
-            <div className="ranking-progress">
-              <ProgressBar current={item.percentage} total={100} showText = {false} />
-            </div>
+        {ranking.length === 0 ? (
+          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
+              Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
+            </p>
           </div>
-        ))}
+        ) : (
+          ranking.slice(0, 5).map((item, idx) => (
+            <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
+              <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
+              <div className="ranking-light-text ranking-subtitle">{item.code}</div>
+              <div className="ranking-light-text ranking-score">{item.percentage}%</div>
+              <div className="ellipse" />
+              <div className="ranking-progress">
+                <ProgressBar current={item.percentage} total={100} showText = {false} />
+              </div>
+            </div>
+          ))
+        )}
 
         {/* ── Khối 3: Trái-dưới ── */}
         <div className="card-rect card-lower-left" />
@@ -128,6 +130,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         <div className="card-rect card-fullwidth-2" />
         <p className="block-title title-fullwidth-2">Credit team BKTI</p>
       </div>
+      <Footer/>
     </div>
   );
 }

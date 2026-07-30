@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import shape from "/image/shape.svg";
+/* import shape from "/image/shape.svg"; */
 import { ProgressBar } from "../elements/progressbar";
 import "./answerstyle.css";
 
@@ -9,8 +9,17 @@ function Answer(){
   const [currentIndex, setCurrentIndex] = useState(0);
   const [loading, setLoading] = useState(true)
   const [userAnswers, setUserAnswers] = useState<Record<string, string>>({});
-  const [resultData, setResultData] = useState<any>(null);
+  /* const [resultData, setResultData] = useState<any>(null); */
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth <= 992);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 992);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(()=> {
     const getQuestionFromBackend = async () => {
@@ -73,43 +82,75 @@ function Answer(){
     }
   };
 
+  const renderNavigationButtons = () => {
+    return (
+      <div className="nav-btn-container">
+        <button 
+          className="nav-btn div-wrapper" 
+          onClick={goToPreviousQuestion} 
+          disabled={currentIndex === 0}
+          style={{ opacity: currentIndex === 0 ? 0.5 : 1 }}
+        >
+          <span className="text-wrapper-2">Câu trước</span>
+        </button>
+
+        {currentIndex < totalQuestions - 1 ? (
+          // Các câu hỏi bình thường
+          <button 
+            className="nav-btn frame" 
+            onClick={goToNextQuestion}
+            disabled={!isCurrentQuestionAnswered} // Khóa nút nếu chưa chọn đáp án
+            style={{ 
+              opacity: isCurrentQuestionAnswered ? 1 : 0.4,
+              cursor: isCurrentQuestionAnswered ? 'pointer' : 'not-allowed'
+            }}
+          >
+            <div className="text-wrapper-2" style={{ color: '#000', textAlign: 'center', width: '100%' }}>
+              Câu kế tiếp
+            </div>
+          </button>
+        ) : (
+          // Câu hỏi cuối
+          <button 
+            className="nav-btn frame" 
+            onClick={handleSubmitQuiz}
+            disabled={!isCurrentQuestionAnswered || submitting}
+            style={{ 
+              backgroundColor: isCurrentQuestionAnswered ? '#28a745' : '#ccc',
+              opacity: isCurrentQuestionAnswered ? 1 : 0.4,
+              cursor: isCurrentQuestionAnswered ? 'pointer' : 'not-allowed'
+            }}
+          >
+            <div className="text-wrapper-2" style={{ color: '#fff', textAlign: 'center', width: '100%', fontWeight: 'bold' }}>
+              {submitting ? "Đang chấm..." : "Nộp bài làm"}
+            </div>
+          </button>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="test-page">
       {/* ── Background & Decorations ── */}
       <div className="rectangle" />
-      <img className="shape-left" alt="" src={shape} />
-      <img className="shape-right" alt="" src={shape} />
 
       {/* ── Header ── */}
       <header className="header">
         <button className="nav-frame frame-2">
           <div className="nav-text text-wrapper-8">@cse-multimedia</div>
         </button>
-        <button className="nav-frame frame-3">
-          <div className="nav-text text-wrapper-9">#BKTI</div>
-        </button>
         <button className="nav-logo">
           <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
         </button>
         <button className="nav-frame frame-4">
-          <span className="nav-text text-wrapper-10">ENG/VIE</span>
+          <span className="nav-text text-wrapper-10">#BKTI</span>
         </button>
       </header>
 
       {/* ── Card chính ── */}
       <div className="div" />
-
-      {/* ── User info ── */}
-      <div className="user-info group-2">
-        <div className="text-wrapper-3">con quỷ của nie</div>
-        <div className="text-wrapper-4">ai mà biết được</div>
-        <div className="ellipse" />
-      </div>
-
-      {/* ── Progress bar ── */}
-      <div className="progress-bar group-3">
-        <ProgressBar current={currentIndex + 1} total={totalQuestions} />
-      </div>
+      <div className="main-card-wrapper">
 
       {/* ── Câu hỏi ──  */}
       <div className="question-container" key={`q-container-${currentIndex}`}>
@@ -125,6 +166,13 @@ function Answer(){
             {currentQuestion.content}
           </p>
         </div>
+
+        {/* ── Progress bar ── */}
+        <div className="progress-bar-wrap">
+          <ProgressBar current={currentIndex + 1} total={totalQuestions} />
+        </div>
+
+        {!isMobile && renderNavigationButtons()}
       </div>
 
       {/* --- Cụm hiển thị Đáp án --- */}
@@ -163,48 +211,8 @@ function Answer(){
       </div>
 
 
-      {/* ── Điều hướng câu hỏi ── */}
-      <button 
-        className="nav-btn div-wrapper" 
-        onClick={goToPreviousQuestion} 
-        disabled={currentIndex === 0}
-        style={{ opacity: currentIndex === 0 ? 0.5 : 1 }}
-      >
-        <span className="text-wrapper-2">Câu trước</span>
-      </button>
-
-      {currentIndex < totalQuestions - 1 ? (
-        // Các câu hỏi bình thường
-        <button 
-          className="nav-btn frame" 
-          onClick={goToNextQuestion}
-          disabled={!isCurrentQuestionAnswered} // Khóa nút nếu chưa chọn đáp án
-          style={{ 
-            opacity: isCurrentQuestionAnswered ? 1 : 0.4,
-            cursor: isCurrentQuestionAnswered ? 'pointer' : 'not-allowed'
-          }}
-        >
-          <div className="text-wrapper-2" style={{ color: '#000', textAlign: 'center', width: '100%' }}>
-            Câu kế tiếp
-          </div>
-        </button>
-      ) : (
-        // Câu hỏi cuối
-        <button 
-          className="nav-btn frame" 
-          onClick={handleSubmitQuiz}
-          disabled={!isCurrentQuestionAnswered || submitting}
-          style={{ 
-            backgroundColor: isCurrentQuestionAnswered ? '#28a745' : '#ccc',
-            opacity: isCurrentQuestionAnswered ? 1 : 0.4,
-            cursor: isCurrentQuestionAnswered ? 'pointer' : 'not-allowed'
-          }}
-        >
-          <div className="text-wrapper-2" style={{ color: '#fff', textAlign: 'center', width: '100%', fontWeight: 'bold' }}>
-            {submitting ? "Đang chấm..." : "Nộp bài làm"}
-          </div>
-        </button>
-      )}
+      {isMobile && renderNavigationButtons()}
+      </div>{/* === KẾT THÚC main-card-wrapper === */}
     </div>
   );
 };

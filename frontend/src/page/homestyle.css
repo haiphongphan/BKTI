@@ -12,14 +12,15 @@
 .home-container {
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(
+  /* background: linear-gradient(
     252deg,
     rgba(249, 248, 251, 1) 0%,
     rgba(235, 221, 255, 1) 100%
   );
   background-attachment: fixed;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  background: transparent;
 }
 
 .homepage .header {
@@ -527,5 +528,260 @@
   to {
     opacity: 1;
     backdrop-filter: blur(4px);
+  }
+}
+
+/* ══════════════════════════════════════════
+   MOBILE & TABLET RESPONSIVE (max-width: 992px)
+   ══════════════════════════════════════════ */
+@media (max-width: 992px) {
+  /* --- Canvas / Page Container --- */
+  .homepage {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 90px 16px 40px 16px !important;
+    gap: 16px !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
+
+  /* --- Header --- */
+  .homepage .header {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 104px !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    z-index: 200 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  .homepage .nav-logo {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .homepage .nav-logo-img {
+    height: 50px !important;
+    width: 100px !important;
+    object-fit: contain !important;
+  }
+
+  .homepage .nav-frame {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 18px !important;
+  }
+
+  .homepage .nav-text {
+    font-size: 13px !important;
+    width: auto !important;
+  }
+
+  .homepage .nav-btn-social {
+    box-shadow: 0 0 0 2px #998fc7 !important;
+  }
+
+  /* --- Ẩn card rect (card nền) và các thành phần trang trí --- */
+  .homepage .card-rect,
+  .homepage .mask-group,
+  .homepage .rectangle-vectorized,
+  .homepage .img,
+  .homepage .vector,
+  .homepage .cse-multi-colored,
+  .homepage .rectangle-9 {
+    display: none !important;
+  }
+
+  /* --- Ẩn Khối 5 & Khối 6 --- */
+  .homepage .card-fullwidth-1,
+  .homepage .title-fullwidth-1,
+  .homepage .card-fullwidth-2,
+  .homepage .title-fullwidth-2 {
+    display: none !important;
+  }
+
+  /* --- Khối 1: Giới thiệu --- */
+  .homepage .intro-heading-frame {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    background-color: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 1px 4px 21.2px #998fc769 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    justify-content: center !important;
+  }
+
+  .homepage .intro-heading-text {
+    width: 100% !important;
+    font-size: 24px !important;
+    text-align: center !important;
+    margin: 0 !important;
+    position: static !important;
+    height: auto !important;
+  }
+
+  .homepage .intro-desc-frame {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    background-color: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 1px 4px 21.2px #998fc769 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+
+  .homepage .intro-desc-text {
+    width: 100% !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    margin: 0 !important;
+    position: static !important;
+  }
+
+  .homepage .action-btn {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    height: 48px !important;
+    margin: 0 !important;
+  }
+
+  .homepage .btn-start {
+    background-color: #998fc7 !important;
+    border-radius: 24px !important;
+    border: none !important;
+  }
+
+  .homepage .btn-start-label {
+    font-size: 16px !important;
+    height: auto !important;
+  }
+
+  .homepage .btn-opt1,
+  .homepage .btn-opt2 {
+    background-color: #ffffff !important;
+    border-radius: 24px !important;
+    box-shadow: 1px 4px 21.2px #998fc722 !important;
+  }
+
+  .homepage .btn-opt-label {
+    margin: 0 !important;
+    width: 100% !important;
+    font-size: 16px !important;
+    text-align: center !important;
+  }
+
+  /* --- Khối 2: Bảng xếp hạng --- */
+  .homepage .title-ranking {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    font-size: 20px !important;
+    margin: 8px 0 0 0 !important;
+    padding-left: 8px !important;
+  }
+
+  .homepage .group {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    height: auto !important;
+    background-color: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 1px 4px 21.2px #998fc722 !important;
+    padding: 12px 16px !important;
+    box-sizing: border-box !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .homepage .ellipse {
+    position: static !important;
+    flex-shrink: 0 !important;
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  .homepage .ranking-name {
+    position: static !important;
+    width: auto !important;
+    flex-grow: 1 !important;
+    font-size: 14px !important;
+    height: auto !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  .homepage .ranking-light-text {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+  }
+
+  .homepage .ranking-subtitle {
+    display: none !important;
+  }
+
+  .homepage .ranking-score {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+  }
+
+  .homepage .ranking-progress,
+  .homepage .rectangle-7 {
+    display: none !important;
+  }
+
+  /* --- Khối 3 & Khối 4 --- */
+  .homepage .title-lower-left,
+  .homepage .title-right {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    background-color: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 1px 4px 21.2px #998fc769 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    font-size: 18px !important;
+    height: auto !important;
   }
 }

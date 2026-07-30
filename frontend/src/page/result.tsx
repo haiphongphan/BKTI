@@ -1,5 +1,6 @@
 import { Chart } from "../elements/spiderchart.tsx";
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react'; */
+import { useEffect, useState } from 'react';
 import "./resultstyle.css";
 
 export default function Result() {
@@ -20,14 +21,11 @@ export default function Result() {
         <button className="nav-frame frame-5">
           <div className="nav-text text-wrapper-12">@cse-multimedia</div>
         </button>
-        <button className="nav-frame frame-6">
-          <div className="nav-text text-wrapper-13">#BKTI</div>
-        </button>
         <button className="nav-logo">
           <img src="/image/CSE-small.png" alt="CSE Multimedia" className="nav-logo-img" />
         </button>
         <button className="nav-frame frame-7">
-          <span className="nav-text text-wrapper-14">ENG/VIE</span>
+          <span className="nav-text text-wrapper-14">#BKTI</span>
         </button>
       </header>
 
