@@ -13,20 +13,21 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
     dimension_1_A = dimension_1_C = dimension_2_A = dimension_2_C = dimension_3_A = dimension_3_C = 0
     for str_q_id, user_ans in submission.answers.items():
         q_id = int(str_q_id)
+        ans_id = int(user_ans)
         if q_id <= 6:
-            if user_ans == 'A':
+            if ans_id % 3 == 1:
                 dimension_1_A += 1
-            elif user_ans == 'C':
+            elif ans_id % 3 == 0:
                 dimension_1_C += 1
         elif q_id <= 12:
-            if user_ans == 'A':
+            if ans_id % 3 == 1:
                 dimension_2_A += 1
-            elif user_ans == 'C':
+            elif ans_id % 3 == 0:
                 dimension_2_C += 1
         else:
-            if user_ans == 'A':
+            if ans_id % 3 == 1:
                 dimension_3_A += 1
-            elif user_ans == 'C':
+            elif ans_id % 3 == 0:
                 dimension_3_C += 1
     
 
