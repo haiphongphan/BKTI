@@ -4,10 +4,9 @@
   box-shadow: 1px 4px 21.2px #998fc769;
   display: flex;
   flex-direction: column;
-  min-height: 437px;
-  min-width: 486px;
+  height: 700px;
+  width: 700px;
   overflow-x: hidden;
-  width: 486px;
   animation: popupShow 0.35s ease-in-out forwards;
 }
 
