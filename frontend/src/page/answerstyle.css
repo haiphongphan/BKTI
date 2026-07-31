@@ -2,44 +2,22 @@
    Canvas & Background
    ══════════════════════════════════════════ */
 .test-page {
-  background-color: #ffffff;
+
   min-height: 900px;
   overflow: hidden;
   position: relative;
-  width: 1440px;
+  /* SỬA: bỏ width cứng, dùng fluid để tương thích cửa sổ trình duyệt */
+  width: 100%;
+  max-width: 1440px;
   margin: 0 auto;
 }
 
 .test-page .rectangle {
-  background: linear-gradient(
-    180deg,
-    rgba(249, 248, 251, 1) 0%,
-    rgba(235, 221, 255, 1) 100%
-  );
   height:100%;
   width: 100%;
   left: 0;
   position: absolute;
   top: 0;
-}
-/* ══════════════════════════════════════════
-   Decorations (shape images)
-   ══════════════════════════════════════════ */
-.test-page .shape-left {
-  height: 359px;
-  left: 0;
-  position: absolute;
-  top: 541px;
-  width: 251px;
-  rotate: 180deg;
-}
-
-.test-page .shape-right {
-  height: 312px;
-  left: 1188px;
-  position: absolute;
-  top: 0;
-  width: 252px;
 }
 
 /* ══════════════════════════════════════════
@@ -154,6 +132,7 @@
 /* ══════════════════════════════════════════
    User info
    ══════════════════════════════════════════ */
+/*
 .test-page .group-2 {
   height: 40px;
   left: 292px;
@@ -207,16 +186,27 @@
   top: 0;
   width: 40px;
 }
+*/
 
 /* ══════════════════════════════════════════
    Progress bar
    ══════════════════════════════════════════ */
+/*
 .test-page .group-3 {
   height: 24px;
   left: 481px;
   position: absolute;
   top: 135px;
   width: 667px;
+}
+*/
+
+.test-page .question-container .progress-bar-wrap {
+  position: absolute;
+  top: -64px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 78%;
 }
 
 /* ══════════════════════════════════════════
@@ -228,11 +218,6 @@
   left: calc(50.00% - 428px);
   width: 854px;
   height: 120px;
-  transition: transform 0.25s ease-in-out;
-}
-
-.test-page .question-container:hover {
-  transform: scale(1.02);
 }
 
 .test-page .question-container .rectangle-6 {
@@ -522,12 +507,11 @@
   position: absolute;
   width: 119px;
   cursor: pointer;
-  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+  transition: background-color 0.25s ease-in-out;
 }
 
 .test-page .nav-btn:hover {
   background-color: #c4c4c4;
-  transform: scale(1.06);
 }
 
 /* Animation cũ
@@ -548,14 +532,18 @@
   background-color: #d9d9d9;
 }
 
-.test-page .frame {
-  left: 1027px;
-  top: 650px;
+.test-page .question-container .nav-btn-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 451px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
-.test-page .div-wrapper {
-  left: 292px;
-  top: 650px;
+.test-page .question-container .nav-btn-container .nav-btn {
+  position: relative;
 }
 
 .test-page .text-wrapper-2 {
@@ -603,4 +591,233 @@
   opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none; /* Khóa hoàn toàn mọi tương tác chuột */
+}
+
+/* ======================================================
+   WRAPPER mới cho responsive (display:contents trên desktop)
+   ====================================================== */
+.main-card-wrapper {
+  display: contents;
+}
+
+/* ======================================================
+   MOBILE RESPONSIVE (Answer Page) — max-width: 992px
+   ====================================================== */
+@media (max-width: 992px) {
+  /* --- Canvas --- */
+  .test-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: auto !important;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 90px 16px 40px 16px !important;
+  }
+
+  /* --- Ẩn background rectangle và hình trang trí --- */
+  .test-page .rectangle,
+  .test-page .shape-left,
+  .test-page .shape-right {
+    display: none !important;
+  }
+
+  /* --- Header --- */
+  .test-page .header {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 104px !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    z-index: 200 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+  .test-page .nav-logo {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .test-page .nav-logo-img {
+    height: 50px !important;
+    width: 100px !important;
+    object-fit: contain !important;
+  }
+  .test-page .nav-frame {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 18px !important;
+  }
+  .test-page .nav-text {
+    font-size: 13px !important;
+    width: auto !important;
+  }
+  .test-page .text-wrapper-8,
+  .test-page .text-wrapper-9,
+  .test-page .text-wrapper-10 {
+    width: auto !important;
+    padding: 0 6px !important;
+  }
+
+  /* --- Card chính: chuyển wrapper thành flex card --- */
+  .test-page .main-card-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    background-color: #ffffff !important;
+    border-radius: 20px !important;
+    box-shadow: 1px 4px 21.2px #998fc769 !important;
+    padding: 24px 20px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* --- Ẩn card nền absolute --- */
+  .test-page .div {
+    display: none !important;
+  }
+
+ 
+
+  /* --- Câu hỏi --- */
+  .test-page .question-container {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 80px !important;
+    margin-bottom: 16px !important;
+    margin-top: 40px !important;
+  }
+
+  .test-page .question-container .progress-bar-wrap {
+    position: absolute !important;
+    top: -36px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 100% !important;
+    padding: 0 10px !important;
+    box-sizing: border-box !important;
+  }
+  /* Căn chỉnh nội bộ câu hỏi */
+  .test-page .question-card {
+    border-radius: 16px !important;
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+  }
+  .test-page .question-highlight {
+    border-radius: 16px 16px 16px 16px !important;
+    width: 60px !important;
+    height: 100% !important;
+    left: 0 !important;
+  }
+  .test-page .question-label-wrap {
+    width: 60px !important;
+    height: 100% !important;
+    left: 0 !important;
+  }
+  .test-page .question-text-wrap {
+    position: relative !important;
+    left: 0 !important;
+    margin-left: 72px !important;
+    top: 0 !important;
+    width: calc(100% - 84px) !important;
+    height: auto !important;
+    min-height: 80px !important;
+    padding: 24px 12px 24px 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* --- Đáp án --- */
+  .test-page .answers-container {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    width: 100% !important;
+    margin-bottom: 16px !important;
+  }
+  .test-page .answer-btn {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: 56px !important;
+    border-radius: 20px !important;
+  }
+  .test-page .answer-highlight {
+    height: 100% !important;
+    width: 52px !important;
+    border-radius: 20px 20px 20px 20px !important;
+    left: 0 !important;
+    top: 0 !important;
+  }
+  .test-page .rectangle-7 {
+    width: 100% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    border-radius: 20px !important;
+  }
+  .test-page .text-wrapper,
+  .test-page .text-wrapper-6 {
+    left: 19px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    height: auto !important;
+  }
+  .test-page .answer-text {
+    left: 68px !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    right: 12px !important;
+    padding: 0 !important;
+  }
+
+  /* --- Nút điều hướng --- */
+  .test-page .nav-btn-container {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    gap: 16px !important;
+    margin-top: 24px !important;
+  }
+  .test-page .nav-btn {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: calc(50% - 8px) !important;
+    flex-grow: 1 !important;
+    height: 48px !important;
+    margin-bottom: 0 !important;
+    border-radius: 30px !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  .test-page .text-wrapper-2 {
+    margin-top: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+  }
 }

@@ -5,6 +5,7 @@ import FAQ from "./FAQ"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
+import Footer from "../elements/footer";
 
 const RANKING_TOP_POSITIONS = [512, 562, 613, 668, 723];
 
@@ -217,7 +218,8 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
 
   if (loading) return <div style={{ padding: "50px", alignContent: "center" }}>Đang cập nhật bảng xếp hạng</div>;
-  if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
+  // Cũ:
+  // if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
 
 
 
@@ -316,17 +318,25 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
         <p className="block-title title-ranking">Bảng xếp hạng</p>
-        {ranking.slice(0, 5).map((item, idx) => (
-          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-            <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
-            <div className="ranking-light-text ranking-subtitle">{item.code}</div>
-            <div className="ranking-light-text ranking-score">{item.percentage}%</div>
-            <div className="ellipse" />
-            <div className="ranking-progress">
-              <ProgressBar current={item.percentage} total={100} showText = {false} />
-            </div>
+        {ranking.length === 0 ? (
+          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
+              Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
+            </p>
           </div>
-        ))}
+        ) : (
+          ranking.slice(0, 5).map((item, idx) => (
+            <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
+              <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
+              <div className="ranking-light-text ranking-subtitle">{item.code}</div>
+              <div className="ranking-light-text ranking-score">{item.percentage}%</div>
+              <div className="ellipse" />
+              <div className="ranking-progress">
+                <ProgressBar current={item.percentage} total={100} showText = {false} />
+              </div>
+            </div>
+          ))
+        )}
 
         {/* ── Khối 3: Trái-dưới ── */}
         <div className="card-rect card-lower-left" />
@@ -435,6 +445,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         </div>
         
       </div>
+      <Footer/>
     </div>
   );
 }

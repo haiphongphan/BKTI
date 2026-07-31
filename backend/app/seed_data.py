@@ -122,6 +122,26 @@ def clear_all_tables():
                 print(f"⚠️ Lưu ý: Không thể dọn dẹp bảng {table} (Có thể bảng chưa tồn tại)")
         session.commit()
     print(" Đã dọn dẹp database sạch sẽ!")
+#Test 
+def seed_mock_user_answers():
+    """Tự động tạo một số kết quả khảo sát mẫu để bảng xếp hạng hoạt động ngay"""
+    print("--- Đang tạo dữ liệu xếp hạng mẫu ---")
+    import random
+    from models import User_ans
+    
+    # Danh sách các mã tính cách hợp lệ từ personality.csv
+    personalities = ["FVC", "FHC", "FVM", "FHM", "GVC", "GHC", "GVM", "GHM", "LMAO", "NSFW"]
+    
+    with Session(engine) as session:
+        mock_answers = []
+        # Tạo 30 lượt làm bài trắc nghiệm ngẫu nhiên
+        for _ in range(30):
+            p_code = random.choice(personalities)
+            mock_ans = User_ans(p_code=p_code)
+            mock_answers.append(mock_ans)
+        session.add_all(mock_answers)
+        session.commit()
+    print(" Đã tạo dữ liệu xếp hạng mẫu thành công!")
 
 if __name__ == "__main__":
     # Tạo bảng trong Postgres nếu chưa tồn tại
@@ -133,3 +153,6 @@ if __name__ == "__main__":
     import_question_csv("app/data/question.csv")
     import_traits_csv("app/data/traits.csv")
     import_answer_csv("app/data/answer.csv")
+    
+    # Tự động nạp dữ liệu xếp hạng mẫu
+    seed_mock_user_answers()
