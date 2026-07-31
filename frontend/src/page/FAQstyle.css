@@ -1,139 +1,102 @@
-.popup {
-  background-color: #ffffff;
+.FAQ {
+  align-items: flex-start;
   border-radius: 25px;
-  box-shadow: 1px 4px 21.2px #998fc769;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
-  min-height: 437px;
-  min-width: 486px;
-  overflow-x: hidden;
-  width: 486px;
+  gap: 20px;
+  
+  width: 500px;
+  max-width: 90vw;
+  max-height: 80vh;
+  height: auto;
+  
+  padding: 25px 25px;
+  position: relative;
+  box-sizing: border-box;
+  
+  overflow-y: auto;   
   animation: popupShow 0.35s ease-in-out forwards;
 }
 
-.popup .ellipse {
-  height: 142px;
-  margin-left: 172px;
-  margin-top: 63px;
-  width: 142px;
-}
-
-.popup .text-wrapper {
-  align-items: center;
-  color: #000000;
+.FAQ .faq-item {
   display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
-  height: 19px;
-  justify-content: center;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-left: 178px;
-  margin-top: 11px;
-  text-align: center;
-  white-space: nowrap;
-  width: 130px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-/* ── Social icon group ── */
-.popup .group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  margin-top: 27px;
-}
-
-/* Wrapper button */
-.popup .social-btn {
-  background: none;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-
-  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
-}
-
-.popup .social-btn:hover {
-  opacity: 0.85;
-  transform: translateY(-4px) scale(1.1);
-}
-
-.popup .facebook {
-  height: 24.8px;
-  width: 27.5px;
-}
-
-.popup .tiktok {
-  height: 26.32px;
-  width: 25.77px;
-}
-
-.popup .mail {
-  height: 27.69px;
-  width: 33.61px;
-}
-
-.popup .web {
-  height: 27.56px;
-  width: 30.56px;
-}
-
-/* ── Follow button container ── */
-.popup .button {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
-/* Follow button */
-.popup .follow-btn {
-  background-color: #d9d9d9;
-  border-radius: 30px;
-  height: 60px;
-  width: 310px;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
-  color: #000000;
-  text-align: center;
-  letter-spacing: 0;
-  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
-}
-
-.popup .follow-btn:hover {
-  background-color: #c4c4c4;
-  transform: scale(1.03);
-}
-
-/* Close button */
-.close-btn {
+.FAQ-close-btn-absolute {
   position: absolute;
-  top: 10px;
-  right: 14px;
-  background: none;
+  top: 15px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
   border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
+  font-size: 28px;
   line-height: 1;
+  color: #888888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  z-index: 10;
 }
 
-.close-btn:hover {
-  transform: scale(1.1);
+.FAQ-close-btn-absolute:hover {
+  color: #000000;
+  background-color: #f0f0f0; 
 }
 
+.FAQ::-webkit-scrollbar {
+  width: 6px;
+}
+.FAQ::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
 
+.FAQ .text-wrapper,
+.FAQ .div,
+.FAQ .text-wrapper-3,
+.FAQ .text-wrapper-5,
+.FAQ .text-wrapper-9 {
+  color: #000000;
+  font-family: "Inter", sans-serif;
+  text-align: justify;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1.4;
+  position: relative;
+  width: 100%;
+  margin: 0 0 2px 0 !important;
+}
 
+.FAQ .vi-t-t-t-c-a-bach,
+.FAQ .p,
+.FAQ .text-wrapper-2,
+.FAQ .text-wrapper-4,
+.FAQ .text-wrapper-6,
+.FAQ .text-wrapper-7,
+.FAQ .text-wrapper-8,
+.FAQ .text-wrapper-10 {
+  color: #333333;
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.6;
+  position: relative;
+  width: 100%;
+  text-align: justify;
+  
+  height: auto !important;
+  margin: 0 !important;
+  
+  white-space: normal;
+  word-break: break-word;
+}
 @keyframes popupShow {
   0% {
     opacity: 0;
