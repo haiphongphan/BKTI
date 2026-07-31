@@ -1,6 +1,6 @@
 .homepage {
   background-color: transparent;
-  min-height: 1813px;
+  min-height: 2000px;
   max-width: 1440px;
   overflow: hidden;
   position: relative;
@@ -44,42 +44,42 @@
 .homepage .card-intro {
   height: 212px;
   left: calc(50.00% - 485px);
-  top: calc(50.00% - 810px);
+  top: 96.5px;
   width: 971px;
 }
 
 .homepage .card-ranking {
   height: 386px;
   left: calc(50.00% - 485px);
-  top: calc(50.00% - 486px);
+  top: 420.5px;
   width: 534px;
 }
 
 .homepage .card-lower-left {
   height: 386px;
   left: calc(50.00% - 485px);
-  top: calc(50.00% - 88px);
+  top: 818.5px;
   width: 534px;
 }
 
 .homepage .card-right {
   height: 784px;
   left: calc(50.00% + 61px);
-  top: calc(50.00% - 486px);
+  top: 420.5px;
   width: 425px;
 }
 
 .homepage .card-fullwidth-1 {
   height: 206px;
   left: calc(50.00% - 482px);
-  top: calc(50.00% + 310px);
+  top: 1216.5px;
   width: 968px;
 }
 
 .homepage .card-fullwidth-2 {
   height: 520px;
   left: calc(50.00% - 482px);
-  top: calc(50.00% + 528px);
+  top: 1434.5px;
   width: 968px;
 }
 
@@ -105,27 +105,27 @@
 
 .homepage .title-right {
   left: calc(50.00% + 96px);
-  top: calc(50.00% - 480px);
+  top: 426.5px;
 }
 
 .homepage .title-fullwidth-1 {
   left: calc(50.00% - 447px);
-  top: calc(50.00% + 316px);
+  top: 1222.5px;
 }
 
 .homepage .title-lower-left {
   left: calc(50.00% - 450px);
-  top: calc(50.00% - 82px);
+  top: 824.5px;
 }
 
 .homepage .title-fullwidth-2 {
   left: calc(50.00% - 447px);
-  top: calc(50.00% + 534px);
+  top: 1440.5px;
 }
 
 .homepage .title-ranking {
   left: calc(50.00% - 450px);
-  top: calc(50.00% - 480px);
+  top: 426.5px;
 }
 
 /* ══════════════════════════════════════════
@@ -465,7 +465,7 @@
   position: absolute;
   /* Trùng vị trí với card-lower-left */
   left: calc(50.00% - 485px);
-  top: calc(50.00% - 88px);
+  top: 818.5px;
   width: 534px;
   height: 386px;
   padding: 42px 35px 15px 35px;
@@ -592,7 +592,7 @@
 .homepage .credit-container {
   position: absolute;
   left: calc(50.00% - 482px);
-  top: calc(50.00% + 528px);
+  top: 1434.5px;
   width: 968px;
   height: 520px;
   padding: 32px 40px;
@@ -808,7 +808,7 @@
   height: 390px;
   left: calc(50.00% - 490px);
   position: absolute;
-  top: calc(50.00% - 486px);
+  top: 420.5px;
   width: 543px;
 }
 
