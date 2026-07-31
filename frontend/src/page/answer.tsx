@@ -4,6 +4,7 @@ import shape from "/image/shape.svg";
 import { ProgressBar } from "../elements/progressbar";
 import "./answerstyle.css";
 
+
 function Answer(){
   const [questions, setQuestions] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -84,7 +85,7 @@ function Answer(){
         <button className="nav-frame frame-2">
           <div className="nav-text text-wrapper-8">@cse-multimedia</div>
         </button>
-        <button className="nav-logo">
+        <button className="nav-logo" onClick={() => (window as any).navigateToHome?.()}>
           <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
         </button>
         <button className="nav-frame frame-3">
@@ -131,15 +132,15 @@ function Answer(){
 
           const currentLetter = String.fromCharCode(65 + index);
 
-          const isSelected = userAnswers[currentQuestion.id.toString()] === currentLetter;
+          const isSelected = userAnswers[currentQuestion.id.toString()] === opt.id.toString();
 
 
           return (
-            <button key={index} className={`answer-btn ${currentClass}`}
+            <button key={opt.id || index} className={`answer-btn ${currentClass}`}
             onClick={() => {
               setUserAnswers(prev => ({
                 ...prev,
-                [currentQuestion.id.toString()]: currentLetter
+                [currentQuestion.id.toString()]: opt.id.toString()
               }));
             }}
             >
@@ -148,7 +149,7 @@ function Answer(){
                 style={isSelected ? { backgroundColor: '#bb9fe0', border: '2px solid #6f42c1' } : {}}
               />
               <span className="answer-label text-wrapper">
-                {String.fromCharCode(65 + index)} {/* Tự sinh chữ A, B, C */}
+                {currentLetter} {/* Tự sinh chữ A, B, C */}
               </span>
               <div className="answer-text lorem-ipsum-dolor">
                 {opt.content} {}
