@@ -18,9 +18,13 @@ function App() {
       setCurrentPage('home');
       setShowPopUp(false); // Không tự động hiện lại popup
     };
+    (window as any).navigateToAnswer = () => {
+      setCurrentPage('answer');
+    }
     return () => {
       delete (window as any).navigateToResult;
       delete (window as any).navigateToHome;
+      delete (window as any).navigateToAnswer;
     };
   }, []);
 

@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
 
-const RANKING_TOP_POSITIONS = [512, 562, 613, 668, 723];
+const RANKING_TOP_POSITIONS = [512, 572, 632, 692, 752, 812, 872, 932, 992, 1052];
 
 // Slide giới thiệu đoàn hội
 const DH_SLIDES = [
@@ -316,7 +316,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
         <p className="block-title title-ranking">Bảng xếp hạng</p>
-        {ranking.slice(0, 5).map((item, idx) => (
+        {ranking.slice(0, 10).map((item, idx) => (
           <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
             <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
             <div className="ranking-light-text ranking-subtitle">{item.code}</div>

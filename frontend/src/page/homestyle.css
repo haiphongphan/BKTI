@@ -47,7 +47,7 @@
   width: 971px;
 }
 
-.homepage .card-ranking {
+.homepage .card-right {
   height: 386px;
   left: calc(50.00% - 485px);
   top: calc(50.00% - 486px);
@@ -61,7 +61,7 @@
   width: 534px;
 }
 
-.homepage .card-right {
+.homepage .card-ranking {
   height: 784px;
   left: calc(50.00% + 61px);
   top: calc(50.00% - 486px);
@@ -102,7 +102,7 @@
   width: auto;
 }
 
-.homepage .title-right {
+.homepage .title-ranking {
   left: calc(50.00% + 96px);
   top: calc(50.00% - 480px);
 }
@@ -122,7 +122,7 @@
   top: calc(50.00% + 534px);
 }
 
-.homepage .title-ranking {
+.homepage .title-right {
   left: calc(50.00% - 450px);
   top: calc(50.00% - 480px);
 }
@@ -280,7 +280,7 @@
    ══════════════════════════════════════════ */
 .homepage .group {
   /* Căn giữa ngang*/
-  left: calc(50.00% - 485px + 69.5px);
+  left: calc(50.00% + 77px + 15px);
   height: 40px;
   position: absolute;
   top: 512px;
