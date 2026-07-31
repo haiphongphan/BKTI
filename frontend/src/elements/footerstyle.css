@@ -55,7 +55,7 @@
 .footer__credit-slider-wrapper_01 {
   width: 100%;
   max-width: 380px;
-  height: 135px;
+  height: 175px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -87,8 +87,8 @@
 }
 
 .footer__member-avatar-wrapper_01 {
-  width: 70px;   
-  height: 105px;         
+  width: 100px;   
+  height: 150px;         
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(123, 97, 255, 0.15);

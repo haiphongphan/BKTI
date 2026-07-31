@@ -7,63 +7,63 @@ const CREDIT_MEMBERS = [
     name: "Đinh Quốc Thịnh",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 2,
     name: "Phan Hải Phong",
     role: "Lead Dev",
     quote: "\"Sống nay chết mai\"",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/24.jpg"
   },
   {
     id: 3,
     name: "Lâm Chí Nguyên",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 4,
     name: "Trần Duy Phước Nghĩa",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 5,
     name: "Nguyễn Huy Nhật",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 6,
     name: "Hàng Khang Định",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 7,
     name: "Nguyễn Thị Hồng Ngọc",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 8,
     name: "Lê Nguyên Hào",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 9,
     name: "Văn Huỳnh Như",
     role: "",
     quote: "",
-    avatar: "/image/credit_members/PHP.jpeg"
+    avatar: "/image/credit_members/PHP.jpg"
   }
 ];
 
@@ -203,7 +203,7 @@ const Footer: React.FC = () => {
           </p>
           <div className="footer__links_01">
             <a 
-              href="https://www.facebook.com/cse.multimedia" 
+              href="https://www.facebook.com/BKCSE.Multimedia" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="footer__link_01"
