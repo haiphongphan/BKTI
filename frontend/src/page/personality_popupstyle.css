@@ -1,139 +1,94 @@
-.popup {
+/* Container chính */
+.personality {
   background-color: #ffffff;
   border-radius: 25px;
-  box-shadow: 1px 4px 21.2px #998fc769;
-  display: flex;
-  flex-direction: column;
-  min-height: 437px;
-  min-width: 486px;
-  overflow-x: hidden;
-  width: 486px;
+  box-shadow: 1px 4px 21.2px rgba(153, 143, 199, 0.41);
+  min-height: 354px;
+  width: 650px;
+  max-width: 90vw;
+  padding: 24px;
+  position: relative;
+  box-sizing: border-box;
   animation: popupShow 0.35s ease-in-out forwards;
 }
 
-.popup .ellipse {
-  height: 142px;
-  margin-left: 172px;
-  margin-top: 63px;
-  width: 142px;
-}
-
-.popup .text-wrapper {
-  align-items: center;
+/* Tiêu đề chính */
+.personality .title {
   color: #000000;
-  display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
-  height: 19px;
-  justify-content: center;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-left: 178px;
-  margin-top: 11px;
+  font-family: "Inter", Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 900;
   text-align: center;
-  white-space: nowrap;
-  width: 130px;
+  margin: 0 0 24px 0;
 }
 
-/* ── Social icon group ── */
-.popup .group {
+/* ── LƯỚI TỰ ĐỘNG (5 CỘT x 2 HÀNG) ── */
+.personality-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px 12px;
+  justify-items: center;
+}
+
+/* Thẻ bọc 1 phần tử tính cách */
+.personality-item {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 28px;
-  margin-top: 27px;
+  width: 100px;
 }
 
-/* Wrapper button */
-.popup .social-btn {
-  background: none;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
-
-  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+/* ── KHUNG CHỨA ẢNH & THÊM BORDER ── */
+.img-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 16px;       
+  border: 2px solid #998fc7; 
+  overflow: hidden;
+  box-sizing: border-box;
+  background-color: #fcfbfe;
+  box-shadow: 0 4px 10px rgba(153, 143, 199, 0.15);
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
-.popup .social-btn:hover {
-  opacity: 0.85;
-  transform: translateY(-4px) scale(1.1);
+.img-wrapper:hover {
+  transform: translateY(-3px); 
+  border-color: #7b6cb7;
 }
 
-.popup .facebook {
-  height: 24.8px;
-  width: 27.5px;
+.rectangle-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.popup .tiktok {
-  height: 26.32px;
-  width: 25.77px;
-}
-
-.popup .mail {
-  height: 27.69px;
-  width: 33.61px;
-}
-
-.popup .web {
-  height: 27.56px;
-  width: 30.56px;
-}
-
-/* ── Follow button container ── */
-.popup .button {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
-/* Follow button */
-.popup .follow-btn {
-  background-color: #d9d9d9;
-  border-radius: 30px;
-  height: 60px;
-  width: 310px;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 16px;
-  font-weight: 600;
+.item-label {
   color: #000000;
+  font-family: "Inter", Helvetica, sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
   text-align: center;
-  letter-spacing: 0;
-  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+  margin-top: 6px;
+  line-height: 1.2;
 }
 
-.popup .follow-btn:hover {
-  background-color: #c4c4c4;
-  transform: scale(1.03);
-}
-
-/* Close button */
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 14px;
+  top: 16px;
+  right: 18px;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 28px;
   cursor: pointer;
-  color: #666;
+  color: #666666;
   line-height: 1;
+  transition: transform 0.2s ease;
 }
 
 .close-btn:hover {
   transform: scale(1.1);
 }
-
-
-
 @keyframes popupShow {
   0% {
     opacity: 0;

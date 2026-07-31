@@ -1,59 +1,47 @@
-import CSEMul from "/image/CSE-mul.png";
-import FB from "/image/facebook.svg";
-import TT from "/image/tiktok.svg";
-import Mail from "/image/mail.svg";
-import Web from "/image/web.svg";
-import "./popupstyle.css";
+import co_be from "/image/mochi/Cô bé đi lạc.png";
+import lgbt from "/image/mochi/Lgbt.png";
+import onfa from "/image/mochi/Onfa.png";
+import max from "/image/mochi/Max.png";
+import tkka from "/image/mochi/Quí bủ.png";
+import svn8 from "/image/mochi/Svn8.png";
+import mtp from "/image/mochi/Mtp.png";
+import bugs from "/image/mochi/Bugs.png";
+import jztr from "/image/mochi/Jztr.png";
+import nth from "/image/mochi/Nhà thám hiểm.png";
+import "./personality_popupstyle.css";
 
-function Popup({onClose} : any){
+const PERSONALITY_ITEMS = [
+  { img: co_be, label: "Cô bé đi lạc" },
+  { img: lgbt, label: "LGBT" },
+  { img: onfa, label: "ONFA" },
+  { img: max, label: <>Tối đa<br />Verstappen</> },
+  { img: tkka, label: <>TKKA<br />(Thủ khoa khối A)</> },
+  { img: svn8, label: "SVN8" },
+  { img: mtp, label: "Núi Rừng MTV" },
+  { img: bugs, label: "BUGS" },
+  { img: jztr, label: "JZTR" },
+  { img: nth, label: "Bí mật hehe" },
+];
+
+export default function Personality({ onClose }: { onClose: () => void }) {
   return (
-    <div className="popup">
-      <img className="ellipse" alt="Ellipse" src={CSEMul} />
-      <div className="text-wrapper">@csemultimedia</div>
-      <div className="group">
-        <a 
-          href="https://www.facebook.com/BKCSE.Multimedia" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="social-btn"
-        >
-          <img className="facebook" alt="Facebook" src={FB} />
-        </a>
-        <a 
-          href="https://www.tiktok.com/@csemultimedia" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="social-btn"
-        >
-          <img className="tiktok" alt="TikTok" src={TT} />
-        </a>
-        <a 
-          href="mailto:dtn-ktmt@hcmut.edu.vn" 
-          className="social-btn"
-        >
-          <img className="mail" alt="Mail" src={Mail} />
-        </a>
-        <a 
-          href="https://cse.hcmut.edu.vn/en" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="social-btn"
-        >
-          <img className="web" alt="Web" src={Web} />
-        </a>
-      </div>
-
-      {/* ── Follow button — điều hướng về Home ── */}
-      <div className="button">
-        <button className="follow-btn" onClick={onClose}>
-          Hehehehe
-        </button>
-      </div>
+    <div className="personality">
+      <p className="title">Các kiểu tính cách trong bài kiểm tra</p>
       <button className="close-btn" onClick={onClose}>
         &times;
       </button>
+
+      {/* Lưới chứa 10 hình mẫu tính cách */}
+      <div className="personality-grid">
+        {PERSONALITY_ITEMS.map((item, index) => (
+          <div className="personality-item" key={index}>
+            <div className="img-wrapper">
+              <img src={item.img} alt="Personality Avatar" className="rectangle-img" />
+            </div>
+            <span className="item-label">{item.label}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
-};
-
-export default Popup;
+}
