@@ -20,7 +20,7 @@ export default function Result() {
         <button className="nav-frame frame-5">
           <div className="nav-text text-wrapper-12">@cse-multimedia</div>
         </button>
-        <button className="nav-logo">
+        <button className="nav-logo" onClick={() => (window as any).navigateToHome?.()}>
           <img src="/image/CSE-small.png" alt="CSE Multimedia" className="nav-logo-img" />
         </button>
         <button className="nav-frame frame-6">
