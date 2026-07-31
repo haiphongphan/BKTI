@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
 import Footer from "../elements/footer";
+import Navbar from "../elements/navbar";
 
 const RANKING_TOP_POSITIONS = [512, 562, 613, 668, 723];
 
@@ -32,6 +33,7 @@ const DH_SLIDES = [
   }
 ];
 
+/*
 const CREDIT_MEMBERS = [
   {
     id: 1,
@@ -97,6 +99,7 @@ const CREDIT_MEMBERS = [
     avatar: "/image/credit_members/"
   }
 ];
+*/
 
 
 
@@ -177,6 +180,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   };
 
   // Credit
+  /*
   const [creditIndex, setCreditIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const [isCreditAnimating, setIsCreditAnimating] = useState(false);
@@ -196,6 +200,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   const handleCreditAnimationEnd = () => {
     setIsCreditAnimating(false);
   };
+  */
 
 
 
@@ -394,15 +399,14 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           </div>
 
           {/* Cột phải: Card slide thành viên */}
+          {/*
           <div className="credit-member-slide-wrapper">
-            {/* Nút mũi tên TRÁI */}
             <button className="credit-nav-btn credit-nav-left" onClick={handlePrevCredit} aria-label="Previous member">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
             </button>
 
-            {/* Khung nội dung hiển thị ở giữa */}
             <div className="credit-member-slide">
               <div 
                 className={`member-card-content ${
@@ -414,12 +418,10 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
                 }`}
                 onAnimationEnd={handleCreditAnimationEnd}
               >
-                {/* 1. Tên thành viên phía trên */}
                 <h4 className="member-name">{CREDIT_MEMBERS[creditIndex].name}</h4>
                 <p className="member-role">{CREDIT_MEMBERS[creditIndex].role}</p>
                 <p className="member-quote">{CREDIT_MEMBERS[creditIndex].quote}</p>
 
-                {/* 2. Avatar phía dưới */}
                 <div className="member-avatar-wrapper-23">
                   <img 
                     src={CREDIT_MEMBERS[creditIndex].avatar} 
@@ -429,19 +431,18 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
                 </div>
               </div>
 
-              {/* Chỉ số trang hiển thị góc dưới */}
               <div className="credit-page-indicator">
                 {creditIndex + 1} / {CREDIT_MEMBERS.length}
               </div>
             </div>
 
-            {/* Nút mũi tên PHẢI */}
             <button className="credit-nav-btn credit-nav-right" onClick={handleNextCredit} aria-label="Next member">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
           </div>
+          */}
         </div>
         
       </div>
