@@ -7,16 +7,16 @@ class Settings(BaseSettings):
     
     # Cấu hình để Pydantic biết phải tìm file .env ở đâu
     # Cũ:
-    # model_config = SettingsConfigDict(
-    #     env_file="app/.env", # gọi file .env tại thư mục đang chạy
-    #     env_file_encoding="utf-8",
-    #     extra="ignore" # Bỏ qua nếu trong file .env có các biến thừa khác
-    # )
-    # Mới:
     model_config = SettingsConfigDict(
-        env_file=".env", # gọi file .env tại thư mục đang chạy
+        env_file="app/.env", # gọi file .env tại thư mục đang chạy
         env_file_encoding="utf-8",
         extra="ignore" # Bỏ qua nếu trong file .env có các biến thừa khác
     )
+    # Mới:
+    # model_config = SettingsConfigDict(
+    #     env_file=".env", # gọi file .env tại thư mục đang chạy
+    #     env_file_encoding="utf-8",
+    #     extra="ignore" # Bỏ qua nếu trong file .env có các biến thừa khác
+    # )
 
 settings = Settings()
