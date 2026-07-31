@@ -77,7 +77,7 @@
 }
 
 .homepage .card-fullwidth-2 {
-  height: 206px;
+  height: 520px;
   left: calc(50.00% - 482px);
   top: calc(50.00% + 528px);
   width: 968px;
@@ -177,7 +177,7 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-SemiBold", "Inter-Bold";
+  font-family: Helvetica;
   font-size: 14px;
   font-weight: 600;
   letter-spacing: 0;
@@ -233,7 +233,25 @@
   width: 217px;
 }
 
-.homepage .btn-opt-label {
+.homepage .btn-opt-label-1 {
+  align-items: center;
+  color: #000000;
+  display: flex;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 20px;
+  font-weight: 600;
+  height: 36px;
+  justify-content: center;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: -47px;
+  margin-right: -47px;
+  position: relative;
+  text-align: center;
+  width: 311px;
+}
+
+.homepage .btn-opt-label-2 {
   align-items: center;
   color: #000000;
   display: flex;
@@ -366,7 +384,6 @@
   top: 44px;
   border: none;
   outline: none;
-  cursor: pointer;
   z-index: 10;
 }
 
@@ -374,26 +391,18 @@
   left: calc(50.00% - 486px);
   box-shadow: 0 0 0 2px #998fc7;
   z-index: 10;
+  cursor: pointer;
 }
+
 
 .homepage .nav-btn-hashtag {
-  left: calc(50.00% - 308px);
-  z-index: 10;
-}
-
-.homepage .nav-btn-lang {
   left: calc(50.00% + 380px);
   transition: background-color 0.25s ease, color 0.25s ease;
+  box-shadow: 0 0 0 2px #998fc7;
   z-index: 10;
 }
 
-.homepage .nav-btn-lang:hover {
-  background-color: #998fc7;
-}
 
-.homepage .nav-btn-lang:hover .nav-label-lang {
-  color: #ffffff;
-}
 
 .homepage .nav-logo {
   position: absolute;
@@ -447,6 +456,331 @@
 
 .homepage .nav-label-lang {
   width: 105px;
+}
+
+/* ══════════════════════════════════════════
+   Nhóm 6 - Slide Giới thiệu Đoàn hội
+   ══════════════════════════════════════════ */
+.homepage .dh-slide-wrapper {
+  position: absolute;
+  /* Trùng vị trí với card-lower-left */
+  left: calc(50.00% - 485px);
+  top: calc(50.00% - 88px);
+  width: 534px;
+  height: 386px;
+  padding: 42px 35px 15px 35px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 12;
+}
+
+/* Vùng nội dung áp dụng Animation */
+.homepage .btt-slide-inner {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Animation khi đổi slide */
+.homepage .slide-fade-in {
+  animation: slideFadeIn 0.35s ease-out forwards;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px); /* Trượt nhẹ lên */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.homepage .dh-slide-title {
+  position: relative !important;
+  left: 0 !important;
+  top: 0 !important;
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #000000;
+  margin: 0;
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.homepage .dh-slide-content {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1.6;
+  text-align: justify;
+  margin-top: 15px;
+  flex-grow: 1;
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+.homepage .dh-slide-img {
+  width: 100%;             /* Ôm vừa chiều rộng của khung text */
+  max-width: 440px;
+  max-height: 250px;       /* Scale nhỏ chiều cao lại để vừa vặn trong thẻ */
+  object-fit: contain;       /* Giữ tỉ lệ ảnh không bị móp méo */
+  border-radius: 12px;     /* Bo góc nhẹ cho hình ảnh */
+  
+  /* Căn giữa hình ảnh ngay ngắn */
+  display: block;
+  margin: 10px auto;       
+}
+
+/* Đảm bảo vùng chứa không đẩy nội dung ra ngoài thẻ */
+.homepage .dh-slide-body {
+  flex: 1;
+  margin: 8px 0;
+  max-height: 220px;       /* Chiều cao tối đa an toàn */
+  padding-right: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* Căn giữa tất cả nội dung bên trong */
+}
+
+/* Nút bấm điều hướng slide ở góc dưới */
+.homepage .dh-slide-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.homepage .dh-nav-btn {
+  background-color: #f0f0f0;
+  border: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.homepage .dh-nav-btn:hover {
+  background-color: #998fc7;
+  color: #ffffff;
+}
+
+.homepage .dh-slide-indicator {
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #666666;
+}
+
+/* ══════════════════════════════════════════
+   Nhóm 7 - Credit
+   ══════════════════════════════════════════ */
+
+.homepage .credit-container {
+  position: absolute;
+  left: calc(50.00% - 482px);
+  top: calc(50.00% + 528px);
+  width: 968px;
+  height: 520px;
+  padding: 32px 40px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  z-index: 12;
+}
+
+/* Tầng trên: Thông tin chung */
+.homepage .credit-info-general {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.homepage .credit-title {
+  position: relative !important;
+  left: 0 !important;
+  top: 0 !important;
+  font-family: "Inter", sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 8px 0;
+}
+
+.homepage .credit-general-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  color: #555555;
+  line-height: 1.5;
+  margin: 0;
+  text-align: center;
+}
+
+/* ── TẦNG DƯỚI: KHUNG SLIDER & THẺ THÀNH VIÊN ── */
+.homepage .credit-member-slide-wrapper {
+  width: 100%;
+  max-width: 580px; /* Mở rộng chiều rộng thẻ slide */
+  height: 380px;     /* Chiều cao thoải mái cho ảnh 2:3 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  position: relative;
+}
+
+.homepage .credit-member-slide {
+  flex: 1;
+  height: 100%;
+  background-color: #fcfbfe;
+  border-radius: 28px;
+  padding: 24px 20px 36px 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border: 1px solid rgba(153, 143, 199, 0.25);
+  box-shadow: 0 8px 24px rgba(153, 143, 199, 0.12);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Text Thông tin thành viên */
+.homepage .member-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.homepage .member-name {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 2px 0;
+}
+
+.homepage .member-role {
+  font-family: "Inter", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #8375b4;
+  margin: 0 0 4px 0;
+}
+
+.homepage .member-quote {
+  font-family: "Inter", sans-serif;
+  font-style: italic;
+  font-size: 13px;
+  color: #666666;
+  margin: 0 0 14px 0;
+}
+
+
+.homepage .member-avatar-wrapper-23 {
+  width: 140px;   
+  height: 210px;         
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(153, 143, 199, 0.25);
+  border: 2px solid #998fc7;
+  background-color: #f0edfa;
+}
+
+.homepage .member-avatar-23 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;        
+  display: block;
+}
+
+.homepage .credit-page-indicator {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #888888;
+}
+
+.homepage .credit-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 1px solid rgba(153, 143, 199, 0.3);
+  color: #554880;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(153, 143, 199, 0.15);
+  flex-shrink: 0;
+}
+
+.homepage .credit-nav-btn:hover {
+  background-color: #998fc7;
+  color: #ffffff;
+  border-color: #998fc7;
+  transform: scale(1.08);
+  box-shadow: 0 6px 16px rgba(153, 143, 199, 0.35);
+}
+
+.homepage .credit-nav-btn:active {
+  transform: scale(0.96);
+}
+.homepage .slide-from-right {
+  animation: slideFromRight 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Khi bấm nút Prev (Trái) -> Lướt từ TRÁI qua PHẢI */
+.homepage .slide-from-left {
+  animation: slideFromLeft 0.35s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* ══════════════════════════════════════════
