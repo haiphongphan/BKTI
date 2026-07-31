@@ -6,7 +6,7 @@
   flex-direction: column;
   gap: 20px;
   
-  width: 500px;
+  width: 600px;
   max-width: 90vw;
   max-height: 80vh;
   height: auto;
@@ -46,9 +46,9 @@
 }
 
 .FAQ-close-btn-absolute:hover {
-  color: #000000;
-  background-color: #f0f0f0; 
+  transform: scale(1.1);
 }
+
 
 .FAQ::-webkit-scrollbar {
   width: 6px;

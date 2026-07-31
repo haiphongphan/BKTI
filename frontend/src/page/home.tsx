@@ -5,6 +5,8 @@ import FAQ from "./FAQ"
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
+import Footer from "../elements/footer";
+import Navbar from "../elements/navbar";
 
 const RANKING_TOP_POSITIONS = [512, 572, 632, 692, 752, 812, 872, 932, 992, 1052];
 
@@ -31,6 +33,7 @@ const DH_SLIDES = [
   }
 ];
 
+/*
 const CREDIT_MEMBERS = [
   {
     id: 1,
@@ -96,6 +99,7 @@ const CREDIT_MEMBERS = [
     avatar: "/image/credit_members/"
   }
 ];
+*/
 
 
 
@@ -176,6 +180,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   };
 
   // Credit
+  /*
   const [creditIndex, setCreditIndex] = useState(0);
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const [isCreditAnimating, setIsCreditAnimating] = useState(false);
@@ -195,6 +200,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   const handleCreditAnimationEnd = () => {
     setIsCreditAnimating(false);
   };
+  */
 
 
 
@@ -217,7 +223,8 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
 
   if (loading) return <div style={{ padding: "50px", alignContent: "center" }}>Đang cập nhật bảng xếp hạng</div>;
-  if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
+  // Cũ:
+  // if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
 
 
 
@@ -316,17 +323,25 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
         <p className="block-title title-ranking">Bảng xếp hạng</p>
-        {ranking.slice(0, 10).map((item, idx) => (
-          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-            <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
-            <div className="ranking-light-text ranking-subtitle">{item.code}</div>
-            <div className="ranking-light-text ranking-score">{item.percentage}%</div>
-            <div className="ellipse" />
-            <div className="ranking-progress">
-              <ProgressBar current={item.percentage} total={100} showText = {false} />
-            </div>
+        {ranking.length === 0 ? (
+          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
+              Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
+            </p>
           </div>
-        ))}
+        ) : (
+          ranking.slice(0, 10).map((item, idx) => (
+            <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
+              <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
+              <div className="ranking-light-text ranking-subtitle">{item.code}</div>
+              <div className="ranking-light-text ranking-score">{item.percentage}%</div>
+              <div className="ellipse" />
+              <div className="ranking-progress">
+                <ProgressBar current={item.percentage} total={100} showText = {false} />
+              </div>
+            </div>
+          ))
+        )}
 
         {/* ── Khối 3: Trái-dưới ── */}
         <div className="card-rect card-lower-left" />
@@ -384,15 +399,14 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           </div>
 
           {/* Cột phải: Card slide thành viên */}
+          {/*
           <div className="credit-member-slide-wrapper">
-            {/* Nút mũi tên TRÁI */}
             <button className="credit-nav-btn credit-nav-left" onClick={handlePrevCredit} aria-label="Previous member">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
               </svg>
             </button>
 
-            {/* Khung nội dung hiển thị ở giữa */}
             <div className="credit-member-slide">
               <div 
                 className={`member-card-content ${
@@ -404,12 +418,10 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
                 }`}
                 onAnimationEnd={handleCreditAnimationEnd}
               >
-                {/* 1. Tên thành viên phía trên */}
                 <h4 className="member-name">{CREDIT_MEMBERS[creditIndex].name}</h4>
                 <p className="member-role">{CREDIT_MEMBERS[creditIndex].role}</p>
                 <p className="member-quote">{CREDIT_MEMBERS[creditIndex].quote}</p>
 
-                {/* 2. Avatar phía dưới */}
                 <div className="member-avatar-wrapper-23">
                   <img 
                     src={CREDIT_MEMBERS[creditIndex].avatar} 
@@ -419,22 +431,22 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
                 </div>
               </div>
 
-              {/* Chỉ số trang hiển thị góc dưới */}
               <div className="credit-page-indicator">
                 {creditIndex + 1} / {CREDIT_MEMBERS.length}
               </div>
             </div>
 
-            {/* Nút mũi tên PHẢI */}
             <button className="credit-nav-btn credit-nav-right" onClick={handleNextCredit} aria-label="Next member">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="9 18 15 12 9 6"></polyline>
               </svg>
             </button>
           </div>
+          */}
         </div>
         
       </div>
+      <Footer/>
     </div>
   );
 }

@@ -1,0 +1,116 @@
+/* Container thanh điều hướng nền trắng */
+.navbar__container_01 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 72px;
+  /* background-color: #ffffff;
+  box-shadow: 0 2px 12px rgba(153, 143, 199, 0.12); */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* Khối bọc nội dung giới hạn chiều rộng bằng card nội dung (971px) */
+.navbar__content_01 {
+  width: 100%;
+  max-width: 971px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+/* Các nút bấm text phẳng, không fill, không bo góc */
+.navbar__btn_01 {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 8px 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+}
+
+/* Hiệu ứng hover cho chữ của nút phẳng */
+.navbar__text_01 {
+  font-family: "Inter-SemiBold", "Inter", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #554880; /* Màu tím đậm thanh lịch */
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.navbar__btn_01:hover .navbar__text_01 {
+  color: #7b61ff; /* Đổi màu khi hover */
+}
+
+/* Hoạt ảnh gạch chân trượt ngang khi hover */
+.navbar__text_01::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: #7b61ff;
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.navbar__btn_01:hover .navbar__text_01::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Nút logo ở giữa */
+.navbar__logo-btn_01 {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  outline: none;
+}
+
+.navbar__logo-btn_01:hover {
+  opacity: 0.85;
+}
+
+.navbar__logo-img_01 {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Responsive cho Mobile */
+@media (max-width: 768px) {
+  .navbar__container_01 {
+    height: 56px;
+  }
+
+  .navbar__content_01 {
+    padding: 0 12px;
+  }
+
+  .navbar__text_01 {
+    font-size: 13px;
+  }
+
+  .navbar__logo-img_01 {
+    height: 42px;
+  }
+}

@@ -1,9 +1,10 @@
 .resultpage {
-  background: linear-gradient(
+  /* background: linear-gradient(
     252deg,
     rgba(249, 248, 251, 1) 0%,
     rgba(235, 221, 255, 1) 100%
-  );
+  ); */
+  background: transparent;
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
@@ -111,7 +112,8 @@
   border-radius: 25px;
   box-shadow: 1px 4px 21.2px #998fc769;
   max-width: 971px;
-  margin: 40px auto;
+  /* SỬA: đồng bộ gap từ header xuống nội dung khớp với trang Home (~97px) */
+  margin: 97px auto 40px auto;
   padding: 40px;
   display: flex;
   gap: 40px;
@@ -220,4 +222,74 @@
 .retry-btn:hover {
   background-color: #f3eefc;
   transform: translateY(-2px);
+/* ======================================================
+   MOBILE RESPONSIVE (Result Page) — max-width: 992px
+   ====================================================== */
+@media (max-width: 992px) {
+  .resultpage {
+    padding-top: 0;
+  }
+
+  /* --- Header --- */
+  .resultpage .header {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 104px !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+    box-shadow: none !important;
+    z-index: 200 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 16px !important;
+    box-sizing: border-box !important;
+  }
+  .resultpage .nav-logo {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .resultpage .nav-logo-img {
+    height: 50px !important;
+    width: 100px !important;
+    object-fit: contain !important;
+  }
+  .resultpage .nav-frame {
+    position: static !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+    border-radius: 18px !important;
+  }
+  .resultpage .nav-text {
+    font-size: 13px !important;
+    width: auto !important;
+  }
+  .resultpage .text-wrapper-12,
+  .resultpage .text-wrapper-13,
+  .resultpage .text-wrapper-14 {
+    width: auto !important;
+    padding: 0 6px !important;
+  }
+
+  /* --- Card kết quả trên mobile --- */
+  .result-card {
+    /* padding-top 90px = chiều cao header mobile */
+    margin: 90px 16px 40px 16px !important;
+    width: auto !important;
+    flex-direction: column !important;
+    padding: 24px !important;
+    gap: 24px !important;
+    border-radius: 20px !important;
+  }
+
+  .back-btn {
+    align-self: center !important;
+  }
 }

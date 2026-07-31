@@ -28,25 +28,29 @@ function App() {
     };
   }, []);
 
-  if (currentPage === 'home') {
-    return (
-      <Home 
-        showPopup={showPopup}
-        onClosePopup={() => setShowPopUp(false)}
-        onStartQuiz={() => setCurrentPage('answer')} 
-      />
-    );
-  }
+  const renderContent = () => {
+    if (currentPage === 'home') {
+      return (
+        <Home 
+          showPopup={showPopup}
+          onClosePopup={() => setShowPopUp(false)}
+          onStartQuiz={() => setCurrentPage('answer')} 
+        />
+      );
+    }
 
-  if (currentPage === 'answer') {
-    return <Answer />;
-  }
+    if (currentPage === 'answer') {
+      return <Answer />;
+    }
 
-  return <Result />;
+    return <Result />;
+  };
+
+  return renderContent();
 }
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <App/>
   </StrictMode>,
 )
