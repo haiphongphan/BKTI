@@ -467,7 +467,7 @@
   top: calc(50.00% - 88px);
   width: 534px;
   height: 386px;
-  padding: 30px 40px;
+  padding: 42px 35px 15px 35px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

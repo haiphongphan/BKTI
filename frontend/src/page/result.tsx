@@ -1,5 +1,5 @@
 import { Chart } from "../elements/spiderchart.tsx";
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import "./resultstyle.css";
 
 export default function Result() {
