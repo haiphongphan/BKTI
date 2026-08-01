@@ -2,7 +2,7 @@ import "./homestyle.css";
 import Popup from "./popup";
 import Pers_popup from "./personality_popup"
 import FAQ from "./FAQ"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
 import Footer from "../elements/footer";
@@ -130,25 +130,60 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
   // Slide đoàn hội
   const [DHSlideIndex, setDHSlideIndex] = useState(0);
-  const [isDHAnimating, setisDHAnimating] = useState(false); // animate trượt slide
+  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
+  const [isDHAnimating, setIsDHAnimating] = useState(false); // animate trượt slide
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+    const autoplayTimerRef = useRef<any>(null);
+  
+    useEffect(() => {
+      if (!isAutoPlaying) return;
+  
+      const timer = setInterval(() => {
+        setSlideDirection("next");
+        setIsDHAnimating(true);
+        setDHSlideIndex((prev) => (prev + 1) % DH_SLIDES.length);
+      }, 5000);
+      return () => clearInterval(timer);
+    }, [isAutoPlaying]);
+  
+    useEffect(() => {
+      return () => {
+        if (autoplayTimerRef.current) {
+          clearTimeout(autoplayTimerRef.current);
+        }
+      };
+    }, []);
+  
+    const resetAutoplayTimer = () => {
+      if (autoplayTimerRef.current) {
+        clearTimeout(autoplayTimerRef.current);
+      }
+      setIsAutoPlaying(false);
+      autoplayTimerRef.current = setTimeout(() => {
+        setIsAutoPlaying(true);
+      }, 5000);
+    };
+
   
   const changeDHSlide = (nextIndex: number) => {
-    setisDHAnimating(true);
+    setIsDHAnimating(true);
     setDHSlideIndex(nextIndex);
   };
 
   const handleNextDHSlide = () => {
+    resetAutoplayTimer();
     const nextIndex = (DHSlideIndex + 1) % DH_SLIDES.length;
     changeDHSlide(nextIndex);
   };
 
   const handlePrevDHSlide = () => {
+    resetAutoplayTimer();
     const nextIndex = (DHSlideIndex - 1 + DH_SLIDES.length) % DH_SLIDES.length;
     changeDHSlide(nextIndex);
   };
 
   const handleDHAnimationEnd = () => {
-    setisDHAnimating(false);
+    setIsDHAnimating(false);
   };
 
   // Vuốt slide trên mobile
@@ -387,16 +422,16 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         <p className="block-title title-fullwidth-1">BKTI dùng để ABC, không phải để XYZ</p>
 
         {/* ── Khối 6: Full-width 2 ── */}
-        <div className="card-rect card-fullwidth-2" />
-        <div className="credit-container">
+        {/* <div className="card-rect card-fullwidth-2" />
+        <div className="credit-container"> */}
           {/* Cột trái: Thông tin chung của trang web */}
-          <div className="credit-info-general">
+          {/* <div className="credit-info-general">
             <h3 className="block-title credit-title">Credit team BKTI</h3>
             <p className="credit-general-desc">
               BKTI - bao gồm nội dung trang web, thiết kế và các hình ảnh minh họa - là sản phẩm thuộc quyền sở hữu của 9 nhân vật phản diện thuộc BTT - khả ái và ngây ngất lòng người.
 
             </p>
-          </div>
+          </div> */}
 
           {/* Cột phải: Card slide thành viên */}
           {/*
@@ -443,7 +478,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
             </button>
           </div>
           */}
-        </div>
+        {/* </div> */}
         
       </div>
       <Footer/>
