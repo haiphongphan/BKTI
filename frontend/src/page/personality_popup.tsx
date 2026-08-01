@@ -1,13 +1,13 @@
-import co_be from "/image/mochi/Cô bé đi lạc.png";
-import lgbt from "/image/mochi/Lgbt.png";
-import onfa from "/image/mochi/Onfa.png";
-import max from "/image/mochi/Max.png";
-import tkka from "/image/mochi/Quí bủ.png";
-import svn8 from "/image/mochi/Svn8.png";
-import mtp from "/image/mochi/Mtp.png";
-import bugs from "/image/mochi/Bugs.png";
-import jztr from "/image/mochi/Jztr.png";
-import nth from "/image/mochi/Nhà thám hiểm.png";
+import co_be from "../../image/mochi/Co_be.png";
+import lgbt from "../../image/mochi/Lgbt.png";
+import onfa from "../../image/mochi/Onfa.png";
+import max from "../../image/mochi/Max.png";
+import tkka from "../../image/mochi/Tkka.png";
+import svn8 from "../../image/mochi/Svn8.png";
+import mtp from "../../image/mochi/Mtp.png";
+import bugs from "../../image/mochi/Bugs.png";
+import jztr from "../../image/mochi/Jztr.png";
+import nth from "../../image/mochi/Nha_tham_hiem.png";
 import "./personality_popupstyle.css";
 
 const PERSONALITY_ITEMS = [
