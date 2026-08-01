@@ -7,6 +7,7 @@ class Personality(SQLModel, table = True):
     code: str = Field(primary_key=True)
     name: str = Field()
     description: str = Field()
+    img_url: str = Field()
 
 class User_ans(SQLModel, table = True):
     __tablename__ = "user_ans"

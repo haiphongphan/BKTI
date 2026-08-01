@@ -87,6 +87,7 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
         "code": existing_personality.code,
         "name": existing_personality.name,
         "description": existing_personality.description,
+        "image_url": existing_personality.img_url,
         "dimension1_nguoi_im_lang": dimension_1_A / 6 * 100,
         "dimension1_nguoi_hay_noi": dimension_1_C / 6 * 100,
         "dimension2_vibecoder": dimension_2_A / 6 * 100,
