@@ -63,6 +63,14 @@ export default function Result() {
 
       <main className="result-card">
         <div className="result-info">
+          {result.image_url && (
+            <img 
+              src={result.image_url} 
+              alt={result.name} 
+              className="personality-img" 
+              style={{ maxWidth: '200px', marginBottom: '20px' }}
+            />
+          )}
           <span className="subtitle">Kiểu tính cách của bạn</span>
           
           {/* Hiển thị Tên nhóm tính cách + Mã Code (Ví dụ: Nhóm nhân sự ưu tú - INTJ) */}
