@@ -86,7 +86,13 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
         "message": "Nộp bài thành công!",
         "code": existing_personality.code,
         "name": existing_personality.name,
-        "description": existing_personality.description
+        "description": existing_personality.description,
+        "dimension1_nguoi_im_lang": dimension_1_A / 6 * 100,
+        "dimension1_nguoi_hay_noi": dimension_1_C / 6 * 100,
+        "dimension2_vibecoder": dimension_2_A / 6 * 100,
+        "dimension2_handmade": dimension_2_C / 6 * 100,
+        "dimension3_chua_lanh": dimension_3_A / 6 * 100,
+        "dimension3_mutant": dimension_3_C / 6 * 100
     }
 
 
