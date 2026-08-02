@@ -133,7 +133,11 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
   const [isDHAnimating, setIsDHAnimating] = useState(false); // animate trượt slide
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-    const autoplayTimerRef = useRef<any>(null);
+  const autoplayTimerRef = useRef<any>(null);
+    
+  // Click logo ra secret
+  const [logoClickCount, setLogoClickCount] = useState<number>(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null); // Set time để bấm liên tục
   
     useEffect(() => {
       if (!isAutoPlaying) return;
@@ -284,6 +288,43 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
     setFaq(false)
   };
 
+  // Click logo ra secret
+  const handleLogoClick = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    const newCount = logoClickCount + 1;
+    setLogoClickCount(newCount);
+
+    if (newCount === 11) {
+      setLogoClickCount(0);
+
+      const secretPersonality = {
+        code: "NSFW",
+        name: "Nhà thám hiểm vĩ đại",
+        description: "Chúc mừng! Bạn đã chính thức đi chệch khỏi kịch bản và tìm ra Easter Egg giấu kín của hệ thống. Trong khi những người bình thường ngoan ngoãn điền từng câu trắc nghiệm để nhận kết quả, thì bạn lại chọn cách... \"test nhân phẩm\" của cả cái website này. Với đôi tay không biết mỏi, bản tính tò mò vô cực và khả năng thao tác vặn vẹo mọi luồng UX/UI thông thường, bạn không đi tìm bản ngã của mình, bạn đi tìm... bug. Hệ thống xin đầu hàng trước bạn. Có thể bạn là một pháp sư chuyên mở F12 để soi code, một QA Tester bẩm sinh, hoặc đơn giản là bạn quá rảnh và thích click lung tung khắp màn hình. Dù lý do là gì, tư duy out trình và không chịu gò bó vào khuôn khổ đã biến bạn thành một Nhà thám hiểm vĩ đại thực thụ. Bách khoa rất cần những bộ óc thích khám phá như bạn để tạo ra những đột phá mới (hoặc làm sập server lúc đăng ký môn, tùy tâm trạng). Tóm lại, bạn không thuộc về bất kỳ nhóm tính cách nào ở trên. Xin nhận của team Developer một lạy!",
+        img_url: "../../image/mochi/Nha_tham_hiem.png"
+      };
+
+      localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));
+      
+
+      // Chuyển ngay sang trang Result
+      if ((window as any).navigateToResult) {
+        (window as any).navigateToResult();
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      timerRef.current = setTimeout(() => { setLogoClickCount(0);}, 1000);
+    }
+  };
+  
+  // useEffect(() => {
+  //   return () => {
+  //     if (timerRef.current) clearTimeout(timerRef.current);
+  //   };
+  // }, []);
+
   return (
     <div className="home-container">
       {isPopupOpen && (
@@ -326,7 +367,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           <button className="nav-frame nav-btn-social" onClick={() => setInfoPopupVisible(true)}>
             <div className="nav-text nav-label-social">@cse-multimedia</div>
           </button>
-          <button className="nav-logo" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+          <button className="nav-logo" onClick={handleLogoClick}>
             <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
           </button>
           <button className="nav-frame nav-btn-hashtag">
