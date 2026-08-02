@@ -20,6 +20,7 @@
 Cài postgre trước ((gemini đi t quên r :))  
 Cài xong chạy các lệnh dưới:  
 `psql -d postgres`  
+`DROP DATABASE bkti_db;`
 `CREATE DATABASE bkti_db;`
 
 ### Nạp data

@@ -104,7 +104,7 @@
 }
 
 .homepage .title-ranking {
-  left: calc(50.00% + 96px);
+  left: calc(50.00% + 77px + 15px);
   top: 426.5px;
 }
 
@@ -129,63 +129,43 @@
 }
 
 /* ══════════════════════════════════════════
-   Khối 1 - Giới thiệu: frame, text bên trong
+   Khối 1 - Giới thiệu: wrapper, heading, text
    ══════════════════════════════════════════ */
-.homepage .intro-heading-frame {
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 17.75px;
-  display: inline-flex;
-  gap: 8.88px;
-  justify-content: center;
-  left: calc(50.00% - 469px);
-  padding: 2.66px 0px;
+.homepage .intro-block-wrapper {
   position: absolute;
-  top: 122px;
+  left: calc(50.00% - 485px);
+  top: 96.5px;
+  width: 971px;
+  height: 212px;
+  padding: 25px 35px 12px 35px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  z-index: 12;
 }
 
 .homepage .intro-heading-text {
-  align-items: center;
-  color: #000000;
-  display: flex;
   font-family: "Inter-SemiBold", Helvetica;
-  font-size: 42.6px;
+  font-size: 32px;
   font-weight: 600;
-  justify-content: center;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-top: -0.89px;
-  position: relative;
-  text-align: center;
-  width: 434px;
-}
-
-.homepage .intro-desc-frame {
-  align-items: center;
-  background-color: #ffffff;
-  border-radius: 17.75px;
-  display: inline-flex;
-  gap: 8.88px;
-  justify-content: center;
-  left: calc(50.00% - 438px);
-  padding: 2.66px 0px;
-  position: absolute;
-  top: 193px;
+  color: #000000;
+  margin: 0 0 8px 0;
+  text-align: left;
 }
 
 .homepage .intro-desc-text {
-  align-items: center;
-  color: #000000;
-  display: flex;
-  font-family: Helvetica;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-top: -0.89px;
-  position: relative;
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1.5;
   text-align: justify;
-  width: 546px;
+  margin: 0;
+  width: 550px;
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 /* ══════════════════════════════════════════
@@ -194,33 +174,46 @@
 .homepage .action-btn {
   align-items: center;
   display: flex;
-  gap: 2px;
-  height: 60px;
   justify-content: center;
+  height: 50px; /* Thu gọn chiều cao cho sleeker */
   position: absolute;
-  top: 333px;
+  top: 338px;  /* Cân chỉnh lại nhẹ cho đẹp mắt */
   cursor: pointer;
+  box-sizing: border-box;
+  transition: all 0.25s cubic-bezier(0.25, 1, 0.5, 1); /* Hiệu ứng mượt mà */
+}
+
+.homepage .action-btn:hover {
+  transform: translateY(-2px); /* Nhấc nhẹ lên */
+}
+
+.homepage .action-btn:active {
+  transform: translateY(1px) scale(0.98); /* Hiệu ứng lún nút */
 }
 
 .homepage .btn-start {
   background-color: #998fc7;
-  border-radius: 91px;
+  border-radius: 25px; /* Bo góc đồng bộ */
   left: calc(50.00% - 192px);
   width: 384px;
   border: none;
+  box-shadow: 0 4px 15px rgba(153, 143, 199, 0.35); /* Đổ bóng phát sáng */
+}
+
+.homepage .btn-start:hover {
+  background-color: #8578b8; /* Đổi màu khi hover */
+  box-shadow: 0 6px 20px rgba(133, 120, 184, 0.45);
 }
 
 .homepage .btn-start-label {
   align-items: center;
   color: #ffffff;
   display: flex;
-  flex: 1;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 24px;
-  font-weight: 600;
-  height: 36px;
   justify-content: center;
-  letter-spacing: 0;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 16px; /* Đồng bộ cỡ chữ 16px đồng nhất cho cả 3 nút */
+  font-weight: 600;
+  letter-spacing: 0.5px;
   line-height: normal;
   position: relative;
   text-align: center;
@@ -228,52 +221,51 @@
 
 .homepage .btn-opt1 {
   background-color: #ffffff;
-  border-radius: 119px;
+  border: 1px solid rgba(153, 143, 199, 0.3); /* Viền tím nhạt tinh tế */
+  border-radius: 25px; /* Bo góc đồng bộ */
   left: calc(50.00% - 435px);
   width: 217px;
+  box-shadow: 0 4px 12px rgba(153, 143, 199, 0.12); /* Đổ bóng nhẹ */
+}
+
+.homepage .btn-opt1:hover,
+.homepage .btn-opt2:hover {
+  background-color: #f7f5ff; /* Tím sữa nhạt */
+  border-color: rgba(153, 143, 199, 0.5);
+  box-shadow: 0 6px 16px rgba(153, 143, 199, 0.22);
 }
 
 .homepage .btn-opt-label-1 {
   align-items: center;
-  color: #000000;
+  color: #000000; /* Màu đen thuần sắc nét giống bên Answer */
   display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 20px;
+  font-family: "Inter-SemiBold", Helvetica; /* Đồng bộ font */
+  font-size: 16px; /* Giảm cỡ chữ hợp lý */
   font-weight: 600;
-  height: 36px;
   justify-content: center;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-left: -47px;
-  margin-right: -47px;
   position: relative;
   text-align: center;
-  width: 311px;
 }
 
 .homepage .btn-opt-label-2 {
   align-items: center;
-  color: #000000;
+  color: #000000; /* Màu đen thuần */
   display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
-  font-size: 24px;
+  font-family: "Inter-SemiBold", Helvetica; /* Đồng bộ font */
+  font-size: 16px;
   font-weight: 600;
-  height: 36px;
   justify-content: center;
-  letter-spacing: 0;
-  line-height: normal;
-  margin-left: -47px;
-  margin-right: -47px;
   position: relative;
   text-align: center;
-  width: 311px;
 }
 
 .homepage .btn-opt2 {
   background-color: #ffffff;
-  border-radius: 103px;
+  border: 1px solid rgba(153, 143, 199, 0.3);
+  border-radius: 25px;
   left: calc(50.00% + 218px);
   width: 217px;
+  box-shadow: 0 4px 12px rgba(153, 143, 199, 0.12);
 }
 
 /* ══════════════════════════════════════════
@@ -281,11 +273,11 @@
    ══════════════════════════════════════════ */
 .homepage .group {
   /* Căn giữa ngang*/
-  left: calc(50.00% + 77px + 15px);
+  left: calc(50.00% + 93px);
   height: 40px;
   position: absolute;
   top: 512px;
-  width: 395px;
+  width: 361px;
 }
 
 .homepage .ranking-name {
@@ -293,17 +285,17 @@
   color: #000000;
   display: flex;
   font-family: "Inter-SemiBold", Helvetica;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   height: 16px;
   justify-content: flex-start;
-  left: 43px;
+  left: 52px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
   text-align: left;
-  top: 4px;
-  width: 115px;
+  top: 3px;
+  width: 100px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -311,9 +303,9 @@
 
 .homepage .ranking-progress {
   position: absolute;
-  left: 159px;
-  top: 17px;
-  width: 202px;
+  left: 162px;
+  right: 0;
+  top: 24px;
   height: 6px;
   background-color: #d9d9d9;
   border-radius: 20px;
@@ -340,23 +332,68 @@
 
 .homepage .ranking-subtitle {
   justify-content: flex-start;
-  left: 44px;
-  top: 20px;
+  left: 52px;
+  top: 22px;
+  width: 100px;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: "Inter-Regular", Helvetica, sans-serif;
+  color: #666666;
 }
 
 .homepage .ranking-score {
-  left: 308px;
-  top: 4px;
+  right: 0;
+  width: auto;
+  top: 2px;
+  font-family: "Inter-SemiBold", Helvetica, sans-serif;
+  font-weight: 600;
+  color: #7b61ff;
+  justify-content: flex-end;
 }
 
 .homepage .ellipse {
-  background-color: #d9d9d9;
-  border-radius: 20px;
+  border-radius: 50%;
   height: 40px;
-  left: calc(50.00% - 198px);
+  width: 40px;
+  left: 0;
   position: absolute;
   top: 0;
-  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Inter-Bold", Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.homepage .ellipse.rank-1 {
+  background: linear-gradient(135deg, #ffd700 0%, #ffb300 100%);
+  box-shadow: 0 4px 10px rgba(255, 215, 0, 0.4);
+}
+
+.homepage .ellipse.rank-2 {
+  background: linear-gradient(135deg, #e0e0e0 0%, #9e9e9e 100%);
+  box-shadow: 0 4px 10px rgba(158, 158, 158, 0.3);
+}
+
+.homepage .ellipse.rank-3 {
+  background: linear-gradient(135deg, #d7ccc8 0%, #8d6e63 100%);
+  box-shadow: 0 4px 10px rgba(141, 110, 99, 0.3);
+}
+
+.homepage .ellipse.rank-4,
+.homepage .ellipse.rank-5,
+.homepage .ellipse.rank-6,
+.homepage .ellipse.rank-7,
+.homepage .ellipse.rank-8,
+.homepage .ellipse.rank-9,
+.homepage .ellipse.rank-10 {
+  background-color: #e2dcfc;
+  color: #7b61ff;
+  border: 1px solid rgba(123, 97, 255, 0.2);
 }
 
 .homepage .rectangle-7 {
@@ -583,6 +620,69 @@
   font-size: 13px;
   font-weight: 600;
   color: #666666;
+}
+
+/* ══════════════════════════════════════════
+   Khối 4 - Mô tả BKTI dùng để làm gì
+   ══════════════════════════════════════════ */
+.homepage .right-block-desc {
+  position: absolute;
+  left: calc(50.00% - 450px);
+  top: 495px;
+  width: 464px;
+  box-sizing: border-box;
+  z-index: 12;
+}
+
+.homepage .right-block-text {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1.6;
+  text-align: justify;
+  margin: 0;
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ══════════════════════════════════════════
+   Khối 5 - Mô tả Đăng ký thành viên BTT
+   ══════════════════════════════════════════ */
+.homepage .fullwidth-block-desc {
+  position: absolute;
+  left: calc(50.00% - 447px);
+  top: 1291px;
+  width: 898px;
+  box-sizing: border-box;
+  z-index: 12;
+}
+
+.homepage .fullwidth-block-text {
+  font-family: "Inter", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333333;
+  line-height: 1.6;
+  text-align: justify;
+  margin: 0;
+  white-space: pre-line;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Đường dẫn liên kết đăng ký thành viên BTT */
+.homepage .btt-reg-link {
+  color: #7b61ff;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.homepage .btt-reg-link:hover {
+  color: #554880;
 }
 
 /* ══════════════════════════════════════════
@@ -953,7 +1053,7 @@
   }
 
   /* --- Khối 1: Giới thiệu --- */
-  .homepage .intro-heading-frame {
+  .homepage .intro-block-wrapper {
     position: relative !important;
     left: auto !important;
     top: auto !important;
@@ -962,33 +1062,23 @@
     background-color: #ffffff !important;
     border-radius: 15px !important;
     box-shadow: 1px 4px 21.2px #998fc769 !important;
-    padding: 16px !important;
+    padding: 24px 16px !important;
     box-sizing: border-box !important;
     display: flex !important;
-    justify-content: center !important;
+    flex-direction: column !important;
+    height: auto !important;
+    z-index: 12 !important;
   }
 
   .homepage .intro-heading-text {
     width: 100% !important;
     font-size: 24px !important;
     text-align: center !important;
-    margin: 0 !important;
+    margin: 0 0 12px 0 !important;
     position: static !important;
     height: auto !important;
-  }
-
-  .homepage .intro-desc-frame {
-    position: relative !important;
-    left: auto !important;
-    top: auto !important;
-    width: 100% !important;
-    max-width: 580px !important;
-    background-color: #ffffff !important;
-    border-radius: 15px !important;
-    box-shadow: 1px 4px 21.2px #998fc769 !important;
-    padding: 16px !important;
-    box-sizing: border-box !important;
-    display: block !important;
+    font-family: "Inter-SemiBold", Helvetica !important;
+    font-weight: 600 !important;
   }
 
   .homepage .intro-desc-text {
@@ -998,6 +1088,9 @@
     text-align: justify !important;
     margin: 0 !important;
     position: static !important;
+    font-family: "Inter", sans-serif !important;
+    font-weight: 500 !important;
+    color: #333333 !important;
   }
 
   .homepage .action-btn {
@@ -1028,7 +1121,8 @@
     box-shadow: 1px 4px 21.2px #998fc722 !important;
   }
 
-  .homepage .btn-opt-label {
+  .homepage .btn-opt-label-1,
+  .homepage .btn-opt-label-2 {
     margin: 0 !important;
     width: 100% !important;
     font-size: 16px !important;
@@ -1117,5 +1211,38 @@
     box-sizing: border-box !important;
     font-size: 18px !important;
     height: auto !important;
+  }
+
+  /* --- Định dạng cho khối văn bản mô tả Khối 4 trên mobile --- */
+  .homepage .right-block-desc {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    background-color: #ffffff !important;
+    border-radius: 15px !important;
+    box-shadow: 1px 4px 21.2px #998fc769 !important;
+    padding: 16px !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  .homepage .right-block-text {
+    width: 100% !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    text-align: justify !important;
+    margin: 0 !important;
+    position: static !important;
+    font-family: "Inter", sans-serif !important;
+    font-weight: 500 !important;
+    color: #333333 !important;
+  }
+
+  /* --- Ẩn khối văn bản mô tả Khối 5 trên mobile --- */
+  .homepage .fullwidth-block-desc {
+    display: none !important;
   }
 }

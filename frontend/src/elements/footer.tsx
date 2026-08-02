@@ -5,8 +5,8 @@ const CREDIT_MEMBERS = [
   {
     id: 1,
     name: "Đinh Quốc Thịnh",
-    role: "",
-    quote: "",
+    role: "Main Lead",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
@@ -19,50 +19,50 @@ const CREDIT_MEMBERS = [
   {
     id: 3,
     name: "Lâm Chí Nguyên",
-    role: "",
-    quote: "",
+    role: "Dev Lead",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 4,
     name: "Trần Duy Phước Nghĩa",
-    role: "",
-    quote: "",
+    role: "Deep led",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 5,
     name: "Nguyễn Huy Nhật",
-    role: "",
-    quote: "",
+    role: "Conf ten",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 6,
     name: "Hàng Khang Định",
     role: "",
-    quote: "",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 7,
     name: "Nguyễn Thị Hồng Ngọc",
     role: "",
-    quote: "",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 8,
     name: "Lê Nguyên Hào",
     role: "",
-    quote: "",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   },
   {
     id: 9,
     name: "Văn Huỳnh Như",
     role: "",
-    quote: "",
+    quote: "\"Sống nay chết mai\"",
     avatar: "/image/credit_members/PHP.jpg"
   }
 ];
