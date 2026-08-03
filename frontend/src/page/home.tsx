@@ -398,26 +398,30 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
-        <p className="block-title title-ranking">Bảng xếp hạng cổ đông</p>
-        {ranking.length === 0 ? (
-          <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-            <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
-              Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
-            </p>
-          </div>
-        ) : (
-          ranking.slice(0, 10).map((item, idx) => (
-            <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-              <div className="ranking-name">Cổ đông {idx + 1}</div>
-              <div className="ranking-light-text ranking-subtitle">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
-              <div className="ranking-light-text ranking-score">{item.percentage}%</div>
-              <div className={`ellipse rank-${idx + 1}`}>{idx + 1}</div>
-              <div className="ranking-progress">
-                <ProgressBar current={item.percentage} total={100} showText={false} />
+        <div className="ranking-board-container">
+          <p className="block-title title-ranking">Bảng xếp hạng cổ đông</p>
+          <div className="ranking-list-container">
+            {ranking.length === 0 ? (
+              <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
+                  Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
+                </p>
               </div>
-            </div>
-          ))
-        )}
+            ) : (
+              ranking.slice(0, 10).map((item, idx) => (
+                <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
+                  <div className="ranking-name">Cổ đông {idx + 1}</div>
+                  <div className="ranking-light-text ranking-subtitle">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
+                  <div className="ranking-light-text ranking-score">{item.percentage}%</div>
+                  <div className={`ellipse rank-${idx + 1}`}>{idx + 1}</div>
+                  <div className="ranking-progress">
+                    <ProgressBar current={item.percentage} total={100} showText={false} />
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </div>
 
         {/* ── Khối 3: Trái-dưới ── */}
         <div className="card-rect card-lower-left" />
@@ -456,25 +460,27 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 4: Phải (dọc) ── */}
         <div className="card-rect card-right" />
-        <p className="block-title title-right">BKTI dùng để làm gì</p>
-        <div className="right-block-desc">
-          <p className="right-block-text">
-            BKTI là sản phẩm thuần giải trí. Chúng tôi hi vọng thông qua bài khảo sát này, các bạn sinh viên - đặc biệt là sinh viên năm nhất - sẽ có những phút giây giải trí và bắt đầu năm học mới một cách thật khoắn khỏe và năng lượng.<br></br>
-            BKTI không được dùng cho các mục đích như xin việc hay thay thế các liệu pháp trị liệu tâm thần. Tuy nhiên, khảo sát với những người sử dụng BKTI phiên bản Beta cho thấy: 67,67% người tham gia sử dụng BKTI như một chủ đề để tán gẫu hay mở lời hẹn hò. Khi bạn nói “BKTI của tôi là JZTR” với nhà tuyển dụng, có thể họ sẽ không ấn tượng mấy, nhưng nếu nói với crush thì cô ấy/ anh ấy sẽ đổ bạn ngay lập tức, vì đó là 1 trong 2 kiểu tính cách ẩn của chúng tôi.
-
-          </p>
+        <div className="bkti-about-container">
+          <p className="block-title title-right">BKTI dùng để làm gì</p>
+          <div className="right-block-desc">
+            <p className="right-block-text">
+              BKTI là sản phẩm thuần giải trí. Chúng tôi hi vọng thông qua bài khảo sát này, các bạn sinh viên - đặc biệt là sinh viên năm nhất - sẽ có những phút giây giải trí và bắt đầu năm học mới một cách thật khoắn khỏe và năng lượng.<br></br>
+              BKTI không được dùng cho các mục đích như xin việc hay thay thế các liệu pháp trị liệu tâm thần. Tuy nhiên, khảo sát với những người sử dụng BKTI phiên bản Beta cho thấy: 67,67% người tham gia sử dụng BKTI như một chủ đề để tán gẫu hay mở lời hẹn hò. Khi bạn nói “BKTI của tôi là JZTR” với nhà tuyển dụng, có thể họ sẽ không ấn tượng mấy, nhưng nếu nói với crush thì cô ấy/ anh ấy sẽ đổ bạn ngay lập tức, vì đó là 1 trong 2 kiểu tính cách ẩn của chúng tôi.
+            </p>
+          </div>
         </div>
 
         {/* ── Khối 5: Full-width 1 ── */}
         <div className="card-rect card-fullwidth-1" />
-        <p className="block-title title-fullwidth-1">Đăng ký để trở thành thành viên BCH và BTT ngay hôm nay!</p>
-        <div className="fullwidth-block-desc">
-          <p className="fullwidth-block-text">
-            Ban Chấp hành (BCH) và Ban Truyền thông (BTT) khoa Khoa học và Kỹ thuật Máy tính luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BCH và BTT ngay hôm nay để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
-            {/* Chỗ gắn link nhe mấy bồ */}
-            <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link" target="_blank" rel="noopener noreferrer">Mấy cổ đông click vào đây để đăng kí nhen! </a>
-          </p>
-          
+        <div className="bkti-register-container">
+          <p className="block-title title-fullwidth-1">Đăng ký để trở thành thành viên BCH và BTT ngay hôm nay!</p>
+          <div className="fullwidth-block-desc">
+            <p className="fullwidth-block-text">
+              Ban Chấp hành (BCH) và Ban Truyền thông (BTT) khoa Khoa học và Kỹ thuật Máy tính luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BCH và BTT ngay hôm nay để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
+              {/* Chỗ gắn link nhe mấy bồ */}
+              <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link" target="_blank" rel="noopener noreferrer">Mấy cổ đông click vào đây để đăng kí nhen! </a>
+            </p>
+          </div>
         </div>
 
         {/* ── Khối 6: Full-width 2 ── */}

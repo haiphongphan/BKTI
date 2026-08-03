@@ -6,14 +6,13 @@
 html, body {
   margin: 0;
   padding: 0;
-  /* Giữ gõc scrollbar cố định — ngăn layout shift */
-  scrollbar-gutter: stable;
   min-height: 100vh;
-/*   /* === BACKGROUND ĐỒNG BỘ TOÀN DỰ ÁN (252°) === */
+  /* === BACKGROUND ĐỒNG BỘ TOÀN DỰ ÁN (252°) === */
   background: linear-gradient(
     252deg,
     rgba(249, 248, 251, 1) 0%,
     rgba(235, 221, 255, 1) 100%
   );
   background-attachment: fixed;
+  overflow-x: hidden;
 }
