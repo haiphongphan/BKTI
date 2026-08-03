@@ -8,6 +8,7 @@ import Footer from "../elements/footer.tsx";
 export default function Result() {
   const [result, setResult] = useState<any>(null);
   const captureRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const handleDownload = async () => {
     if (!captureRef.current) return;
@@ -48,6 +49,48 @@ export default function Result() {
       setResult(JSON.parse(savedResult));
     }
   }, []);
+
+  useEffect(() => {
+  const savedResult = localStorage.getItem("quiz_result");
+  if (!savedResult) return;
+
+  const parsedResult = JSON.parse(savedResult);
+  setResult(parsedResult);
+
+  if (parsedResult.music_url) {
+    // 1. Khai báo Audio
+    const audio = new Audio(parsedResult.music_url);
+    audio.loop = true;
+    audio.volume = 0.7;
+    audioRef.current = audio;
+
+    // 2. Hàm phát nhạc
+    const playAudio = () => {
+      audio.play().then(() => {
+        // Nếu phát thành công, gỡ bỏ sự kiện click lắng nghe
+        window.removeEventListener("click", playAudio);
+        window.removeEventListener("touchstart", playAudio);
+      }).catch((err) => {
+        console.log("Chờ người dùng tương tác để phát nhạc...", err);
+      });
+    };
+
+    // Thử phát ngay lập tức
+    playAudio();
+
+    // 3. Nếu trình duyệt chặn, gắn sự kiện click toàn cục để phát nhạc ngay cú chạm đầu tiên
+    window.addEventListener("click", playAudio);
+    window.addEventListener("touchstart", playAudio);
+
+    // 4. Cleanup khi rời trang Result
+    return () => {
+      window.removeEventListener("click", playAudio);
+      window.removeEventListener("touchstart", playAudio);
+      audio.pause();
+      audioRef.current = null;
+    };
+  }
+}, []); // Mảng rỗng [] đảm bảo chỉ khởi tạo đúng 1 lần
 
   if (!result) return <div style={{ padding: '50px' }}>Đang tải kết quả...</div>;
 

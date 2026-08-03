@@ -23,7 +23,8 @@ def import_personality_csv(file_path: str):
                     code=row["code"].strip(),
                     name=row["name"].strip(),
                     description=row["description"].strip(),
-                    img_url=row["img_url"].strip()
+                    img_url=row["img_url"].strip(),
+                    music_url=row["music_url"].strip()
                 )
                 personalities.append(personality)
             session.add_all(personalities)
