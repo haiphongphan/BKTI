@@ -8,6 +8,7 @@ class Personality(SQLModel, table = True):
     name: str = Field()
     description: str = Field()
     img_url: str = Field()
+    music_url: Optional[str] = None
 
 class User_ans(SQLModel, table = True):
     __tablename__ = "user_ans"
