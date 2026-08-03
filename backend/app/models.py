@@ -1,24 +1,19 @@
 from typing import Optional
-from datetime import datetime
 from sqlmodel import SQLModel, Field
 
-class User(SQLModel, table = True):
-    __tablename__ = "user"
-    id: Optional[int] = Field(default=None, primary_key=True)
 
 class Personality(SQLModel, table = True):
     __tablename__ = "personality"
     code: str = Field(primary_key=True)
     name: str = Field()
     description: str = Field()
+    img_url: str = Field()
+    music_url: Optional[str] = None
 
-class Task_Session(SQLModel, table = True):
-    __tablename__ = "task_session"
-    id: Optional[int] = Field(default=None, primary_key=True)
-    start: datetime = Field(default_factory = datetime.now)
-    end: datetime = Field(default_factory = datetime.now)
+class User_ans(SQLModel, table = True):
+    __tablename__ = "user_ans"
     p_code: str = Field(foreign_key="personality.code", ondelete="CASCADE")
-    user_id: int = Field(foreign_key="user.id", ondelete="CASCADE")
+    user_ans_id: Optional[int] = Field(default=None, primary_key=True)
 
 class Dimension(SQLModel, table = True):
     __tablename__ = "dimension"
@@ -44,9 +39,3 @@ class Answer(SQLModel, table = True):
     content: str = Field()
     trait_code: str = Field(foreign_key="trait.code", ondelete="CASCADE")
     question_id: int = Field(foreign_key="question.id", ondelete="CASCADE")
-
-class User_ans(SQLModel, table = True):
-    session_id: int = Field(primary_key=True, foreign_key="session.id", ondelete="CASCADE")
-    trait_code: int = Field(foreign_key="trait.code", ondelete="CASCADE")
-    user_ans_id: Optional[int] = Field(default=None, primary_key=True)
-

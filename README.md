@@ -1,17 +1,45 @@
 # BKTI
+
 ## Cài đặt
+
+## Chạy backend
+
+`cd backend`  
+
 ### venv
-`python3 -m venv env`  
-`source backend/env/bin/activate`
+
+`python3 -m venv .venv`  
+`source backend/.venv/bin/activate`
+
 ### Thư viện
+
 `pip3 install -r requirement.txt`
+
 ### PostgreSQL
+
 Cài postgre trước ((gemini đi t quên r :))  
 Cài xong chạy các lệnh dưới:  
 `psql -d postgres`  
+`DROP DATABASE bkti_db;`
 `CREATE DATABASE bkti_db;`
 
-## Chạy backend
-`cd backend`  
+### Nạp data
+
+`python3 app/seed_data.py`  
+
+### Khởi tạo
+
 Chạy lệnh `uvicorn app.main:app --reload`  
-Mở đường dẫn `http://127.0.0.1:8000/`
+
+## Chạy frontend
+
+`cd frontend`  
+
+### Tải thư viện
+
+`npm install`
+
+### Chạy frontend
+
+`npm run dev`  
+Mở đường dẫn và khen: `http://localhost:5173/`

@@ -1,0 +1,146 @@
+.popup {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 1px 4px 21.2px #998fc769;
+  display: flex;
+  flex-direction: column;
+  min-height: 437px;
+  min-width: 486px;
+  overflow-x: hidden;
+  width: 486px;
+  animation: popupShow 0.35s ease-in-out forwards;
+}
+
+.popup .ellipse {
+  height: 142px;
+  margin-left: 172px;
+  margin-top: 63px;
+  width: 142px;
+}
+
+.popup .text-wrapper {
+  align-items: center;
+  color: #000000;
+  display: flex;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 19px;
+  justify-content: center;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-left: 178px;
+  margin-top: 11px;
+  text-align: center;
+  white-space: nowrap;
+  width: 130px;
+}
+
+/* ── Social icon group ── */
+.popup .group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 27px;
+}
+
+/* Wrapper button */
+.popup .social-btn {
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+
+  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.popup .social-btn:hover {
+  opacity: 0.85;
+  transform: translateY(-4px) scale(1.1);
+}
+
+.popup .facebook {
+  height: 24.8px;
+  width: 27.5px;
+}
+
+.popup .tiktok {
+  height: 26.32px;
+  width: 25.77px;
+}
+
+.popup .mail {
+  height: 27.69px;
+  width: 33.61px;
+}
+
+.popup .web {
+  height: 27.56px;
+  width: 30.56px;
+}
+
+/* ── Follow button container ── */
+.popup .button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+/* Follow button */
+.popup .follow-btn {
+  background-color: #d9d9d9;
+  border-radius: 30px;
+  height: 60px;
+  width: 310px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  text-align: center;
+  letter-spacing: 0;
+  transition: background-color 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+
+.popup .follow-btn:hover {
+  background-color: #c4c4c4;
+  transform: scale(1.03);
+}
+
+/* Close button */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #666;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  transform: scale(1.1);
+}
+
+
+
+@keyframes popupShow {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}

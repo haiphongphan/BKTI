@@ -17,6 +17,18 @@ INSERT INTO Dimension (id, name) VALUES
     (2, 'Chuyên môn'),
     (3, 'Thói quen');
 
+INSERT INTO Personality (code, name, description) VALUES
+    ('FVC', 'Cô bé đi lạc', 'abc'),
+    ('FHC', 'Cô bé đi lạc', 'abc'),
+    ('FVM', 'Cô bé đi lạc', 'abc'),
+    ('FHM', 'Cô bé đi lạc', 'abc'),
+    ('GVC', 'Cô bé đi lạc', 'abc'),
+    ('GHC', 'Cô bé đi lạc', 'abc'),
+    ('GVM', 'Cô bé đi lạc', 'abc'),
+    ('GHM', 'Cô bé đi lạc', 'abc'),
+    ('LMAO', 'Cô bé đi lạc', 'abc'),
+    ('NSFW', 'Cô bé đi lạc', 'abc');
+
 INSERT INTO Question (id, content, dimension_id) VALUES
     ('1', 'Giả sử bạn cùng những người anh em đi uống Hồng Trà Ngô Gia. Quán báo hết trân châu đen và nếu bạn muốn dùng thì phải đợi "hơi lâu" một chút. Bạn xử lý trường hợp này như thế nào?', '1'),
     ('2', 'Bạn có bao giờ bật voice chat khi đánh LoL không?', '1'),
@@ -38,13 +50,13 @@ INSERT INTO Question (id, content, dimension_id) VALUES
     ('18', 'Người yêu của bạn giận dỗi vì bạn suốt ngày học và cho rằng trai Bách khoa thật tồi.', '3');
 
 INSERT INTO Trait (code, name, description, dimension_id) VALUES
-    ('F', 'Flexer (Người hay nói)', 'Năng lực code có hạn nhưng thủ đoạn ngoại giao vô biên. Chuyên gia đi xin source code khóa trên, mail xin lùi deadline với thầy. Thích làm Leader để chia task. → extrovert', '1'),
-    ('G', 'Ghoster (Người im lặng)', 'Kẻ hủy diệt tin nhắn group. "Seen" là một sự ban phước. Không ai biết mặt, chỉ hữu duyên xuất hiện đúng 1 lần lúc báo cáo hay khi tag tên rồi lại chìm vào bóng tối. Ai nói gì cũng “oke”, “tui cũng dị”. Luôn luôn lắng nghe, lâu lâu mới hiểu. → introvert', '1'),
-    ('V', 'Vibecoder (Hệ vibe code đơ)', ' ChatGPT, Copilot, Claude là chân ái. Viết câu prompt tiếng Anh dài gấp 3 lần đoạn code cần viết. Quan niệm: "Đằng nào chắc AI cũng làm được cái này ròi, tui hiểu là được ". → người đi đầu xu hướng (cánh tả)', '2'),
-    ('H', 'Handmade (Anh thợ đụng)', 'Cố chấp tự gõ từng dòng code, đánh giá thấp người dùng AI. Đụng đâu gõ đó, code dài như một tờ sớ nhưng rất tự hào vì đó là tư duy chất xám nguyên bản của bản thân. → người tin vào sự bền vững (cánh hữu)', '2'),
-    ('C', 'Chữa lành (Healing)', 'Code 5 phút, lướt TopTop 1 tiếng. Đặt tinh thần và nhan sắc lên trên deadline. Có rớt môn cũng phải rớt trong một tâm thái đắc đạo, thơm tho và skincare đầy đủ thần sắc sáng sủa. → người sống vui vẻ, cân bằng, lên kế hoạch tốt.', '3'),
-    ('M', 'Mutant (Đột biến)', 'Người đột biến tin rằng cuộc sống êm đềm là một cuộc sống thất bại. Càng sát deadline nảy số càng nhanh, cú đêm code 1 đêm bằng người ta code 1 tháng, đam mê cảm giác mạnh. → người sống YOLO, quyết tâm vì mục tiêu.', '3'),
-    ('Neutral', 'Trung lập', 'Trung lập', '0');
+    ('F', 'Flexer (Người hay nói)', 'Năng lực code có hạn nhưng thủ đoạn ngoại giao vô biên. Chuyên gia đi xin source code khóa trên, mail xin lùi deadline với thầy. Thích làm Leader để chia task.', '1'),
+    ('G', 'Ghoster (Người im lặng)', 'Kẻ hủy diệt tin nhắn group. "Seen" là một sự ban phước. Không ai biết mặt, chỉ hữu duyên xuất hiện đúng 1 lần lúc báo cáo hay khi tag tên rồi lại chìm vào bóng tối. Ai nói gì cũng “oke”, “tui cũng dị”. Luôn luôn lắng nghe, lâu lâu mới hiểu.', '1'),
+    ('V', 'Vibecoder (Hệ vibe code đơ)', ' ChatGPT, Copilot, Claude là chân ái. Viết câu prompt tiếng Anh dài gấp 3 lần đoạn code cần viết. Quan niệm: "Đằng nào chắc AI cũng làm được cái này ròi, tui hiểu là được ".', '2'),
+    ('H', 'Handmade (Anh thợ đụng)', 'Cố chấp tự gõ từng dòng code, đánh giá thấp người dùng AI. Đụng đâu gõ đó, code dài như một tờ sớ nhưng rất tự hào vì đó là tư duy chất xám nguyên bản của bản thân.', '2'),
+    ('C', 'Chữa lành (Healing)', 'Code 5 phút, lướt TopTop 1 tiếng. Đặt tinh thần và nhan sắc lên trên deadline. Có rớt môn cũng phải rớt trong một tâm thái đắc đạo, thơm tho và skincare đầy đủ thần sắc sáng sủa.', '3'),
+    ('M', 'Mutant (Đột biến)', 'Người đột biến tin rằng cuộc sống êm đềm là một cuộc sống thất bại. Càng sát deadline nảy số càng nhanh, cú đêm code 1 đêm bằng người ta code 1 tháng, đam mê cảm giác mạnh.', '3'),
+    ('LMAO', 'Trung lập', 'Trung lập', '0');
 
 INSERT INTO Answer (id, content, trait_code, question_id) VALUES
     -- Nhóm tính cách: G-F (Người im lặng - Người hay nói)
