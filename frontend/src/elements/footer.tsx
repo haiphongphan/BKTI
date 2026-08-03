@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import "./footerstyle.css";
-import FB from "/image/facebook.svg";
-import TT from "/image/tiktok.svg";
-import Mail from "/image/mail.svg";
-import Ins from "/image/ins.svg";
-import Git from "/image/github.svg";
-import Personality from "../page/personality_popup";
+import React, { useState, useEffect, useRef } from 'react';
+import './footerstyle.css';
+import FB from "../../image/facebook.svg";
+import TT from "../../image/tiktok.svg";
+import Mail from "../../image/mail.svg";
+import Ins from "../../image/ins.svg";
+import Git from "../../image/github.svg";
+import Personality from '../page/personality_popup';
 
 export interface Personality {
   code: string;
@@ -73,8 +73,8 @@ const CREDIT_MEMBERS: Member[] = [
     id: 4,
     name: "Trần Duy Phước Nghĩa",
     role: "Dev Team",
-    quote: '" "',
-    avatar: "../../image/credit_members/PHP.jpeg",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/TDPN.jpg",
     socials: {
       tiktok: "tiktok.com/...",
     },
@@ -83,11 +83,11 @@ const CREDIT_MEMBERS: Member[] = [
     id: 5,
     name: "Nguyễn Huy Nhật",
     role: "Content Team",
-    quote: '" "',
-    avatar: "../../image/credit_members/PHP.jpeg",
+    quote: "\"Cuộc sống như wifi, đứng đúng chỗ thì bắt được sống\"",
+    avatar: "../../image/credit_members/NHN.jpg",
     socials: {
-      tiktok: "tiktok.com/...",
-    },
+      instagram: "https://www.instagram.com/uhwsnaht"
+    }
   },
   {
     id: 6,
@@ -113,7 +113,7 @@ const CREDIT_MEMBERS: Member[] = [
     id: 8,
     name: "Lê Nguyên Hào",
     role: "Content Team",
-    quote: '" "',
+    quote: "\"Người hay nói đạo lý là người sống như loài bươm bướm\"",
     avatar: "../../image/credit_members/LNH.jpg",
     socials: {
       tiktok: "tiktok.com/...",
@@ -123,8 +123,8 @@ const CREDIT_MEMBERS: Member[] = [
     id: 9,
     name: "Văn Huỳnh Như",
     role: "Illustrator",
-    quote: '" "',
-    avatar: "../../image/credit_members/PHP.jpeg",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/VHN.jpg",
     socials: {
       tiktok: "tiktok.com/...",
     },
@@ -132,8 +132,8 @@ const CREDIT_MEMBERS: Member[] = [
   {
     id: 10,
     name: "Mochi",
-    role: "Nhân vật kéo tương tác cho page",
-    quote: '"Bí mật nằm đâu đó quanh đây..."',
+    role: "Kéo Tương Tác Cho Page",
+    quote: "\"Bí mật nằm đâu đó quanh đây...\"",
     avatar: "../../image/credit_members/Mochi.png",
     socials: {
       facebook: "https://www.facebook.com/BKCSE.Multimedia",
