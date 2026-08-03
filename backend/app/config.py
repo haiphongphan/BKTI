@@ -9,9 +9,9 @@ class Settings(BaseSettings):
     DATABASE_URL: str
 
     model_config = SettingsConfigDict(
-        env_file=ENV_FILE_PATH, # gọi file .env tại thư mục đang chạy
+        env_file=ENV_FILE_PATH if ENV_FILE_PATH.exists() else None,
         env_file_encoding="utf-8",
-        extra="ignore" # Bỏ qua nếu trong file .env có các biến thừa khác
+        extra="ignore",
     )
 
 settings = Settings()

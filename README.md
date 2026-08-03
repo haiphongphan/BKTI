@@ -43,3 +43,7 @@ Chạy lệnh `uvicorn app.main:app --reload`
 
 `npm run dev`  
 Mở đường dẫn và khen: `http://localhost:5173/`
+
+
+## Cách chạy mới
+mở thư mục gốc và `./run.sh`

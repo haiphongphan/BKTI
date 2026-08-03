@@ -105,7 +105,34 @@
 
 .homepage .title-ranking {
   left: calc(50.00% + 77px + 15px);
-  top: 426.5px;
+  top: 416px;
+}
+
+.homepage .ranking-section-title {
+  align-items: center;
+  color: #000000;
+  display: flex;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 16px;
+  font-weight: 600;
+  height: 20px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: left;
+  justify-content: flex-start;
+  white-space: nowrap;
+  width: auto;
+  left: calc(50.00% + 92px);
+  z-index: 2;
+}
+
+.homepage .title-ranking-normal {
+  top: 464px;
+}
+
+.homepage .title-ranking-special {
+  top: 1030px;
 }
 
 .homepage .title-fullwidth-1 {
@@ -287,11 +314,11 @@
    ══════════════════════════════════════════ */
 .homepage .group {
   /* Căn giữa ngang*/
-  left: calc(50.00% + 93px);
+  left: calc(50.00% + 79px);
   height: 40px;
   position: absolute;
   top: 512px;
-  width: 361px;
+  width: 393px;
 }
 
 .homepage .ranking-name {
@@ -301,25 +328,80 @@
   font-family: "Inter-SemiBold", Helvetica;
   font-size: 14px;
   font-weight: 600;
-  height: 16px;
+  height: 20px;
   justify-content: flex-start;
   left: 52px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
   text-align: left;
-  top: 3px;
-  width: 100px;
+  top: 4px;
+  width: 130px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
+.homepage .special-ranking-name {
+  align-items: center;
+  color: #000000;
+  display: flex;
+  font-family: "Inter-SemiBold", Helvetica;
+  font-size: 14px;
+  font-weight: 600;
+  height: 20px;
+  justify-content: flex-start;
+  left: 52px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  text-align: left;
+  top: 13.5px;
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.homepage .special-rank-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  background-color: #000000;
+  color: #ffffff;
+  font-family: "Inter-SemiBold", Helvetica, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  border-radius: 2px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.homepage .ranking-empty {
+  width: 393px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.homepage .ranking-empty-text {
+  color: #777;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  width: 100%;
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
 .homepage .ranking-progress {
   position: absolute;
-  left: 162px;
-  right: 0;
-  top: 24px;
+  left: 190px;
+  right: 4px;
+  top: 28px;
   height: 6px;
   background-color: #d9d9d9;
   border-radius: 20px;
@@ -347,8 +429,8 @@
 .homepage .ranking-subtitle {
   justify-content: flex-start;
   left: 52px;
-  top: 22px;
-  width: 100px;
+  top: 26px;
+  width: 130px;
   text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -358,9 +440,10 @@
 }
 
 .homepage .ranking-score {
-  right: 0;
+  left: 190px;
+  right: 4px;
   width: auto;
-  top: 2px;
+  top: 4px;
   font-family: "Inter-SemiBold", Helvetica, sans-serif;
   font-weight: 600;
   color: #7b61ff;
@@ -373,7 +456,7 @@
   width: 40px;
   left: 0;
   position: absolute;
-  top: 0;
+  top: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1152,6 +1235,17 @@
     max-width: 580px !important;
     font-size: 20px !important;
     margin: 8px 0 0 0 !important;
+    padding-left: 8px !important;
+  }
+
+  .homepage .ranking-section-title {
+    position: relative !important;
+    left: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 580px !important;
+    font-size: 15px !important;
+    margin: 12px 0 4px 0 !important;
     padding-left: 8px !important;
   }
 
