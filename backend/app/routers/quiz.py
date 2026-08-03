@@ -10,67 +10,38 @@ router = APIRouter(prefix="/quiz", tags=["Quiz"])
 @router.post("/submit", status_code=status.HTTP_201_CREATED)
 def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
     # A là nghiêng trái, C là nghiêng phải, B là ở giữa (Dựa vào sheet câu hỏi)
-    dimension_1_A = dimension_1_C = dimension_2_A = dimension_2_C = dimension_3_A = dimension_3_C = 0
+    dimension_1_A = dimension_1_B = dimension_2_A = dimension_2_B = dimension_3_A = dimension_3_B = 0
     for str_q_id, user_ans in submission.answers.items():
         q_id = int(str_q_id)
         ans_id = int(user_ans)
-        if q_id <= 6:
-            if ans_id % 3 == 1:
+        if q_id <= 7:
+            if ans_id % 2 == 1:
                 dimension_1_A += 1
-            elif ans_id % 3 == 0:
-                dimension_1_C += 1
-        elif q_id <= 12:
-            if ans_id % 3 == 1:
+            elif ans_id % 2 == 0:
+                dimension_1_B += 1
+        elif q_id <= 14:
+            if ans_id % 2 == 1:
                 dimension_2_A += 1
-            elif ans_id % 3 == 0:
-                dimension_2_C += 1
+            elif ans_id % 2 == 0:
+                dimension_2_B += 1
         else:
-            if ans_id % 3 == 1:
+            if ans_id % 2 == 1:
                 dimension_3_A += 1
-            elif ans_id % 3 == 0:
-                dimension_3_C += 1
+            elif ans_id % 2 == 0:
+                dimension_3_B += 1
     
 
     # F_G la nam giua
     # Tinh phase 1
-    state_1 = "F_G"
-    if dimension_1_A > 2:
-        state_1 = "G"
-    elif dimension_1_C > 2:
-        state_1 = "F"
-    elif dimension_1_A + dimension_1_C == 4: 
-        state_1 = random.choice(['F', 'G', 'F_G'])
+    state_1 = "G" if dimension_1_A > dimension_1_B else "F"
 
     # Tinh phase 2
-    state_2 = "V_H"
-    if dimension_2_A > 2:
-        state_2 = "V"
-    elif dimension_2_C > 2:
-        state_2 = "H"
-    elif dimension_2_A + dimension_2_C == 4: 
-        state_2 = random.choice(['V', 'H', 'V_H'])   
+    state_2 = "V" if dimension_2_A > dimension_2_B else "H"
 
     # Tinh phase 3
-    state_3 = "C_M"
-    if dimension_3_A > 2:
-        state_3 = "C"
-    elif dimension_3_C > 2:
-        state_3 = "M"
-    elif dimension_3_A + dimension_3_C == 4: 
-        state_3 = random.choice(['C', 'M', 'C_M'])    
+    state_3 = "C" if dimension_3_A > dimension_3_B else "M"
 
-    personality: str
-    if state_1 == "F_G" and state_2 == "V_H" and state_3 == "C_M":
-        personality = "LMAO"
-    else:
-        if state_1 == "F_G":
-            state_1 = random.choice(['F', 'G'])
-        if state_2 == "V_H":
-            state_2 = random.choice(['V', 'H'])
-        if state_3 == "C_M":
-            state_3 = random.choice(['C', 'M'])
-
-        personality = state_1 + state_2 + state_3
+    personality = state_1 + state_2 + state_3
 
     result_db = User_ans(p_code=personality)
     db.add(result_db)
@@ -86,7 +57,14 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
         "message": "Nộp bài thành công!",
         "code": existing_personality.code,
         "name": existing_personality.name,
-        "description": existing_personality.description
+        "description": existing_personality.description,
+        "image_url": existing_personality.img_url,
+        "dimension1_nguoi_im_lang": dimension_1_A / 7 * 100,
+        "dimension1_nguoi_hay_noi": dimension_1_B / 7 * 100,
+        "dimension2_vibecoder": dimension_2_A / 7 * 100,
+        "dimension2_handmade": dimension_2_B / 7 * 100,
+        "dimension3_chua_lanh": dimension_3_A / 7 * 100,
+        "dimension3_mutant": dimension_3_B / 7 * 100
     }
 
 

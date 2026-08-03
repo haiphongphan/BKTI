@@ -1,22 +1,17 @@
 # pyrefly: ignore [missing-import]
+from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+BASE_DIR = Path(__file__).resolve().parent
+ENV_FILE_PATH = BASE_DIR / ".env"
+
 class Settings(BaseSettings):
-    # Khai báo các biến muốn đọc từ file .env và kiểu dữ liệu bắt buộc của nó
     DATABASE_URL: str
-    
-    # Cấu hình để Pydantic biết phải tìm file .env ở đâu
-    # Cũ:
+
     model_config = SettingsConfigDict(
-        env_file="app/.env", # gọi file .env tại thư mục đang chạy
+        env_file=ENV_FILE_PATH, # gọi file .env tại thư mục đang chạy
         env_file_encoding="utf-8",
         extra="ignore" # Bỏ qua nếu trong file .env có các biến thừa khác
     )
-    # Mới:
-    # model_config = SettingsConfigDict(
-    #     env_file=".env", # gọi file .env tại thư mục đang chạy
-    #     env_file_encoding="utf-8",
-    #     extra="ignore" # Bỏ qua nếu trong file .env có các biến thừa khác
-    # )
 
 settings = Settings()

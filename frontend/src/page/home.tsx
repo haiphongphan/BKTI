@@ -2,13 +2,13 @@ import "./homestyle.css";
 import Popup from "./popup";
 import Pers_popup from "./personality_popup"
 import FAQ from "./FAQ"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
 import Footer from "../elements/footer";
 import Navbar from "../elements/navbar";
 
-const RANKING_TOP_POSITIONS = [512, 572, 632, 692, 752, 812, 872, 932, 992, 1052];
+const RANKING_TOP_POSITIONS = [520, 580, 640, 700, 760, 820, 880, 940, 1000, 1060];
 
 // Slide giới thiệu đoàn hội
 const DH_SLIDES = [
@@ -29,7 +29,7 @@ const DH_SLIDES = [
   {
     id: 3,
     title: "Ban Chấp hành khoa Khoa học\nvà Kỹ thuật Máy tính",
-    content: "abcxyz"
+    content: "Đoàn Thanh niên - Liên Chi hội Sinh viên Khoa Khoa học và Kỹ thuật Máy tính là tổ chức chính trị - xã hội đóng vai trò nòng cốt trong việc rèn luyện phẩm chất, phát triển kỹ năng và đồng hành cùng sinh viên. Chúng tôi là cầu nối vững chắc giữa sinh viên với Ban Chủ nhiệm Khoa và các doanh nghiệp. Thông qua chuỗi sự kiện chuyên môn (CSE Job Fair, Company Tour, Code Tour,...) cùng các hoạt động phong trào theo tiêu chí \"Sinh viên 5 tốt\" (Mùa hè xanh, Xuân tình nguyện, CSE Olympics,...), Đoàn - Hội hướng tới xây dựng môi trường phát triển toàn diện cho sinh viên CSE."
   }
 ];
 
@@ -130,25 +130,64 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
   // Slide đoàn hội
   const [DHSlideIndex, setDHSlideIndex] = useState(0);
-  const [isDHAnimating, setisDHAnimating] = useState(false); // animate trượt slide
+  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
+  const [isDHAnimating, setIsDHAnimating] = useState(false); // animate trượt slide
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoplayTimerRef = useRef<any>(null);
+    
+  // Click logo ra secret
+  const [logoClickCount, setLogoClickCount] = useState<number>(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null); // Set time để bấm liên tục
+  
+    useEffect(() => {
+      if (!isAutoPlaying) return;
+  
+      const timer = setInterval(() => {
+        setSlideDirection("next");
+        setIsDHAnimating(true);
+        setDHSlideIndex((prev) => (prev + 1) % DH_SLIDES.length);
+      }, 5000);
+      return () => clearInterval(timer);
+    }, [isAutoPlaying]);
+  
+    useEffect(() => {
+      return () => {
+        if (autoplayTimerRef.current) {
+          clearTimeout(autoplayTimerRef.current);
+        }
+      };
+    }, []);
+  
+    const resetAutoplayTimer = () => {
+      if (autoplayTimerRef.current) {
+        clearTimeout(autoplayTimerRef.current);
+      }
+      setIsAutoPlaying(false);
+      autoplayTimerRef.current = setTimeout(() => {
+        setIsAutoPlaying(true);
+      }, 5000);
+    };
+
   
   const changeDHSlide = (nextIndex: number) => {
-    setisDHAnimating(true);
+    setIsDHAnimating(true);
     setDHSlideIndex(nextIndex);
   };
 
   const handleNextDHSlide = () => {
+    resetAutoplayTimer();
     const nextIndex = (DHSlideIndex + 1) % DH_SLIDES.length;
     changeDHSlide(nextIndex);
   };
 
   const handlePrevDHSlide = () => {
+    resetAutoplayTimer();
     const nextIndex = (DHSlideIndex - 1 + DH_SLIDES.length) % DH_SLIDES.length;
     changeDHSlide(nextIndex);
   };
 
   const handleDHAnimationEnd = () => {
-    setisDHAnimating(false);
+    setIsDHAnimating(false);
   };
 
   // Vuốt slide trên mobile
@@ -249,6 +288,43 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
     setFaq(false)
   };
 
+  // Click logo ra secret
+  const handleLogoClick = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    const newCount = logoClickCount + 1;
+    setLogoClickCount(newCount);
+
+    if (newCount === 11) {
+      setLogoClickCount(0);
+
+      const secretPersonality = {
+        code: "NSFW",
+        name: "Nhà thám hiểm vĩ đại",
+        description: "Chúc mừng! Bạn đã chính thức đi chệch khỏi kịch bản và tìm ra Easter Egg giấu kín của hệ thống. Trong khi những người bình thường ngoan ngoãn điền từng câu trắc nghiệm để nhận kết quả, thì bạn lại chọn cách... \"test nhân phẩm\" của cả cái website này. Với đôi tay không biết mỏi, bản tính tò mò vô cực và khả năng thao tác vặn vẹo mọi luồng UX/UI thông thường, bạn không đi tìm bản ngã của mình, bạn đi tìm... bug. Hệ thống xin đầu hàng trước bạn. Có thể bạn là một pháp sư chuyên mở F12 để soi code, một QA Tester bẩm sinh, hoặc đơn giản là bạn quá rảnh và thích click lung tung khắp màn hình. Dù lý do là gì, tư duy out trình và không chịu gò bó vào khuôn khổ đã biến bạn thành một Nhà thám hiểm vĩ đại thực thụ. Bách khoa rất cần những bộ óc thích khám phá như bạn để tạo ra những đột phá mới (hoặc làm sập server lúc đăng ký môn, tùy tâm trạng). Tóm lại, bạn không thuộc về bất kỳ nhóm tính cách nào ở trên. Xin nhận của team Developer một lạy!",
+        img_url: "../../image/mochi/Nha_tham_hiem.png"
+      };
+
+      localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));
+      
+
+      // Chuyển ngay sang trang Result
+      if ((window as any).navigateToResult) {
+        (window as any).navigateToResult();
+      }
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      timerRef.current = setTimeout(() => { setLogoClickCount(0);}, 1000);
+    }
+  };
+  
+  // useEffect(() => {
+  //   return () => {
+  //     if (timerRef.current) clearTimeout(timerRef.current);
+  //   };
+  // }, []);
+
   return (
     <div className="home-container">
       {isPopupOpen && (
@@ -291,7 +367,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           <button className="nav-frame nav-btn-social" onClick={() => setInfoPopupVisible(true)}>
             <div className="nav-text nav-label-social">@cse-multimedia</div>
           </button>
-          <button className="nav-logo" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+          <button className="nav-logo" onClick={handleLogoClick}>
             <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
           </button>
           <button className="nav-frame nav-btn-hashtag">
@@ -301,14 +377,14 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 1: Giới thiệu ── */}
         <div className="card-rect card-intro" />
-        <div className="intro-heading-frame">
-          <p className="intro-heading-text">BKTI là gì vậy nhỉ?</p>
-        </div>
-        <div className="intro-desc-frame">
+        <div className="intro-block-wrapper">
+          <h1 className="intro-heading-text">BKTI là gì vậy nhỉ?</h1>
           <p className="intro-desc-text">
             BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 18 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
-
           </p>
+
+          {/* Logo đặt độc lập ở góc phải */}
+          <img src="/image/bkti_logo_full.png" alt="BKTI Logo" className="intro-side-logo" />
         </div>
         <div className="action-btn btn-opt1" onClick={() => setPersPopup(true)}>
           <div className="btn-opt-label-1">Các kiểu tính cách</div>
@@ -322,7 +398,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
-        <p className="block-title title-ranking">Bảng xếp hạng</p>
+        <p className="block-title title-ranking">Bảng xếp hạng cổ đông</p>
         {ranking.length === 0 ? (
           <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
@@ -332,12 +408,12 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         ) : (
           ranking.slice(0, 10).map((item, idx) => (
             <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-              <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
-              <div className="ranking-light-text ranking-subtitle">{item.code}</div>
+              <div className="ranking-name">Cổ đông {idx + 1}</div>
+              <div className="ranking-light-text ranking-subtitle">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
               <div className="ranking-light-text ranking-score">{item.percentage}%</div>
-              <div className="ellipse" />
+              <div className={`ellipse rank-${idx + 1}`}>{idx + 1}</div>
               <div className="ranking-progress">
-                <ProgressBar current={item.percentage} total={100} showText = {false} />
+                <ProgressBar current={item.percentage} total={100} showText={false} />
               </div>
             </div>
           ))
@@ -380,23 +456,38 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 4: Phải (dọc) ── */}
         <div className="card-rect card-right" />
-        <p className="block-title title-right">Chủ nhân đằng sau BKTI</p>
+        <p className="block-title title-right">BKTI dùng để làm gì</p>
+        <div className="right-block-desc">
+          <p className="right-block-text">
+            BKTI là sản phẩm thuần giải trí. Chúng tôi hi vọng thông qua bài khảo sát này, các bạn sinh viên - đặc biệt là sinh viên năm nhất - sẽ có những phút giây giải trí và bắt đầu năm học mới một cách thật khoắn khỏe và năng lượng.<br></br>
+            BKTI không được dùng cho các mục đích như xin việc hay thay thế các liệu pháp trị liệu tâm thần. Tuy nhiên, khảo sát với những người sử dụng BKTI phiên bản Beta cho thấy: 67,67% người tham gia sử dụng BKTI như một chủ đề để tán gẫu hay mở lời hẹn hò. Khi bạn nói “BKTI của tôi là JZTR” với nhà tuyển dụng, có thể họ sẽ không ấn tượng mấy, nhưng nếu nói với crush thì cô ấy/ anh ấy sẽ đổ bạn ngay lập tức, vì đó là 1 trong 2 kiểu tính cách ẩn của chúng tôi.
+
+          </p>
+        </div>
 
         {/* ── Khối 5: Full-width 1 ── */}
         <div className="card-rect card-fullwidth-1" />
-        <p className="block-title title-fullwidth-1">BKTI dùng để ABC, không phải để XYZ</p>
+        <p className="block-title title-fullwidth-1">Đăng ký để trở thành thành viên BCH và BTT ngay hôm nay!</p>
+        <div className="fullwidth-block-desc">
+          <p className="fullwidth-block-text">
+            Ban Chấp hành (BCH) và Ban Truyền thông (BTT) khoa Khoa học và Kỹ thuật Máy tính luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BCH và BTT ngay hôm nay để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
+            {/* Chỗ gắn link nhe mấy bồ */}
+            <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link" target="_blank" rel="noopener noreferrer">Mấy cổ đông click vào đây để đăng kí nhen! </a>
+          </p>
+          
+        </div>
 
         {/* ── Khối 6: Full-width 2 ── */}
-        <div className="card-rect card-fullwidth-2" />
-        <div className="credit-container">
+        {/* <div className="card-rect card-fullwidth-2" />
+        <div className="credit-container"> */}
           {/* Cột trái: Thông tin chung của trang web */}
-          <div className="credit-info-general">
+          {/* <div className="credit-info-general">
             <h3 className="block-title credit-title">Credit team BKTI</h3>
             <p className="credit-general-desc">
               BKTI - bao gồm nội dung trang web, thiết kế và các hình ảnh minh họa - là sản phẩm thuộc quyền sở hữu của 9 nhân vật phản diện thuộc BTT - khả ái và ngây ngất lòng người.
 
             </p>
-          </div>
+          </div> */}
 
           {/* Cột phải: Card slide thành viên */}
           {/*
@@ -443,7 +534,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
             </button>
           </div>
           */}
-        </div>
+        {/* </div> */}
         
       </div>
       <Footer/>

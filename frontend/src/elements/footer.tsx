@@ -1,69 +1,148 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './footerstyle.css';
+import FB from "/image/facebook.svg";
+import TT from "/image/tiktok.svg";
+import Mail from "/image/mail.svg";
+import Ins from "/image/ins.svg";
+import Git from "/image/github.svg";
+import Personality from '../page/personality_popup';
 
-const CREDIT_MEMBERS = [
+export interface Personality {
+  code: string;
+  name: string;
+  description: string;
+  img_url: string;
+}
+
+interface MemberSocials {
+  facebook?: string;
+  instagram?: string;
+  tiktok?: string;
+  email?: string;
+  github?: string;
+  easterEgg?: Personality; // Định nghĩa tùy chọn cho Easter Egg
+}
+
+interface Member {
+  id: number;
+  name: string;
+  role: string;
+  quote: string;
+  avatar: string;
+  socials?: MemberSocials;
+}
+
+const CREDIT_MEMBERS : Member[] = [
   {
     id: 1,
     name: "Đinh Quốc Thịnh",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Lead Content",
+    quote: "\"Ước gì một ngày có 36 tiếng để có thể ngủ 12 tiếng.\"",
+    avatar: "../../image/credit_members/DQT.jpg",
+    socials: {
+      instagram: "https://www.instagram.com/biinseventeen"
+    }
   },
   {
     id: 2,
     name: "Phan Hải Phong",
     role: "Lead Dev",
-    quote: "\"Sống nay chết mai\"",
-    avatar: "/image/credit_members/24.jpg"
+    quote: "\"Họ cười tôi vì tôi không giống họ, tôi cười họ vì tưởng họ cười với tôi 🤡\"",
+    avatar: "../../image/credit_members/PHP.jpg",
+    socials: {
+      facebook: "https://www.facebook.com/phongphanhai06",
+      instagram: "https://www.instagram.com/phongphanhai06",
+      email: "mailto:phong.phan06@hcmut.edu.vn",
+      github: "https://github.com/haiphongphan"
+    }
   },
   {
     id: 3,
     name: "Lâm Chí Nguyên",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Dev Team",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/PHP.jpeg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
   },
   {
     id: 4,
     name: "Trần Duy Phước Nghĩa",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Dev Team",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/PHP.jpeg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
   },
   {
     id: 5,
     name: "Nguyễn Huy Nhật",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Content Team",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/PHP.jpeg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
   },
   {
     id: 6,
     name: "Hàng Khang Định",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Content Team",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/HKD.jpg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
   },
   {
     id: 7,
     name: "Nguyễn Thị Hồng Ngọc",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Content Team",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/NTHN.jpg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
   },
   {
     id: 8,
     name: "Lê Nguyên Hào",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Content Team",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/LNH.jpg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
   },
   {
     id: 9,
     name: "Văn Huỳnh Như",
-    role: "",
-    quote: "",
-    avatar: "/image/credit_members/PHP.jpg"
+    role: "Illustrator",
+    quote: "\" \"",
+    avatar: "../../image/credit_members/PHP.jpeg",
+    socials: {
+      tiktok: "tiktok.com/...",
+    }
+  },
+  {
+    id: 10,
+    name: "Mochi",
+    role: "Nhân vật kéo tương tác cho page",
+    quote: "\"Bí mật nằm đâu đó quanh đây...\"",
+    avatar: "../../image/credit_members/Mochi.png",
+    socials: {
+      facebook: "https://www.facebook.com/BKCSE.Multimedia",
+      tiktok: "https://www.tiktok.com/@csemultimedia",
+      email: "mailto:dtn-ktmt@hcmut.edu.vn",
+      easterEgg: {
+        code: "LMAO",
+        name: "JZTR",
+        description: "Chúc mừng bạn! Bạn là cá thể hiếm nhất mà chúng tôi trong quá trình tạo ra bộ khảo sát này cũng không phát hiện ra. Trong thế giới vận hành bởi tư duy nhị nguyên - đen hoặc trắng, không hoặc có, đúng hoặc sai - bạn là điểm trung vị hoàn hảo của nó. Nghiên cứu của chúng tôi chỉ ra rằng đây không phải là sự ba phải hay thiếu chính kiến, mà nó là...ờm...cái gì đó...ở giữa...ờm...thì nói chung là vậy đó. Chúng tôi tạm đặt tên cho bạn là JZTR - một minh họa hoàn hảo cho cảm giác khó hiểu của cả nhóm. Trong lúc chờ chúng tôi tìm ra cụ thể bạn là gì, bạn có thể...ờm...đi làm một bài khảo sát khác như MBTI chẳng hạn? Hoặc bạn cũng có thể đến một phòng lab nào đó ở 2 cơ sở của Bách khoa và đề xuất trở thành vật nghiên cứu chăng? Ở Bách khoa có rất nhiều cao thủ ẩn mình, có thể họ sẽ có câu trả lời cho bạn, và cho chúng tôi nữa.",
+        img_url: "../../image/mochi/Jztr.png"
+      }
+    }
   }
 ];
 
@@ -73,6 +152,18 @@ const Footer: React.FC = () => {
   const [isCreditAnimating, setIsCreditAnimating] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoplayTimerRef = useRef<any>(null);
+  const handleEasterEggClick = (e: React.MouseEvent, secretJZTR: Personality) => {
+    e.preventDefault();
+    // Chuyển hướng tới trang kết quả tính cách đặc biệt (ví dụ: /result/JZTR)
+    localStorage.setItem("quiz_result", JSON.stringify(secretJZTR));
+      
+
+      // Chuyển ngay sang trang Result
+      if ((window as any).navigateToResult) {
+        (window as any).navigateToResult();
+      }
+    
+  };
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -81,7 +172,7 @@ const Footer: React.FC = () => {
       setSlideDirection("next");
       setIsCreditAnimating(true);
       setCreditIndex((prev) => (prev + 1) % CREDIT_MEMBERS.length);
-    }, 2000);
+    }, 5000);
     return () => clearInterval(timer);
   }, [isAutoPlaying]);
 
@@ -120,6 +211,33 @@ const Footer: React.FC = () => {
   const handleCreditAnimationEnd = () => {
     setIsCreditAnimating(false);
   };
+  // Vuốt slide trên mobile
+  const [touchPosition, setTouchPosition] = useState<number | null>(null);
+  
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touchDown = e.touches[0].clientX;
+    setTouchPosition(touchDown);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const touchDown = touchPosition;
+    if (touchDown === null) return;
+
+    const currentTouch = e.touches[0].clientX;
+    const diff = touchDown - currentTouch;
+
+    // Vuốt sang trái (next slide)
+    if (diff > 50) {
+      handleNextCredit();
+      setTouchPosition(null);
+    }
+
+    // Vuốt sang phải (prev slide)
+    if (diff < -50) {
+      handlePrevCredit();
+      setTouchPosition(null);
+    }
+  };
 
   return (
     <footer className="footer__container_01">
@@ -133,7 +251,7 @@ const Footer: React.FC = () => {
           </p>
 
           {/* Khối slide thành viên nhỏ gọn trong footer với 2 nút bấm điều hướng */}
-          <div className="footer__credit-slider-wrapper_01">
+          <div className="footer__credit-slider-wrapper_01" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove}>
             {/* Nút mũi tên TRÁI */}
             <button 
               className="footer__credit-nav-btn_01 footer__credit-nav-left_01" 
@@ -175,6 +293,48 @@ const Footer: React.FC = () => {
                   {CREDIT_MEMBERS[creditIndex].quote && (
                     <p className="footer__member-quote_01">{CREDIT_MEMBERS[creditIndex].quote}</p>
                   )}
+                  {/* ── Cụm Icon Social ── */}
+                  <div className="member-socials">
+                    {CREDIT_MEMBERS[creditIndex].socials?.facebook && (
+                      <a href={CREDIT_MEMBERS[creditIndex].socials.facebook} target="_blank" rel="noopener noreferrer" className="member-social-btn" title="Facebook">
+                        <img src={FB} alt="Facebook" />
+                      </a>
+                    )}
+                    {CREDIT_MEMBERS[creditIndex].socials?.instagram && (
+                      <a href={CREDIT_MEMBERS[creditIndex].socials.instagram} target="_blank" rel="noopener noreferrer" className="member-social-btn" title="Instagram">
+                        <img src={Ins} alt="Instagram" />
+                      </a>
+                    )}
+                    {CREDIT_MEMBERS[creditIndex].socials?.tiktok && (
+                      <a href={CREDIT_MEMBERS[creditIndex].socials.tiktok} target="_blank" rel="noopener noreferrer" className="member-social-btn" title="TikTok">
+                        <img src={TT} alt="TikTok" />
+                      </a>
+                    )}
+                    {CREDIT_MEMBERS[creditIndex].socials?.easterEgg && (
+                      <a
+                        className="member-social-btn"
+                        title="Bí mật Mochi"
+                        onClick={(e) => 
+                          handleEasterEggClick(
+                            e, 
+                            CREDIT_MEMBERS[creditIndex].socials!.easterEgg!
+                          )
+                        }
+                      >
+                        <img src="/image/secret_icon.svg" alt="Easter Egg" />
+                      </a>
+                    )}
+                    {CREDIT_MEMBERS[creditIndex].socials?.email && (
+                      <a href={CREDIT_MEMBERS[creditIndex].socials.email} className="member-social-btn" title="Email">
+                        <img src={Mail} alt="Email" />
+                      </a>
+                    )}
+                    {CREDIT_MEMBERS[creditIndex].socials?.github && (
+                      <a href={CREDIT_MEMBERS[creditIndex].socials.github} target="_blank" rel="noopener noreferrer" className="member-social-btn" title="GitHub">
+                        <img src={Git} alt="GitHub" />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
 
