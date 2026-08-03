@@ -8,7 +8,7 @@ import { ProgressBar } from "../elements/progressbar";
 import Footer from "../elements/footer";
 import Navbar from "../elements/navbar";
 
-const RANKING_TOP_POSITIONS = [512, 572, 632, 692, 752, 812, 872, 932, 992, 1052];
+const RANKING_TOP_POSITIONS = [520, 580, 640, 700, 760, 820, 880, 940, 1000, 1060];
 
 // Slide giới thiệu đoàn hội
 const DH_SLIDES = [
@@ -377,13 +377,10 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 1: Giới thiệu ── */}
         <div className="card-rect card-intro" />
-        <div className="intro-heading-frame">
-          <p className="intro-heading-text">BKTI là gì vậy nhỉ?</p>
-        </div>
-        <div className="intro-desc-frame">
+        <div className="intro-block-wrapper">
+          <h1 className="intro-heading-text">BKTI là gì vậy nhỉ?</h1>
           <p className="intro-desc-text">
             BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 18 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
-
           </p>
         </div>
         <div className="action-btn btn-opt1" onClick={() => setPersPopup(true)}>
@@ -398,7 +395,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
         <div className="card-rect card-ranking" />
-        <p className="block-title title-ranking">Bảng xếp hạng</p>
+        <p className="block-title title-ranking">Bảng xếp hạng cổ đông</p>
         {ranking.length === 0 ? (
           <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
@@ -408,12 +405,12 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         ) : (
           ranking.slice(0, 10).map((item, idx) => (
             <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-              <div className="ranking-name">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
-              <div className="ranking-light-text ranking-subtitle">{item.code}</div>
+              <div className="ranking-name">Cổ đông {idx + 1}</div>
+              <div className="ranking-light-text ranking-subtitle">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
               <div className="ranking-light-text ranking-score">{item.percentage}%</div>
-              <div className="ellipse" />
+              <div className={`ellipse rank-${idx + 1}`}>{idx + 1}</div>
               <div className="ranking-progress">
-                <ProgressBar current={item.percentage} total={100} showText = {false} />
+                <ProgressBar current={item.percentage} total={100} showText={false} />
               </div>
             </div>
           ))
@@ -456,11 +453,26 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 4: Phải (dọc) ── */}
         <div className="card-rect card-right" />
-        <p className="block-title title-right">Chủ nhân đằng sau BKTI</p>
+        <p className="block-title title-right">BKTI dùng để làm gì</p>
+        <div className="right-block-desc">
+          <p className="right-block-text">
+            BKTI là sản phẩm thuần giải trí. Chúng tôi hi vọng thông qua bài khảo sát này, các bạn sinh viên - đặc biệt là sinh viên năm nhất - sẽ có những phút giây giải trí và bắt đầu năm học mới một cách thật khoắn khỏe và năng lượng.<br></br>
+            BKTI không được dùng cho các mục đích như xin việc hay thay thế các liệu pháp trị liệu tâm thần. Tuy nhiên, khảo sát với những người sử dụng BKTI phiên bản Beta cho thấy: 67,67% người tham gia sử dụng BKTI như một chủ đề để tán gẫu hay mở lời hẹn hò. Khi bạn nói “BKTI của tôi là JZTR” với nhà tuyển dụng, có thể họ sẽ không ấn tượng mấy, nhưng nếu nói với crush thì cô ấy/ anh ấy sẽ đổ bạn ngay lập tức, vì đó là 1 trong 2 kiểu tính cách ẩn của chúng tôi.
+
+          </p>
+        </div>
 
         {/* ── Khối 5: Full-width 1 ── */}
         <div className="card-rect card-fullwidth-1" />
-        <p className="block-title title-fullwidth-1">BKTI dùng để ABC, không phải để XYZ</p>
+        <p className="block-title title-fullwidth-1">Đăng ký để trở thành thành viên BTT ngay hôm nay!</p>
+        <div className="fullwidth-block-desc">
+          <p className="fullwidth-block-text">
+            Ban Truyền thông khoa Khoa học và Kỹ thuật Máy tính (BTT) luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BTT ngay hôm nay  để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
+            {/* Chỗ gắn link nhe mấy bồ */}
+            <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link">Mấy cổ đông click vào đây để đăng kí nhen!</a>
+          </p>
+          
+        </div>
 
         {/* ── Khối 6: Full-width 2 ── */}
         {/* <div className="card-rect card-fullwidth-2" />

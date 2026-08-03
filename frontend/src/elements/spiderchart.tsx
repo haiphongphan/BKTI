@@ -7,20 +7,6 @@ ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, 
 
 const SPIDER_CHART_CONFIG = {
   employeeName: 'Nhân sự A',       // Thay đổi tên
-  scores: [65, 59, 90, 81, 56],   // Điểm số 
-};
-
-const data: ChartData<'radar'> = {
-  labels: ['Design', 'Coding', 'Marketing', 'Management', 'Sales'],
-  datasets: [
-    {
-      label: SPIDER_CHART_CONFIG.employeeName,
-      data: SPIDER_CHART_CONFIG.scores,
-      backgroundColor: 'rgba(59, 130, 246, 0.2)',
-      borderColor: 'rgba(59, 130, 246, 1)',
-      borderWidth: 2,
-    },
-  ],
 };
 
 const options: ChartOptions<'radar'> = {
@@ -57,7 +43,11 @@ const options: ChartOptions<'radar'> = {
   },
 };
 
-export const Chart: React.FC = () => {
+interface ChartProps {
+  scores?: number[];
+}
+
+export const Chart: React.FC<ChartProps> = ({ scores = [0, 0, 0, 0, 0, 0] }) => {
   const [isVisible, setIsVisible] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -83,12 +73,25 @@ export const Chart: React.FC = () => {
     };
   }, []);
 
+  const chartData: ChartData<'radar'> = {
+    labels: ['Im Lặng', 'Hay Nói', 'VibeCoder', 'Handmade', 'Chữa Lành', 'Mutant'],
+    datasets: [
+      {
+        label: SPIDER_CHART_CONFIG.employeeName,
+        data: scores,
+        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+        borderColor: 'rgba(59, 130, 246, 1)',
+        borderWidth: 2,
+      },
+    ],
+  };
+
   return (
     <div 
       ref={containerRef} 
       className={`spider-chart-wrapper ${isVisible ? 'fade-in' : ''}`}
     >
-      {isVisible && <Radar data={data} options={options} />}
+      {isVisible && <Radar data={chartData} options={options} />}
     </div>
   );
 };
