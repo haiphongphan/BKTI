@@ -325,8 +325,8 @@
     transform: translate(-50%, -50%) !important;
   }
   .resultpage .nav-logo-img {
-    height: 50px !important;
-    width: 100px !important;
+    height: 150px !important;
+    width: 200px !important;
     object-fit: contain !important;
   }
   .resultpage .nav-frame {
@@ -380,4 +380,3 @@
   .back-btn {
     align-self: stretch !important;
   }
-}

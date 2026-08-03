@@ -32,7 +32,11 @@ interface Member {
   socials?: MemberSocials;
 }
 
-const CREDIT_MEMBERS: Member[] = [
+function boldUppercase(text: string) {
+  return text.split("").map((char, i) => char >= "A" && char <= "Z" ? (<strong key={i}>{char}</strong>) : (char));
+}
+
+const CREDIT_MEMBERS : Member[] = [
   {
     id: 1,
     name: "Đinh Quốc Thịnh",
@@ -73,20 +77,20 @@ const CREDIT_MEMBERS: Member[] = [
     id: 4,
     name: "Trần Duy Phước Nghĩa",
     role: "Dev Team",
-    quote: "\" \"",
+    quote: "\"Young Ones should Understand that great Achievement Requires Endless Grind, burning Ambition and unwavering constancY!\"",
     avatar: "../../image/credit_members/TDPN.jpg",
     socials: {
-      tiktok: "tiktok.com/...",
-    },
+      instagram: "https://www.instagram.com/_pngh1a_/",
+    }
   },
   {
     id: 5,
     name: "Nguyễn Huy Nhật",
     role: "Content Team",
     quote: "\"Cuộc sống như wifi, đứng đúng chỗ thì bắt được sống\"",
-    avatar: "../../image/credit_members/NHN.jpg",
+    avatar: "../../image/credit_members/Nguyễn Huy Nhật.jpg",
     socials: {
-      instagram: "https://www.instagram.com/uhwsnaht"
+      instagram: "https://www.instagram.com/uhwsnaht.06/",
     }
   },
   {
@@ -103,7 +107,7 @@ const CREDIT_MEMBERS: Member[] = [
     id: 7,
     name: "Nguyễn Thị Hồng Ngọc",
     role: "Content Team",
-    quote: '" "',
+    quote: "\"Hai mươi phút ngủ trưa là hai tiếng đáng nhớ nhất trong ngày.\"",
     avatar: "../../image/credit_members/NTHN.jpg",
     socials: {
       tiktok: "tiktok.com/...",
@@ -123,11 +127,11 @@ const CREDIT_MEMBERS: Member[] = [
     id: 9,
     name: "Văn Huỳnh Như",
     role: "Illustrator",
-    quote: "\" \"",
-    avatar: "../../image/credit_members/VHN.jpg",
+    quote: "\"Beauty and the bed\"",
+    avatar: "../../image/credit_members/Văn Huỳnh Như.jpg",
     socials: {
-      tiktok: "tiktok.com/...",
-    },
+      instagram: "https://www.instagram.com/nhu.hyunie/",
+    }
   },
   {
     id: 10,
@@ -313,17 +317,15 @@ const Footer: React.FC = () => {
 
                 {/* 2. Thông tin phía bên phải */}
                 <div className="footer__member-details_01">
-                  <h4 className="footer__member-name_01">
-                    {CREDIT_MEMBERS[creditIndex].name}
-                  </h4>
+                  <h4 className={(CREDIT_MEMBERS[creditIndex].id === 4 || CREDIT_MEMBERS[creditIndex].id === 7) ? "footer__member-name_01--small" : "footer__member-name_01"}>{CREDIT_MEMBERS[creditIndex].name}</h4>
                   {CREDIT_MEMBERS[creditIndex].role && (
                     <p className="footer__member-role_01">
                       {CREDIT_MEMBERS[creditIndex].role}
                     </p>
                   )}
                   {CREDIT_MEMBERS[creditIndex].quote && (
-                    <p className="footer__member-quote_01">
-                      {CREDIT_MEMBERS[creditIndex].quote}
+                    <p className={CREDIT_MEMBERS[creditIndex].id === 4 ? "footer__member-quote_01 footer__member-quote_01--small" : "footer__member-quote_01"}>
+                      {CREDIT_MEMBERS[creditIndex].id === 4 ? boldUppercase(CREDIT_MEMBERS[creditIndex].quote) : CREDIT_MEMBERS[creditIndex].quote}
                     </p>
                   )}
                   {/* ── Cụm Icon Social ── */}

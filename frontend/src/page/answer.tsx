@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 /* import shape from "/image/shape.svg"; */
 import { ProgressBar } from "../elements/progressbar";
+import API_URL from "../api";
 import "./answerstyle.css";
 
 
@@ -24,7 +25,7 @@ function Answer(){
   useEffect(()=> {
     const getQuestionFromBackend = async () => {
       try {
-        const respond = await axios.get("http://127.0.0.1:8000/questions");
+        const respond = await axios.get(`${API_URL}/questions`);
         setQuestions(respond.data);
       } catch (error) {
         console.error("Lỗi kết nối API lấy câu hỏi:", error);
@@ -63,7 +64,7 @@ function Answer(){
       }; 
 
       // Gọi API POST nộp bài lên Backend
-      const response = await axios.post("http://127.0.0.1:8000/quiz/submit", payload);
+      const response = await axios.post(`${API_URL}/quiz/submit`, payload);
 
       if (response.data) {
         // Lưu kết quả tính cách vào localStorage để trang Result hiển thị

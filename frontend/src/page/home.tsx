@@ -7,8 +7,14 @@ import axios from "axios";
 import { ProgressBar } from "../elements/progressbar";
 import Footer from "../elements/footer";
 import Navbar from "../elements/navbar";
+import API_URL from "../api";
 
-const RANKING_TOP_POSITIONS = [520, 580, 640, 700, 760, 820, 880, 940, 1000, 1060];
+// Luôn hiện 2 cái này dù chưa có ai ra
+const SPECIAL_PERSONALITIES = [{ code: "LMAO", name: "JZTR" }, { code: "NSFW", name: "Nhà thám hiểm vĩ đại" }];
+const SPECIAL_CODES = SPECIAL_PERSONALITIES.map((p) => p.code);
+
+const NORMAL_RANKING_TOPS = [508, 576, 644, 712, 780, 848, 916, 984];
+const SPECIAL_RANKING_TOPS = [1078, 1146];
 
 // Slide giới thiệu đoàn hội
 const DH_SLIDES = [
@@ -17,7 +23,7 @@ const DH_SLIDES = [
     title: "Đoàn hội khoa Khoa học và Kỹ thuật Máy tính",
     content: (
       <>
-      <img src="/image/doan_hoi.jpg" alt="Doan hoi" className="dh-slide-img" />
+      <img src="/image/Doan_hoi.jpg" alt="Doan hoi" className="dh-slide-img" />
       </>
     )
   },
@@ -247,7 +253,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   useEffect(() =>{
     const getRankingFromBackend = async () => {
       try {
-        const respond = await axios.get("http://127.0.0.1:8000/quiz/ranking");
+        const respond = await axios.get(`${API_URL}/quiz/ranking`);
         setRanking(respond.data.ranking);
       } catch (error) {
         console.error("Lỗi kết nối lấy bảng xếp hạng", error);
@@ -265,8 +271,22 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
   // Cũ:
   // if (ranking.length === 0) return <div style={{ padding: "50px" }}>Không tìm thấy bảng xếp hạng nào!</div>;
 
+  const normalRank = ranking.filter((item) => !SPECIAL_CODES.includes(item.code)).sort((a, b) => b.percentage - a.percentage).slice(0, 8);
 
-
+  // Ghép với ranking API; chưa có data thì % = 0, vẫn hiện đủ 2 tính cách
+  const specialRank = SPECIAL_PERSONALITIES
+    .map((base) => {
+      const found = ranking.find((item) => item.code === base.code);
+      return {
+        code: base.code,
+        name: found?.name ?? base.name,
+        description: found?.description ?? "",
+        percentage: found?.percentage ?? 0,
+        rank: found?.rank ?? 0,
+      };
+    })
+    .sort((a, b) => b.percentage - a.percentage);
+  
   // Bật popup từ nút hoặc tự động khi mở web
   const isPopupOpen = showPopup || infoPopupVisible;
   const handleClose = () => {
@@ -396,32 +416,43 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           <div className="btn-opt-label-2">FAQ</div>
         </div>
 
-        {/* ── Khối 2: Bảng xếp hạng (trái-trên) ── */}
+        {/* ── Khối 2: Bảng xếp hạng (phải) ── */}
         <div className="card-rect card-ranking" />
-        <div className="ranking-board-container">
-          <p className="block-title title-ranking">Bảng xếp hạng cổ đông</p>
-          <div className="ranking-list-container">
-            {ranking.length === 0 ? (
-              <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
-                  Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
-                </p>
+        <p className="block-title title-ranking">Bảng xếp hạng cổ đông</p>
+        {ranking.length === 0 ? (
+          <div className="group" style={{ top: `${NORMAL_RANKING_TOPS[0]}px`, width: "395px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <p style={{ color: "#777", fontSize: "14px", fontStyle: "italic", textAlign: "center", width: "100%", margin: "10px 0", lineHeight: "1.4" }}>
+              Chưa có lượt xếp hạng nào hoặc không kết nối được server. Hãy bắt đầu làm bài test đầu tiên!
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="ranking-section-title title-ranking-normal">Nỏmie</p>
+            {normalRank.map((item, idx) => (
+              <div className="group" style={{ top: `${NORMAL_RANKING_TOPS[idx]}px` }} key={item.code}>
+                <div className="ranking-name">Cổ đông {idx + 1}</div>
+                <div className="ranking-light-text ranking-subtitle">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
+                <div className="ranking-light-text ranking-score">{item.percentage}%</div>
+                <div className={`ellipse rank-${idx + 1}`}>{idx + 1}</div>
+                <div className="ranking-progress"><ProgressBar current={item.percentage} total={100} showText={false} /></div>
               </div>
-            ) : (
-              ranking.slice(0, 10).map((item, idx) => (
-                <div className="group" style={{ top: `${RANKING_TOP_POSITIONS[idx]}px` }} key={item.code}>
-                  <div className="ranking-name">Cổ đông {idx + 1}</div>
-                  <div className="ranking-light-text ranking-subtitle">{item.name.replace(/\s*\([^)]*\)\s*/g, "").trim()}</div>
+            ))}
+
+            {specialRank.length > 0 && (
+              <>
+                <p className="ranking-section-title title-ranking-special">Sít rịt</p>
+                {specialRank.map((item, idx) => (
+                <div className="group" style={{ top: `${SPECIAL_RANKING_TOPS[idx]}px` }} key={item.code}>
+                  <div className="special-ranking-name">bủ bủ lmao {idx + 1}</div>
                   <div className="ranking-light-text ranking-score">{item.percentage}%</div>
                   <div className={`ellipse rank-${idx + 1}`}>{idx + 1}</div>
-                  <div className="ranking-progress">
-                    <ProgressBar current={item.percentage} total={100} showText={false} />
-                  </div>
+                  <div className="ranking-progress"><ProgressBar current={item.percentage} total={100} showText={false} /></div>
                 </div>
-              ))
+              ))}
+              </>
             )}
-          </div>
-        </div>
+          </>
+        )}
 
         {/* ── Khối 3: Trái-dưới ── */}
         <div className="card-rect card-lower-left" />
