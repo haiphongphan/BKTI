@@ -225,9 +225,10 @@
 /* ======================================================
    MOBILE RESPONSIVE (Result Page) — max-width: 992px
    ====================================================== */
-@media (max-width: 992px) {
-  .resultpage {
-    padding-top: 0;
+  @media (max-width: 992px) {
+    .resultpage {
+      padding-top: 0;
+    }
   }
 
   /* --- Header --- */
