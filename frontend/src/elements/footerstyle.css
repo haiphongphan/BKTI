@@ -113,7 +113,8 @@
   flex: 1;
   overflow: hidden;
   gap: 4px;
-  height: 105px;
+  height: auto;
+  max-height: 140px;
 }
 
 .footer__member-name_01 {
@@ -149,7 +150,7 @@
   white-space: normal;
   word-break: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.4;
@@ -205,7 +206,7 @@
 @keyframes footerSlideFromRight {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateX(30px);
   }
   to {
     opacity: 1;
@@ -216,7 +217,7 @@
 @keyframes footerSlideFromLeft {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
@@ -332,4 +333,46 @@
   .footer__links_01 {
     justify-content: center;
   }
+}
+
+/* ── SỬA LẠI CSS CHO CỤM SOCIALS TRONG FOOTER ── */
+.footer__container_01 .member-socials {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Căn trái cùng với chữ */
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Tùy chỉnh kích thước từng nút Icon vừa vặn với Footer */
+.footer__container_01 .member-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;                  /* Kích thước vừa vặn 24px */
+  height: 24px;
+  border-radius: 50%;
+  background-color: #f0edfa;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.footer__container_01 .member-social-btn img {
+  width: 13px;                  /* Kích thước icon SVG bên trong */
+  height: 13px;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  display: block;
+}
+
+/* Hiệu ứng rê chuột */
+.footer__container_01 .member-social-btn:hover {
+  background-color: #7b61ff;
+  transform: translateY(-2px);
+}
+
+.footer__container_01 .member-social-btn:hover img {
+  filter: grayscale(0%) brightness(0) invert(1);
+  opacity: 1;
 }
