@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends
+from sqlalchemy.sql import func
 from sqlmodel import Session, select
 from app.database import get_db, engine
 from app.models import Question, Answer
@@ -29,16 +30,12 @@ def get_questions(db: Session = Depends(get_db)):
     #     result.append(QuestionResponse(id=q.id, content=q.content, answers=q_answer))
     
     # return result
-    questions = db.exec(select(Question)).all()
-    questions_list = list(questions)
-    random.shuffle(questions_list)
+    questions = db.exec(select(Question).order_by(func.random())).all()
 
     result = []
-    for q in questions_list:
-        answers = db.exec(select(Answer).where(Answer.question_id == q.id)).all()
-        answers_list = list(answers)
-        random.shuffle(answers_list)
-        q_answer = [AnswerResponse(id=a.id, content=a.content) for a in answers_list]
+    for q in questions:
+        answers = db.exec(select(Answer).where(Answer.question_id == q.id).order_by(func.random())).all()
+        q_answer = [AnswerResponse(id=a.id, content=a.content) for a in answers]
 
         result.append(QuestionResponse(id=q.id, content=q.content, answers=q_answer))
     return result

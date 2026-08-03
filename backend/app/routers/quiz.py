@@ -11,13 +11,10 @@ router = APIRouter(prefix="/quiz", tags=["Quiz"])
 def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
     # A là nghiêng trái, C là nghiêng phải, B là ở giữa (Dựa vào sheet câu hỏi)
     dimension_1_A = dimension_1_B = dimension_2_A = dimension_2_B = dimension_3_A = dimension_3_B = 0
-    personality = "NOT"
     for str_q_id, user_ans in submission.answers.items():
         q_id = int(str_q_id)
         ans_id = int(user_ans)
-        if q_id == 13 and ans_id == 99:
-            personality = "LMAO"
-        elif q_id <= 7:
+        if q_id <= 7:
             if ans_id % 2 == 1:
                 dimension_1_A += 1
             elif ans_id % 2 == 0:
@@ -44,8 +41,7 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
     # Tinh phase 3
     state_3 = "C" if dimension_3_A > dimension_3_B else "M"
 
-    if personality == "NOT":
-        personality = state_1 + state_2 + state_3
+    personality = state_1 + state_2 + state_3
 
     result_db = User_ans(p_code=personality)
     db.add(result_db)
@@ -63,12 +59,12 @@ def submit(submission: QuizSubmit, db: Session = Depends(get_db)):
         "name": existing_personality.name,
         "description": existing_personality.description,
         "image_url": existing_personality.img_url,
-        "dimension1_nguoi_im_lang": dimension_1_A / 6 * 100,
-        "dimension1_nguoi_hay_noi": dimension_1_B / 6 * 100,
-        "dimension2_vibecoder": dimension_2_A / 6 * 100,
-        "dimension2_handmade": dimension_2_B / 6 * 100,
-        "dimension3_chua_lanh": dimension_3_A / 6 * 100,
-        "dimension3_mutant": dimension_3_B / 6 * 100
+        "dimension1_nguoi_im_lang": dimension_1_A / 7 * 100,
+        "dimension1_nguoi_hay_noi": dimension_1_B / 7 * 100,
+        "dimension2_vibecoder": dimension_2_A / 7 * 100,
+        "dimension2_handmade": dimension_2_B / 7 * 100,
+        "dimension3_chua_lanh": dimension_3_A / 7 * 100,
+        "dimension3_mutant": dimension_3_B / 7 * 100
     }
 
 
