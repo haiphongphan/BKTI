@@ -145,6 +145,7 @@
   z-index: 12;
 }
 
+
 .homepage .intro-heading-text {
   font-family: "Inter-SemiBold", Helvetica;
   font-size: 32px;
@@ -166,6 +167,19 @@
   white-space: pre-line;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.homepage .intro-side-logo {
+  position: absolute !important;
+  right: 50px !important;            /* Cách mép phải 35px (bằng padding của khung) */
+  top: 50% !important;               /* Căn giữa theo chiều dọc */
+  transform: translateY(-50%) !important;
+  width: 300px !important;           /* Chiều rộng logo */
+  max-height: 150px !important;
+  object-fit: contain !important;
+  z-index: 15 !important;            /* Nổi lên trên cùng để không bị che */
+  margin: 0 !important;
+  left: auto !important;             /* Hủy bỏ các tọa độ left cũ nếu có */
 }
 
 /* ══════════════════════════════════════════

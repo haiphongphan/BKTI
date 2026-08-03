@@ -5,14 +5,40 @@ import TT from "/image/tiktok.svg";
 import Mail from "/image/mail.svg";
 import Ins from "/image/ins.svg";
 import Git from "/image/github.svg";
+import Personality from '../page/personality_popup';
 
-const CREDIT_MEMBERS = [
+export interface Personality {
+  code: string;
+  name: string;
+  description: string;
+  img_url: string;
+}
+
+interface MemberSocials {
+  facebook?: string;
+  instagram?: string;
+  tiktok?: string;
+  email?: string;
+  github?: string;
+  easterEgg?: Personality; // Định nghĩa tùy chọn cho Easter Egg
+}
+
+interface Member {
+  id: number;
+  name: string;
+  role: string;
+  quote: string;
+  avatar: string;
+  socials?: MemberSocials;
+}
+
+const CREDIT_MEMBERS : Member[] = [
   {
     id: 1,
     name: "Đinh Quốc Thịnh",
     role: "Lead Content",
     quote: "\"Ước gì một ngày có 36 tiếng để có thể ngủ 12 tiếng.\"",
-    avatar: "/image/credit_members/DQT.jpg",
+    avatar: "../../image/credit_members/DQT.jpg",
     socials: {
       instagram: "https://www.instagram.com/biinseventeen"
     }
@@ -22,7 +48,7 @@ const CREDIT_MEMBERS = [
     name: "Phan Hải Phong",
     role: "Lead Dev",
     quote: "\"Họ cười tôi vì tôi không giống họ, tôi cười họ vì tưởng họ cười với tôi 🤡\"",
-    avatar: "/image/credit_members/PHP.jpg",
+    avatar: "../../image/credit_members/PHP.jpg",
     socials: {
       facebook: "https://www.facebook.com/phongphanhai06",
       instagram: "https://www.instagram.com/phongphanhai06",
@@ -35,7 +61,7 @@ const CREDIT_MEMBERS = [
     name: "Lâm Chí Nguyên",
     role: "Dev Team",
     quote: "\" \"",
-    avatar: "/image/credit_members/PHP.jpeg",
+    avatar: "../../image/credit_members/PHP.jpeg",
     socials: {
       tiktok: "tiktok.com/...",
     }
@@ -45,7 +71,7 @@ const CREDIT_MEMBERS = [
     name: "Trần Duy Phước Nghĩa",
     role: "Dev Team",
     quote: "\" \"",
-    avatar: "/image/credit_members/PHP.jpeg",
+    avatar: "../../image/credit_members/PHP.jpeg",
     socials: {
       tiktok: "tiktok.com/...",
     }
@@ -55,7 +81,7 @@ const CREDIT_MEMBERS = [
     name: "Nguyễn Huy Nhật",
     role: "Content Team",
     quote: "\" \"",
-    avatar: "/image/credit_members/PHP.jpeg",
+    avatar: "../../image/credit_members/PHP.jpeg",
     socials: {
       tiktok: "tiktok.com/...",
     }
@@ -65,7 +91,7 @@ const CREDIT_MEMBERS = [
     name: "Hàng Khang Định",
     role: "Content Team",
     quote: "\" \"",
-    avatar: "/image/credit_members/HKD.jpg",
+    avatar: "../../image/credit_members/HKD.jpg",
     socials: {
       tiktok: "tiktok.com/...",
     }
@@ -75,7 +101,7 @@ const CREDIT_MEMBERS = [
     name: "Nguyễn Thị Hồng Ngọc",
     role: "Content Team",
     quote: "\" \"",
-    avatar: "/image/credit_members/NTHN.jpg",
+    avatar: "../../image/credit_members/NTHN.jpg",
     socials: {
       tiktok: "tiktok.com/...",
     }
@@ -85,7 +111,7 @@ const CREDIT_MEMBERS = [
     name: "Lê Nguyên Hào",
     role: "Content Team",
     quote: "\" \"",
-    avatar: "/image/credit_members/LNH.jpg",
+    avatar: "../../image/credit_members/LNH.jpg",
     socials: {
       tiktok: "tiktok.com/...",
     }
@@ -95,9 +121,27 @@ const CREDIT_MEMBERS = [
     name: "Văn Huỳnh Như",
     role: "Illustrator",
     quote: "\" \"",
-    avatar: "/image/credit_members/PHP.jpeg",
+    avatar: "../../image/credit_members/PHP.jpeg",
     socials: {
       tiktok: "tiktok.com/...",
+    }
+  },
+  {
+    id: 10,
+    name: "Mochi",
+    role: "Nhân vật kéo tương tác cho page",
+    quote: "\"Bí mật nằm đâu đó quanh đây...\"",
+    avatar: "../../image/credit_members/Mochi.png",
+    socials: {
+      facebook: "https://www.facebook.com/BKCSE.Multimedia",
+      tiktok: "https://www.tiktok.com/@csemultimedia",
+      email: "mailto:dtn-ktmt@hcmut.edu.vn",
+      easterEgg: {
+        code: "LMAO",
+        name: "JZTR",
+        description: "Chúc mừng bạn! Bạn là cá thể hiếm nhất mà chúng tôi trong quá trình tạo ra bộ khảo sát này cũng không phát hiện ra. Trong thế giới vận hành bởi tư duy nhị nguyên - đen hoặc trắng, không hoặc có, đúng hoặc sai - bạn là điểm trung vị hoàn hảo của nó. Nghiên cứu của chúng tôi chỉ ra rằng đây không phải là sự ba phải hay thiếu chính kiến, mà nó là...ờm...cái gì đó...ở giữa...ờm...thì nói chung là vậy đó. Chúng tôi tạm đặt tên cho bạn là JZTR - một minh họa hoàn hảo cho cảm giác khó hiểu của cả nhóm. Trong lúc chờ chúng tôi tìm ra cụ thể bạn là gì, bạn có thể...ờm...đi làm một bài khảo sát khác như MBTI chẳng hạn? Hoặc bạn cũng có thể đến một phòng lab nào đó ở 2 cơ sở của Bách khoa và đề xuất trở thành vật nghiên cứu chăng? Ở Bách khoa có rất nhiều cao thủ ẩn mình, có thể họ sẽ có câu trả lời cho bạn, và cho chúng tôi nữa.",
+        img_url: "../../image/mochi/Jztr.png"
+      }
     }
   }
 ];
@@ -108,6 +152,18 @@ const Footer: React.FC = () => {
   const [isCreditAnimating, setIsCreditAnimating] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoplayTimerRef = useRef<any>(null);
+  const handleEasterEggClick = (e: React.MouseEvent, secretJZTR: Personality) => {
+    e.preventDefault();
+    // Chuyển hướng tới trang kết quả tính cách đặc biệt (ví dụ: /result/JZTR)
+    localStorage.setItem("quiz_result", JSON.stringify(secretJZTR));
+      
+
+      // Chuyển ngay sang trang Result
+      if ((window as any).navigateToResult) {
+        (window as any).navigateToResult();
+      }
+    
+  };
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -252,6 +308,20 @@ const Footer: React.FC = () => {
                     {CREDIT_MEMBERS[creditIndex].socials?.tiktok && (
                       <a href={CREDIT_MEMBERS[creditIndex].socials.tiktok} target="_blank" rel="noopener noreferrer" className="member-social-btn" title="TikTok">
                         <img src={TT} alt="TikTok" />
+                      </a>
+                    )}
+                    {CREDIT_MEMBERS[creditIndex].socials?.easterEgg && (
+                      <a
+                        className="member-social-btn"
+                        title="Bí mật Mochi"
+                        onClick={(e) => 
+                          handleEasterEggClick(
+                            e, 
+                            CREDIT_MEMBERS[creditIndex].socials!.easterEgg!
+                          )
+                        }
+                      >
+                        <img src="/image/secret_icon.svg" alt="Easter Egg" />
                       </a>
                     )}
                     {CREDIT_MEMBERS[creditIndex].socials?.email && (

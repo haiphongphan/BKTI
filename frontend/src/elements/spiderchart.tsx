@@ -6,7 +6,7 @@ import "./spiderstyle.css";
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 const SPIDER_CHART_CONFIG = {
-  employeeName: 'Nhân sự A',       // Thay đổi tên
+  employeeName: 'Tỉ lệ',       // Thay đổi tên
 };
 
 const options: ChartOptions<'radar'> = {

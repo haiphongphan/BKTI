@@ -342,6 +342,7 @@
   justify-content: flex-start; /* Căn trái cùng với chữ */
   gap: 8px;
   margin-top: 6px;
+  cursor: pointer;
 }
 
 /* Tùy chỉnh kích thước từng nút Icon vừa vặn với Footer */

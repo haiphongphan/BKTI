@@ -29,7 +29,7 @@ const DH_SLIDES = [
   {
     id: 3,
     title: "Ban Chấp hành khoa Khoa học\nvà Kỹ thuật Máy tính",
-    content: "abcxyz"
+    content: "Đoàn Thanh niên - Liên Chi hội Sinh viên Khoa Khoa học và Kỹ thuật Máy tính là tổ chức chính trị - xã hội đóng vai trò nòng cốt trong việc rèn luyện phẩm chất, phát triển kỹ năng và đồng hành cùng sinh viên. Chúng tôi là cầu nối vững chắc giữa sinh viên với Ban Chủ nhiệm Khoa và các doanh nghiệp. Thông qua chuỗi sự kiện chuyên môn (CSE Job Fair, Company Tour, Code Tour,...) cùng các hoạt động phong trào theo tiêu chí \"Sinh viên 5 tốt\" (Mùa hè xanh, Xuân tình nguyện, CSE Olympics,...), Đoàn - Hội hướng tới xây dựng môi trường phát triển toàn diện cho sinh viên CSE."
   }
 ];
 
@@ -382,6 +382,9 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
           <p className="intro-desc-text">
             BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 18 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
           </p>
+
+          {/* Logo đặt độc lập ở góc phải */}
+          <img src="/image/bkti_logo_full.png" alt="BKTI Logo" className="intro-side-logo" />
         </div>
         <div className="action-btn btn-opt1" onClick={() => setPersPopup(true)}>
           <div className="btn-opt-label-1">Các kiểu tính cách</div>
@@ -464,12 +467,12 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
 
         {/* ── Khối 5: Full-width 1 ── */}
         <div className="card-rect card-fullwidth-1" />
-        <p className="block-title title-fullwidth-1">Đăng ký để trở thành thành viên BTT ngay hôm nay!</p>
+        <p className="block-title title-fullwidth-1">Đăng ký để trở thành thành viên BCH và BTT ngay hôm nay!</p>
         <div className="fullwidth-block-desc">
           <p className="fullwidth-block-text">
-            Ban Truyền thông khoa Khoa học và Kỹ thuật Máy tính (BTT) luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BTT ngay hôm nay  để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
+            Ban Chấp hành (BCH) và Ban Truyền thông (BTT) khoa Khoa học và Kỹ thuật Máy tính luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BCH và BTT ngay hôm nay để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
             {/* Chỗ gắn link nhe mấy bồ */}
-            <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link">Mấy cổ đông click vào đây để đăng kí nhen!</a>
+            <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link" target="_blank" rel="noopener noreferrer">Mấy cổ đông click vào đây để đăng kí nhen! </a>
           </p>
           
         </div>
