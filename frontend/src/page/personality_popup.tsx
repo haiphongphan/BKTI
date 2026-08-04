@@ -6,8 +6,7 @@ import tkka from "../../image/mochi/Tkka.png";
 import svn8 from "../../image/mochi/Svn8.png";
 import mtp from "../../image/mochi/Mtp.png";
 import bugs from "../../image/mochi/Bugs.png";
-import jztr from "../../image/mochi/Jztr.png";
-import nth from "../../image/mochi/Nha_tham_hiem.png";
+import secret from "../../image/mochi/secret.png"
 import "./personality_popupstyle.css";
 
 const PERSONALITY_ITEMS = [
@@ -19,8 +18,8 @@ const PERSONALITY_ITEMS = [
   { img: svn8, label: "SVN8" },
   { img: mtp, label: "Núi Rừng MTV" },
   { img: bugs, label: "BUGS" },
-  { img: jztr, label: "JZTR" },
-  { img: nth, label: "Bí mật hehe" },
+  { img: secret, label: "Bí mật hehe" },
+  { img: secret, label: "Bí mật hehe" },
 ];
 
 export default function Personality({ onClose }: { onClose: () => void }) {

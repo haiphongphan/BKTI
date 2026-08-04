@@ -785,7 +785,7 @@
 }
 
 /* Đường dẫn liên kết đăng ký thành viên BTT */
-.homepage .btt-reg-link {
+.homepage .btt-reg-link-left {
   color: #7b61ff;
   text-decoration: underline;
   font-weight: 600;
@@ -793,7 +793,20 @@
   transition: color 0.2s ease;
 }
 
-.homepage .btt-reg-link:hover {
+.homepage .btt-reg-link-left:hover {
+  color: #554880;
+}
+
+.homepage .btt-reg-link-right {
+  color: #7b61ff;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  margin-left: 290px;
+}
+
+.homepage .btt-reg-link-right:hover {
   color: #554880;
 }
 

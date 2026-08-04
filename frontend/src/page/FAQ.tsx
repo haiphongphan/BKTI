@@ -12,7 +12,7 @@ function Faq({onClose} : any) {
         <p className="text-wrapper">BKTI là gì vậy nhỉ?</p>
         <p className="vi-t-t-t-c-a-bach">
             Viết tắt của Bach Khoa Type Indicator, BKTI là bài khảo sát tâm lý châm
-            biếm, mô phỏng bài khảo sát nổi tiếng MBTI. Với 18 câu hỏi, 3 trục tâm
+            biếm, mô phỏng bài khảo sát nổi tiếng MBTI. Với 21 câu hỏi, 3 trục tâm
             lý, BKTI ghép mỗi người khảo sát vào 1 trong 10 hình mẫu sinh viên Bách
             khoa hài hước.
         </p>
@@ -28,7 +28,7 @@ function Faq({onClose} : any) {
       <div className="faq-item">
         <p className="div">Mất bao lâu để hoàn thành bài khảo sát?</p>
         <p className="text-wrapper-2">
-            18 câu, chỉ mất khoảng 3 - 5 phút để hoàn thành.
+            21 câu, chỉ mất khoảng 3 - 5 phút để hoàn thành.
         </p>
       </div>
       <div className="faq-item">
@@ -65,8 +65,8 @@ function Faq({onClose} : any) {
       <div className="faq-item">
         <p className="text-wrapper-5">Cách chấm điểm như thế nào?</p>
         <p className="text-wrapper-8">
-            Mỗi trục có 2 chiều hướng, 6 câu hỏi, mỗi câu hỏi có 3 đáp án, đánh dấu
-            bằng lệch trái - lệch phải - cân bằng, kèm cơ chế tính điểm riêng biệt.
+            Mỗi trục có 2 chiều hướng, 7 câu hỏi, mỗi câu hỏi có 2 đáp án, đánh dấu
+            bằng lệch trái - lệch phải, kèm cơ chế tính điểm riêng biệt.
             Chúng tôi cộng điểm của tất cả các câu của mỗi trục, ghép 3 trục lại với
             nhau cho ra tổng cộng 8 kiểu tính cách, kèm thêm 2 kiểu tính cách ẩn.
         </p>

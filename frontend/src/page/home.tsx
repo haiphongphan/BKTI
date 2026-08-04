@@ -323,7 +323,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         code: "NSFW",
         name: "Nhà thám hiểm vĩ đại",
         description: "Chúc mừng! Bạn đã chính thức đi chệch khỏi kịch bản và tìm ra Easter Egg giấu kín của hệ thống. Trong khi những người bình thường ngoan ngoãn điền từng câu trắc nghiệm để nhận kết quả, thì bạn lại chọn cách... \"test nhân phẩm\" của cả cái website này. Với đôi tay không biết mỏi, bản tính tò mò vô cực và khả năng thao tác vặn vẹo mọi luồng UX/UI thông thường, bạn không đi tìm bản ngã của mình, bạn đi tìm... bug. Hệ thống xin đầu hàng trước bạn. Có thể bạn là một pháp sư chuyên mở F12 để soi code, một QA Tester bẩm sinh, hoặc đơn giản là bạn quá rảnh và thích click lung tung khắp màn hình. Dù lý do là gì, tư duy out trình và không chịu gò bó vào khuôn khổ đã biến bạn thành một Nhà thám hiểm vĩ đại thực thụ. Bách khoa rất cần những bộ óc thích khám phá như bạn để tạo ra những đột phá mới (hoặc làm sập server lúc đăng ký môn, tùy tâm trạng). Tóm lại, bạn không thuộc về bất kỳ nhóm tính cách nào ở trên. Xin nhận của team Developer một lạy!",
-        img_url: "../../image/mochi/Nha_tham_hiem.png"
+        image_url: "../../image/mochi/Nha_tham_hiem.png"
       };
 
       localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));
@@ -400,7 +400,7 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
         <div className="intro-block-wrapper">
           <h1 className="intro-heading-text">BKTI là gì vậy nhỉ?</h1>
           <p className="intro-desc-text">
-            BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 18 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
+            BKTI (Bach Khoa Type Indicator) là một bài trắc nghiệm tâm lý miễn phí ghép bạn vào 1 trong 10 hình mẫu “SV” Bách khoa dựa trên 3 chiều tâm lý. So với MBTI, nó hài hước và tốn ít thời gian hơn, còn so với SBTI từng làm mưa làm gió trên mạng xã hội thì nó là hàng Việt chất lượng cao. 21 câu, 3 phút, miễn phí, không cần đăng ký, chỉ cần bạn dành chút thời gian ghé thăm trang của chúng tôi.
           </p>
 
           {/* Logo đặt độc lập ở góc phải */}
@@ -509,7 +509,8 @@ export default function Home({ showPopup, onClosePopup, onStartQuiz }: HomePros)
             <p className="fullwidth-block-text">
               Ban Chấp hành (BCH) và Ban Truyền thông (BTT) khoa Khoa học và Kỹ thuật Máy tính luôn chào đón các thế hệ sinh viên nhiệt huyết, đam mê sáng tạo và mong muốn thử thách bản thân trong môi trường truyền thông năng động. Đăng ký tham gia BCH và BTT ngay hôm nay để có cơ hội được học hỏi, rèn luyện các kỹ năng thiết kế, viết lách, quay dựng phim và tổ chức các sự kiện lớn nhỏ của Khoa và Trường! <br></br>
               {/* Chỗ gắn link nhe mấy bồ */}
-              <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link" target="_blank" rel="noopener noreferrer">Mấy cổ đông click vào đây để đăng kí nhen! </a>
+              <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link-left" target="_blank" rel="noopener noreferrer">Mấy cổ đông click vào đây để đăng kí vào BTT nhen! </a>
+              <a href="https://www.facebook.com/BKCSE.Multimedia" className="btt-reg-link-right" target="_blank" rel="noopener noreferrer">Còn đăng ký vào BCH thì ở đây! </a>
             </p>
           </div>
         </div>

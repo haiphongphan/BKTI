@@ -4,6 +4,7 @@ import "./resultstyle.css";
 import html2canvas from "html2canvas";
 import { ProgressBar } from "../elements/progressbar.tsx";
 import Footer from "../elements/footer.tsx";
+import confetti from 'canvas-confetti';
 
 export default function Result() {
   const [result, setResult] = useState<any>(null);
@@ -91,6 +92,36 @@ export default function Result() {
     };
   }
 }, []); // Mảng rỗng [] đảm bảo chỉ khởi tạo đúng 1 lần
+  useEffect(() => {
+    const duration = 2.5 * 1000; // Bắn trong 2.5 giây
+    const animationEnd = Date.now() + duration;
+
+    const interval: any = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      // Bắn ngẫu nhiên từ góc trái và phải
+      confetti({
+        particleCount: 40,
+        angle: 60,
+        spread: 55,
+        origin: { x: 0, y: 0.8 },
+        colors: ['#7b61ff', '#998fc7', '#ffd11a']
+      });
+      confetti({
+        particleCount: 40,
+        angle: 120,
+        spread: 55,
+        origin: { x: 1, y: 0.8 },
+        colors: ['#7b61ff', '#998fc7', '#ffd11a']
+      });
+    }, 250);
+
+    return () => clearInterval(interval);
+  }, []);
 
   if (!result) return <div style={{ padding: '50px' }}>Đang tải kết quả...</div>;
 

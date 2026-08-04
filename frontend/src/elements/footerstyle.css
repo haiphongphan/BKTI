@@ -114,7 +114,7 @@
   overflow: hidden;
   gap: 4px;
   height: auto;
-  max-height: 140px;
+  max-height: 100%;
 }
 
 .footer__member-name_01 {
@@ -161,7 +161,7 @@
   white-space: normal;
   word-break: break-word;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 10;
   -webkit-box-orient: vertical;
   overflow: hidden;
   line-height: 1.4;
@@ -172,6 +172,13 @@
   font-size: 10px;
   line-height: 1.3;
   overflow:visible;
+}
+
+/* Quote Khinh Đạn */
+.footer__member-quote_01--verysmall {
+  font-size: 7.5px;
+  line-height: 1.2;
+  margin-bottom: 0px;
 }
 
 .footer__member-quote_01 strong {
@@ -373,7 +380,7 @@
   align-items: center;
   justify-content: flex-start; /* Căn trái cùng với chữ */
   gap: 8px;
-  margin-top: 6px;
+  margin-top: 0px;
   cursor: pointer;
 }
 

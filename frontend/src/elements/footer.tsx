@@ -11,7 +11,7 @@ export interface Personality {
   code: string;
   name: string;
   description: string;
-  img_url: string;
+  image_url: string;
 }
 
 interface MemberSocials {
@@ -57,8 +57,7 @@ const CREDIT_MEMBERS : Member[] = [
     socials: {
       facebook: "https://www.facebook.com/phongphanhai06",
       instagram: "https://www.instagram.com/phongphanhai06",
-      email: "mailto:phong.phan06@hcmut.edu.vn",
-      github: "https://github.com/haiphongphan",
+      email: "mailto:phong.phan06@hcmut.edu.vn"
     },
   },
   {
@@ -88,7 +87,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Nguyễn Huy Nhật",
     role: "Content Team",
     quote: "\"Cuộc sống như wifi, đứng đúng chỗ thì bắt được sống\"",
-    avatar: "../../image/credit_members/Nguyễn Huy Nhật.jpg",
+    avatar: "../../image/credit_members/NHN.jpg",
     socials: {
       instagram: "https://www.instagram.com/uhwsnaht.06/",
     }
@@ -97,10 +96,11 @@ const CREDIT_MEMBERS : Member[] = [
     id: 6,
     name: "Hàng Khang Định",
     role: "Content Team",
-    quote: '" "',
+    quote: '"Tôi đã trưởng thành từ trong đau khổ, tôi đứng lên từ đống tro tàn, tôi đứng lên từ một đống tro tàn nguội lạnh, như một bông hoa nở giữa sa mạc và tôi có ngày hôm nay là do tôi may mắn cộng thêm một sự kiêu hãnh kiên định không có dễ gì lung lay tôi đâu, thấy tôi cười đừng nghĩ tôi vui, mà thấy tôi khóc đừng nghĩ tôi buồn. Cái đầu của tôi tỉnh như tỉnh Ủy."',
     avatar: "../../image/credit_members/HKD.jpg",
     socials: {
-      tiktok: "tiktok.com/...",
+      instagram: "https://www.instagram.com/whwsmdfr",
+      facebook: "https://www.facebook.com/apl.gind"
     },
   },
   {
@@ -109,9 +109,6 @@ const CREDIT_MEMBERS : Member[] = [
     role: "Content Team",
     quote: "\"Hai mươi phút ngủ trưa là hai tiếng đáng nhớ nhất trong ngày.\"",
     avatar: "../../image/credit_members/NTHN.jpg",
-    socials: {
-      tiktok: "tiktok.com/...",
-    },
   },
   {
     id: 8,
@@ -119,16 +116,13 @@ const CREDIT_MEMBERS : Member[] = [
     role: "Content Team",
     quote: "\"Người hay nói đạo lý là người sống như loài bươm bướm\"",
     avatar: "../../image/credit_members/LNH.jpg",
-    socials: {
-      tiktok: "tiktok.com/...",
-    },
   },
   {
     id: 9,
     name: "Văn Huỳnh Như",
     role: "Illustrator",
     quote: "\"Beauty and the bed\"",
-    avatar: "../../image/credit_members/Văn Huỳnh Như.jpg",
+    avatar: "../../image/credit_members/VHN.jpg",
     socials: {
       instagram: "https://www.instagram.com/nhu.hyunie/",
     }
@@ -148,7 +142,7 @@ const CREDIT_MEMBERS : Member[] = [
         name: "JZTR",
         description:
           "Chúc mừng bạn! Bạn là cá thể hiếm nhất mà chúng tôi trong quá trình tạo ra bộ khảo sát này cũng không phát hiện ra. Trong thế giới vận hành bởi tư duy nhị nguyên - đen hoặc trắng, không hoặc có, đúng hoặc sai - bạn là điểm trung vị hoàn hảo của nó. Nghiên cứu của chúng tôi chỉ ra rằng đây không phải là sự ba phải hay thiếu chính kiến, mà nó là...ờm...cái gì đó...ở giữa...ờm...thì nói chung là vậy đó. Chúng tôi tạm đặt tên cho bạn là JZTR - một minh họa hoàn hảo cho cảm giác khó hiểu của cả nhóm. Trong lúc chờ chúng tôi tìm ra cụ thể bạn là gì, bạn có thể...ờm...đi làm một bài khảo sát khác như MBTI chẳng hạn? Hoặc bạn cũng có thể đến một phòng lab nào đó ở 2 cơ sở của Bách khoa và đề xuất trở thành vật nghiên cứu chăng? Ở Bách khoa có rất nhiều cao thủ ẩn mình, có thể họ sẽ có câu trả lời cho bạn, và cho chúng tôi nữa.",
-        img_url: "../../image/mochi/Jztr.png",
+        image_url: "../../image/mochi/Jztr.png",
       },
     },
   },
@@ -317,13 +311,18 @@ const Footer: React.FC = () => {
 
                 {/* 2. Thông tin phía bên phải */}
                 <div className="footer__member-details_01">
-                  <h4 className={(CREDIT_MEMBERS[creditIndex].id === 4 || CREDIT_MEMBERS[creditIndex].id === 7) ? "footer__member-name_01--small" : "footer__member-name_01"}>{CREDIT_MEMBERS[creditIndex].name}</h4>
+                  <h4 className={(CREDIT_MEMBERS[creditIndex].id === 4) ? "footer__member-name_01--small" : "footer__member-name_01"}>{CREDIT_MEMBERS[creditIndex].name}</h4>
                   {CREDIT_MEMBERS[creditIndex].role && (
                     <p className="footer__member-role_01">
                       {CREDIT_MEMBERS[creditIndex].role}
                     </p>
                   )}
-                  {CREDIT_MEMBERS[creditIndex].quote && (
+                  {CREDIT_MEMBERS[creditIndex].quote && CREDIT_MEMBERS[creditIndex].id === 6 && (
+                    <p className={"footer__member-quote_01 footer__member-quote_01--verysmall"}>
+                      {CREDIT_MEMBERS[creditIndex].quote}
+                    </p>
+                  )}
+                  {CREDIT_MEMBERS[creditIndex].quote && CREDIT_MEMBERS[creditIndex].id !== 6 &&(
                     <p className={CREDIT_MEMBERS[creditIndex].id === 4 ? "footer__member-quote_01 footer__member-quote_01--small" : "footer__member-quote_01"}>
                       {CREDIT_MEMBERS[creditIndex].id === 4 ? boldUppercase(CREDIT_MEMBERS[creditIndex].quote) : CREDIT_MEMBERS[creditIndex].quote}
                     </p>
