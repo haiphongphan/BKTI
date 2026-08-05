@@ -1,48 +1,114 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import './navbarstyle.css';
 
 interface NavbarProps {
-  onSocialClick?: () => void;
-  onLogoClick?: () => void;
-  onHashtagClick?: () => void;
+  onNavClick: (target: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => void;
+  activeItem?: 'home' | 'ranking' | 'personality' | 'faq' | 'credit';
 }
 
-export const Navbar: React.FC<NavbarProps> = ({
-  onSocialClick,
-  onLogoClick,
-  onHashtagClick
-}) => {
+export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [clickCount, setClickCount] = useState(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleCseClick = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    const newCount = clickCount + 1;
+    setClickCount(newCount);
+
+    if (newCount === 11) {
+      setClickCount(0);
+      const secretPersonality = {
+        code: "NSFW",
+        name: "Nhà thám hiểm vĩ đại",
+        description:
+          'Chúc mừng! Bạn đã chính thức đi chệch khỏi kịch bản và tìm ra Easter Egg giấu kín của hệ thống. Trong khi những người bình thường ngoan ngoãn điền từng câu trắc nghiệm để nhận kết quả, thì bạn lại chọn cách... "test nhân phẩm" của cả cái website này. Với đôi tay không biết mỏi, bản tính tò mò vô cực và khả năng thao tác vặn vẹo mọi luồng UX/UI thông thường, bạn không đi tìm bản ngã của mình, bạn đi tìm... bug. Hệ thống xin đầu hàng trước bạn. Có thể bạn là một pháp sư chuyên mở F12 để soi code, một QA Tester bẩm sinh, hoặc đơn giản là bạn quá rảnh và thích click lung tung khắp màn hình. Dù lý do là gì, tư duy out trình và không chịu gò bó vào khuôn khổ đã biến bạn thành một Nhà thám hiểm vĩ đại thực thụ. Bách khoa rất cần những bộ óc thích khám phá như bạn để tạo ra những đột phá mới (hoặc làm sập server lúc đăng ký môn, tùy tâm trạng). Tóm lại, bạn không thuộc về bất kỳ nhóm tính cách nào ở trên. Xin nhận của team Developer một lạy!',
+        image_url: "../../image/mochi/Nha_tham_hiem.png",
+      };
+
+      localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));
+      if ((window as any).navigateToResult) {
+        (window as any).navigateToResult();
+      }
+    } else {
+      timerRef.current = setTimeout(() => {
+        setClickCount(0);
+      }, 1000);
+    }
+  };
+
+  const navItems = [
+    { id: 'home', label: 'Trang chủ' },
+    { id: 'ranking', label: 'Bảng xếp hạng' },
+    { id: 'personality', label: 'Các kiểu tính cách' },
+    { id: 'faq', label: 'FAQ' },
+    { id: 'credit', label: 'Credit' }
+  ] as const;
+
+  const handleItemClick = (id: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => {
+    onNavClick(id);
+    setIsOpen(false); // Đóng menu mobile drawer
+  };
+
   return (
-    <header className="navbar__container_01">
-      <div className="navbar__content_01">
-        {/* 1. Nút Social bên trái */}
-        <button 
-          className="navbar__btn_01 navbar__social-btn_01" 
-          onClick={onSocialClick}
-          aria-label="Social Link"
-        >
-          <span className="navbar__text_01">@cse-multimedia</span>
-        </button>
+    <nav className="bkti-navbar">
+      <div className="bkti-navbar__container">
+        {/* Khối Logo & CSE bên trái */}
+        <div className="bkti-navbar__logo-area">
+          <div className="bkti-navbar__logo" onClick={() => handleItemClick('home')}>
+            <img src="/image/bkti_logo.png" alt="BKTI Logo" className="bkti-navbar__logo-img" />
+            <div className="bkti-navbar__logo-text-group">
+              <span className="bkti-navbar__logo-title">BKTI</span>
+              <span className="bkti-navbar__logo-subtitle">Bach Khoa Type Indicator</span>
+            </div>
+          </div>
 
-        {/* 2. Logo ở giữa */}
-        <button 
-          className="navbar__logo-btn_01" 
-          onClick={onLogoClick}
-          aria-label="BKTI Logo"
-        >
-          <img src="/image/cse-small.png" alt="CSE Multimedia" className="navbar__logo-img_01" />
-        </button>
+          {/* Nút CSE logo kích hoạt Easter Egg */}
+          <button className="bkti-navbar__cse-btn" onClick={handleCseClick} aria-label="CSE Multimedia">
+            <img src="/image/cse-small.png" alt="CSE Logo" className="bkti-navbar__cse-img" />
+          </button>
+        </div>
 
-        {/* 3. Nút Hashtag bên phải */}
+        {/* Menu giữa cho Desktop */}
+        <div className="bkti-navbar__menu">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              className={`bkti-navbar__link ${activeItem === item.id ? 'bkti-navbar__link--active' : ''}`}
+              onClick={() => handleItemClick(item.id)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+
+        {/* Burger Icon cho Mobile */}
         <button 
-          className="navbar__btn_01 navbar__hashtag-btn_01" 
-          onClick={onHashtagClick}
-          aria-label="Hashtag Link"
+          className={`bkti-navbar__burger ${isOpen ? 'bkti-navbar__burger--open' : ''}`}
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
         >
-          <span className="navbar__text_01">#BKTI</span>
+          <span className="bkti-navbar__burger-line"></span>
+          <span className="bkti-navbar__burger-line"></span>
+          <span className="bkti-navbar__burger-line"></span>
         </button>
       </div>
-    </header>
+
+      {/* Mobile Drawer Menu */}
+      <div className={`bkti-navbar__mobile-menu ${isOpen ? 'bkti-navbar__mobile-menu--open' : ''}`}>
+        {navItems.map((item) => (
+          <button
+            key={item.id}
+            className={`bkti-navbar__mobile-link ${activeItem === item.id ? 'bkti-navbar__mobile-link--active' : ''}`}
+            onClick={() => handleItemClick(item.id)}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+    </nav>
   );
 };
 

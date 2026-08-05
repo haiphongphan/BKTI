@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import "./resultstyle.css";
 import html2canvas from "html2canvas";
 import { ProgressBar } from "../elements/progressbar.tsx";
+import TiltCard from "../elements/tiltcard";
+import Navbar from "../elements/navbar";
 import Footer from "../elements/footer.tsx";
 import confetti from 'canvas-confetti';
 
@@ -143,24 +145,23 @@ export default function Result() {
     result.dimension3_mutant || 0,
   ];
 
+  const handleNavClick = (target: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => {
+    if (target === 'home') {
+      (window as any).navigateToHome?.();
+    } else {
+      localStorage.setItem("nav_target", target);
+      (window as any).navigateToHome?.();
+    }
+  };
+
   return (
     <div className="result-page-wrapper">
       <div className="resultpage">
-        <header className="header">
-          <button className="nav-frame frame-5">
-            <div className="nav-text text-wrapper-12">@cse-multimedia</div>
-          </button>
-          <button className="nav-logo" onClick={() => (window as any).navigateToHome?.()}>
-            <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
-          </button>
-          <button className="nav-frame frame-6">
-            <div className="nav-text text-wrapper-13">#BKTI</div>
-          </button>
-        </header>
+        <Navbar onNavClick={handleNavClick} />
 
         <main className="result-container" ref={captureRef}>
           {/* Khối 1: Hình ảnh & Thông tin tính cách */}
-          <div className="result-block-1">
+          <TiltCard className="result-block-1">
             {result.image_url && (
               <img 
                 src={result.image_url} 
@@ -180,10 +181,10 @@ export default function Result() {
             <p className="desc">
               {result.description}
             </p>
-          </div>
+          </TiltCard>
 
           {/* Khối 2: Biểu đồ spider, hệ 6 thanh thống kê và các button chức năng */}
-          <div className="result-block-2">
+          <TiltCard className="result-block-2">
             <div className="result-chart">
               <Chart scores={scores} /> 
             </div>
@@ -222,7 +223,7 @@ export default function Result() {
                 Quay lại Trang chủ
               </button>
             </div>
-          </div>
+          </TiltCard>
         </main>
       </div>
       <Footer />
