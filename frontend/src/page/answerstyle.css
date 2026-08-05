@@ -214,7 +214,7 @@
 }
 
 .test-page .question-container .rectangle-6 {
-  background-color: #abf1fd;
+  background-color: #EEF2FF;
   border-radius: 32px;
   height: 100%;
   left: 0;
@@ -224,7 +224,7 @@
 }
 
 .test-page .question-container .rectangle-9 {
-  background-color: #57E7FF;
+  background-color: #3E53A0;
   border-radius: 32px;
   height: 100%;
   left: 0;
@@ -246,7 +246,7 @@
 
 .test-page .text-wrapper-7 {
   align-items: center;
-  color: #000000;
+  color: #ffffff;
   display: flex;
   font-family: "Inter-Bold", Helvetica;
   font-size: 20px;
