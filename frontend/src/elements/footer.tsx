@@ -116,6 +116,9 @@ const CREDIT_MEMBERS : Member[] = [
     role: "Content Team",
     quote: "\"Người hay nói đạo lý là người sống như loài bươm bướm\"",
     avatar: "../../image/credit_members/LNH.jpg",
+    socials: {
+      instagram: "https://www.instagram.com/ngynhcao.l7ll"
+    }
   },
   {
     id: 9,
