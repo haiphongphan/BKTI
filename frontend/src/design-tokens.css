@@ -1,0 +1,72 @@
+/* ══════════════════════════════════════════════════════════
+   BKTI Design Tokens — CSS Variables chung toàn dự án
+   Import vào index.css hoặc từng file cần dùng
+   ══════════════════════════════════════════════════════════ */
+:root {
+  /* ── Color Palette ── */
+  --color-primary: #998fc7;
+  --color-primary-hover: #8578b8;
+  --color-primary-light: #e2dcfc;
+  --color-accent: #7b61ff;
+  --color-accent-dark: #554880;
+
+  --color-bg-card: #ffffff;
+  --color-bg-card-inner: #fcfbfe;
+  --color-bg-gradient-start: rgba(249, 248, 251, 1);
+  --color-bg-gradient-end: rgba(235, 221, 255, 1);
+
+  --color-text-primary: #000000;
+  --color-text-body: #333333;
+  --color-text-secondary: #666666;
+  --color-text-muted: #888888;
+  --color-text-placeholder: #777777;
+
+  --color-border-subtle: rgba(153, 143, 199, 0.2);
+  --color-border-medium: rgba(153, 143, 199, 0.3);
+  --color-shadow-card: 1px 4px 21.2px rgba(153, 143, 199, 0.41);
+  --color-shadow-btn-primary: 0 4px 15px rgba(153, 143, 199, 0.35);
+  --color-shadow-btn-secondary: 0 4px 12px rgba(153, 143, 199, 0.12);
+
+  /* ── Typography ── */
+  --font-family: "Inter", sans-serif;
+
+  --fs-heading-xl: 32px;
+  --fs-heading-lg: 26px;
+  --fs-heading-md: 24px;
+  --fs-heading-sm: 20px;
+  --fs-body: 15px;
+  --fs-body-sm: 14px;
+  --fs-caption: 13px;
+  --fs-label: 10px;
+
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ── Spacing (8px grid) ── */
+  --sp-4: 4px;
+  --sp-8: 8px;
+  --sp-12: 12px;
+  --sp-16: 16px;
+  --sp-20: 20px;
+  --sp-24: 24px;
+  --sp-32: 32px;
+  --sp-40: 40px;
+
+  /* ── Card ── */
+  --card-radius: 25px;
+  --card-radius-sm: 16px;
+  --card-radius-mobile: 15px;
+  --card-padding-desktop: 25px 35px;
+  --card-padding-mobile: 24px 16px;
+
+  /* ── Transition ── */
+  --transition-default: all 0.25s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: all 0.2s ease;
+
+  /* ── Layout ── */
+  --content-max-width: 971px;
+  --mobile-max-width: 580px;
+}

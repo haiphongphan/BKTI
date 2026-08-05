@@ -295,11 +295,10 @@
 /* ======================================================
    MOBILE RESPONSIVE (Result Page) — max-width: 768px
    ====================================================== */
-  @media (max-width: 992px) {
+  @media (max-width: 768px) {
     .resultpage {
-      padding-top: 0;
+      padding-top: 120px !important;
     }
-  }
 
   /* --- Header --- */
   .resultpage .header {
@@ -325,8 +324,8 @@
     transform: translate(-50%, -50%) !important;
   }
   .resultpage .nav-logo-img {
-    height: 150px !important;
-    width: 200px !important;
+    height: 50px !important;
+    width: 100px !important;
     object-fit: contain !important;
   }
   .resultpage .nav-frame {
@@ -353,7 +352,7 @@
   .result-container {
     flex-direction: column !important;
     padding: 0 16px !important;
-    margin: 130px auto 40px auto !important;
+    margin: 0 auto 40px auto !important;
     gap: 20px !important;
     width: auto !important;
     position: static !important;
@@ -380,3 +379,4 @@
   .back-btn {
     align-self: stretch !important;
   }
+}

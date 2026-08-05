@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 /* import shape from "/image/shape.svg"; */
 import { ProgressBar } from "../elements/progressbar";
+import TiltCard from "../elements/tiltcard";
+import Navbar from "../elements/navbar";
 import API_URL from "../api";
 import "./answerstyle.css";
 
@@ -131,27 +133,25 @@ function Answer(){
     );
   };
 
+  const handleNavClick = (target: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => {
+    if (target === 'home') {
+      (window as any).navigateToHome?.();
+    } else {
+      localStorage.setItem("nav_target", target);
+      (window as any).navigateToHome?.();
+    }
+  };
+
   return (
     <div className="test-page">
       {/* ── Background & Decorations ── */}
       <div className="rectangle" />
 
-      {/* ── Header ── */}
-      <header className="header">
-        <button className="nav-frame frame-2">
-          <div className="nav-text text-wrapper-8">@cse-multimedia</div>
-        </button>
-        <button className="nav-logo" onClick={() => (window as any).navigateToHome?.()}>
-          <img src="/image/cse-small.png" alt="CSE Multimedia" className="nav-logo-img" />
-        </button>
-        <button className="nav-frame frame-3">
-          <div className="nav-text text-wrapper-9">#BKTI</div>
-        </button>
-      </header>
+      <Navbar onNavClick={handleNavClick} />
 
       {/* ── Card chính ── */}
       <div className="div" />
-      <div className="main-card-wrapper">
+      <TiltCard className="main-card-wrapper">
 
       {/* ── Câu hỏi ──  */}
       <div className="question-container" key={`q-container-${currentIndex}`}>
@@ -213,7 +213,7 @@ function Answer(){
 
 
       {isMobile && renderNavigationButtons()}
-      </div>{/* === KẾT THÚC main-card-wrapper === */}
+      </TiltCard>{/* === KẾT THÚC main-card-wrapper === */}
     </div>
   );
 };
