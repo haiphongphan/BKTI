@@ -43,7 +43,7 @@ function Answer(){
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = questions.length;
-  const isCurrentQuestionAnswered = Boolean(currentQuestion?.id != null && userAnswers[String(currentQuestion.id)]);
+  const isCurrentQuestionAnswered = !!userAnswers[currentQuestion.id.toString()];
 
   const answers = currentQuestion.answers || [];
 
@@ -184,17 +184,15 @@ function Answer(){
 
           const currentLetter = String.fromCharCode(65 + index);
 
-          const questionId = String(currentQuestion?.id ?? '');
-          const optionId = String(opt?.id ?? '');
-          const isSelected = Boolean(userAnswers) && userAnswers[questionId] === optionId;
+          const isSelected = userAnswers[currentQuestion.id.toString()] === opt.id.toString();
 
 
           return (
-            <button key={opt?.id || index} className={`answer-btn ${currentClass}`}
+            <button key={opt.id || index} className={`answer-btn ${currentClass}`}
             onClick={() => {
               setUserAnswers(prev => ({
                 ...prev,
-                [questionId]: optionId
+                [currentQuestion.id.toString()]: opt.id.toString()
               }));
             }}
             >
