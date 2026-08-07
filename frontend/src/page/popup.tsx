@@ -1,4 +1,4 @@
-import CSEMul from "/image/CSE-mul.png";
+import CSEMul from "/image/CSE-mul.webp";
 import FB from "/image/facebook.svg";
 import TT from "/image/tiktok.svg";
 import Mail from "/image/mail.svg";

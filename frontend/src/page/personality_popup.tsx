@@ -1,12 +1,12 @@
-import co_be from "/image/mochi/Co_be.png";
-import lgbt from "/image/mochi/Lgbt.png";
-import onfa from "/image/mochi/Onfa.png";
-import max from "/image/mochi/Max.png";
-import tkka from "/image/mochi/Tkka.png";
-import svn8 from "/image/mochi/Svn8.png";
-import mtp from "/image/mochi/Mtp.png";
-import bugs from "/image/mochi/Bugs.png";
-import secret from "/image/mochi/secret.png"
+import co_be from "/image/mochi/Co_be.webp";
+import lgbt from "/image/mochi/Lgbt.webp";
+import onfa from "/image/mochi/Onfa.webp";
+import max from "/image/mochi/Max.webp";
+import tkka from "/image/mochi/Tkka.webp";
+import svn8 from "/image/mochi/Svn8.webp";
+import mtp from "/image/mochi/Mtp.webp";
+import bugs from "/image/mochi/Bugs.webp";
+import secret from "/image/mochi/secret.webp"
 import "./personality_popupstyle.css";
 
 const PERSONALITY_ITEMS = [

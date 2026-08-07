@@ -42,7 +42,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Đinh Quốc Thịnh",
     role: "Lead Content",
     quote: '"Ước gì một ngày có 36 tiếng để có thể ngủ 12 tiếng."',
-    avatar: "/image/credit_members/DQT.jpg",
+    avatar: "/image/credit_members/DQT.webp",
     socials: {
       instagram: "https://www.instagram.com/biinseventeen",
     },
@@ -53,7 +53,7 @@ const CREDIT_MEMBERS : Member[] = [
     role: "Lead Dev",
     quote:
       '"Họ cười tôi vì tôi không giống họ, tôi cười họ vì tưởng họ cười với tôi 🤡"',
-    avatar: "/image/credit_members/PHP.jpg",
+    avatar: "/image/credit_members/PHP.webp",
     socials: {
       facebook: "https://www.facebook.com/phongphanhai06",
       instagram: "https://www.instagram.com/phongphanhai06",
@@ -65,7 +65,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Lâm Chí Nguyên",
     role: "Dev Team",
     quote: '"I be sleeping tomorrow like yesterday? Bro, I slept today!"',
-    avatar: "/image/credit_members/N.jpg",
+    avatar: "/image/credit_members/N.webp",
     socials: {
       github: "https://github.com/NieChan17",
       instagram: "https://www.instagram.com/_niechan",
@@ -77,7 +77,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Trần Duy Phước Nghĩa",
     role: "Dev Team",
     quote: "\"Young Ones should Understand that great Achievement Requires Endless Grind, burning Ambition and unwavering constancY!\"",
-    avatar: "/image/credit_members/TDPN.jpg",
+    avatar: "/image/credit_members/TDPN.webp",
     socials: {
       instagram: "https://www.instagram.com/_pngh1a_/",
     }
@@ -87,7 +87,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Nguyễn Huy Nhật",
     role: "Content Team",
     quote: "\"Cuộc sống như wifi, đứng đúng chỗ thì bắt được sống\"",
-    avatar: "/image/credit_members/NHN.jpg",
+    avatar: "/image/credit_members/NHN.webp",
     socials: {
       instagram: "https://www.instagram.com/uhwsnaht.06/",
     }
@@ -97,7 +97,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Hàng Khang Định",
     role: "Content Team",
     quote: '"Tôi đã trưởng thành từ trong đau khổ, tôi đứng lên từ đống tro tàn, tôi đứng lên từ một đống tro tàn nguội lạnh, như một bông hoa nở giữa sa mạc và tôi có ngày hôm nay là do tôi may mắn cộng thêm một sự kiêu hãnh kiên định không có dễ gì lung lay tôi đâu, thấy tôi cười đừng nghĩ tôi vui, mà thấy tôi khóc đừng nghĩ tôi buồn. Cái đầu của tôi tỉnh như tỉnh Ủy."',
-    avatar: "/image/credit_members/HKD.jpg",
+    avatar: "/image/credit_members/HKD.webp",
     socials: {
       instagram: "https://www.instagram.com/whwsmdfr",
       facebook: "https://www.facebook.com/apl.gind"
@@ -108,14 +108,14 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Nguyễn Thị Hồng Ngọc",
     role: "Content Team",
     quote: "\"Hai mươi phút ngủ trưa là hai tiếng đáng nhớ nhất trong ngày.\"",
-    avatar: "/image/credit_members/NTHN.jpg",
+    avatar: "/image/credit_members/NTHN.webp",
   },
   {
     id: 8,
     name: "Lê Nguyên Hào",
     role: "Content Team",
     quote: "\"Người hay nói đạo lý là người sống như loài bươm bướm\"",
-    avatar: "/image/credit_members/LNH.jpg",
+    avatar: "/image/credit_members/LNH.webp",
     socials: {
       instagram: "https://www.instagram.com/ngynhcao.l7ll"
     }
@@ -125,7 +125,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Văn Huỳnh Như",
     role: "Illustrator",
     quote: "\"Beauty and the bed\"",
-    avatar: "/image/credit_members/VHN.jpg",
+    avatar: "/image/credit_members/VHN.webp",
     socials: {
       instagram: "https://www.instagram.com/nhu.hyunie/",
     }
@@ -135,7 +135,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Mochi",
     role: "Kéo Tương Tác Cho Page",
     quote: "\"Bí mật nằm đâu đó quanh đây...\"",
-    avatar: "/image/credit_members/Mochi.png",
+    avatar: "/image/credit_members/Mochi.webp",
     socials: {
       facebook: "https://www.facebook.com/BKCSE.Multimedia",
       tiktok: "https://www.tiktok.com/@csemultimedia",
@@ -145,7 +145,7 @@ const CREDIT_MEMBERS : Member[] = [
         name: "JZTR",
         description:
           "Chúc mừng bạn! Bạn là cá thể hiếm nhất mà chúng tôi trong quá trình tạo ra bộ khảo sát này cũng không phát hiện ra. Trong thế giới vận hành bởi tư duy nhị nguyên - đen hoặc trắng, không hoặc có, đúng hoặc sai - bạn là điểm trung vị hoàn hảo của nó. Nghiên cứu của chúng tôi chỉ ra rằng đây không phải là sự ba phải hay thiếu chính kiến, mà nó là...ờm...cái gì đó...ở giữa...ờm...thì nói chung là vậy đó. Chúng tôi tạm đặt tên cho bạn là JZTR - một minh họa hoàn hảo cho cảm giác khó hiểu của cả nhóm. Trong lúc chờ chúng tôi tìm ra cụ thể bạn là gì, bạn có thể...ờm...đi làm một bài khảo sát khác như MBTI chẳng hạn? Hoặc bạn cũng có thể đến một phòng lab nào đó ở 2 cơ sở của Bách khoa và đề xuất trở thành vật nghiên cứu chăng? Ở Bách khoa có rất nhiều cao thủ ẩn mình, có thể họ sẽ có câu trả lời cho bạn, và cho chúng tôi nữa.",
-        image_url: "../../image/mochi/Jztr.png",
+        image_url: "/image/mochi/Jztr.webp",
       },
     },
   },
