@@ -492,7 +492,7 @@ export default function Home({
           </p>
           <div className="btt-reg-links">
             <a
-              href="https://www.facebook.com/BKCSE.Multimedia"
+              href="https://forms.gle/iWrVv1UbmcPQZ1sz5"
               className="btt-reg-link"
               target="_blank"
               rel="noopener noreferrer"
