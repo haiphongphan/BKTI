@@ -27,7 +27,7 @@ app.include_router(quiz.router)
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5500",
-    "*", # Để test, xóa khi public
+    "https://bkti-flax.vercel.app"
 ]
 
 app.add_middleware(
