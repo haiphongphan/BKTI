@@ -10,6 +10,8 @@ import TiltCard from "../elements/tiltcard";
 import Navbar from "../elements/navbar";
 import API_URL from "../api";
 
+import dh from "../../image/Doan_hoi.jpg";
+
 // Luôn hiện 2 cái này dù chưa có ai ra
 const SPECIAL_PERSONALITIES = [
   { code: "LMAO", name: "JZTR" },
@@ -28,7 +30,7 @@ const DH_SLIDES = [
     content: (
       <>
         <img
-          src="../../image/Doan_hoi.jpg"
+          src="/image/Doan_hoi.jpg"
           alt="Doan hoi"
           className="dh-slide-img"
         />
