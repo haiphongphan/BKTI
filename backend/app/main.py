@@ -25,8 +25,12 @@ app.include_router(quiz.router)
 # Khai báo danh sách các địa chỉ fe được phép gọi vào be
 origins = [
     "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost",
+    "http://127.0.0.1",
+    "http://localhost:80",
+    "http://127.0.0.1:80",
     "http://127.0.0.1:5500",
-    "*", # Để test, xóa khi public
 ]
 
 app.add_middleware(

@@ -1,13 +1,15 @@
 import csv
+from pathlib import Path
 from sqlmodel import Session, create_engine, SQLModel, text
-from models import Trait, Personality, Dimension, Question, Answer
-from config import settings
+from app.models import Trait, Personality, Dimension, Question, Answer, User_ans
+from app.config import settings
 
 # Lấy đường dẫn trong file .env
 DATABASE_URL = settings.DATABASE_URL
 
 # Tạo engine
 engine = create_engine(DATABASE_URL)
+DATA_DIR = Path(__file__).resolve().parent / "data"
 
 BATCH_SIZE = 5000  # Cứ 5000 dòng thì commit 1 lần để tránh tràn RAM
 
@@ -24,7 +26,7 @@ def import_personality_csv(file_path: str):
                     name=row["name"].strip(),
                     description=row["description"].strip(),
                     img_url=row["img_url"].strip(),
-                    music_url=row["music_url"].strip()
+                    music_url=row["music_url"].strip() or None
                 )
                 personalities.append(personality)
             session.add_all(personalities)
@@ -110,7 +112,8 @@ def clear_all_tables():
         "trait", 
         "question", 
         "dimension", 
-        "personality"
+        "personality",
+        "user_ans"
     ]
     
     with Session(engine) as session:
@@ -129,7 +132,6 @@ def seed_mock_user_answers():
     """Tự động tạo một số kết quả khảo sát mẫu để bảng xếp hạng hoạt động ngay"""
     print("--- Đang tạo dữ liệu xếp hạng mẫu ---")
     import random
-    from models import User_ans
     
     # Danh sách các mã tính cách hợp lệ từ personality.csv
     personalities = ["FVC", "FHC", "FVM", "FHM", "GVC", "GHC", "GVM", "GHM", "LMAO", "NSFW"]
@@ -150,11 +152,11 @@ if __name__ == "__main__":
     SQLModel.metadata.create_all(engine)
     clear_all_tables()
     
-    import_personality_csv("app/data/personality.csv")
-    import_dimension_csv("app/data/dimension.csv")
-    import_question_csv("app/data/question.csv")
-    import_traits_csv("app/data/traits.csv")
-    import_answer_csv("app/data/answer.csv")
-    
+    import_personality_csv(DATA_DIR / "personality.csv")
+    import_dimension_csv(DATA_DIR / "dimension.csv")
+    import_question_csv(DATA_DIR / "question.csv")
+    import_traits_csv(DATA_DIR / "traits.csv")
+    import_answer_csv(DATA_DIR / "answer.csv")
+
     # Tự động nạp dữ liệu xếp hạng mẫu
     seed_mock_user_answers()
