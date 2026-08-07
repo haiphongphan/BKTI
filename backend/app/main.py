@@ -10,6 +10,7 @@ app = FastAPI(title="bkti")
 app.include_router(questions.router)
 
 @app.get("/")
+@app.head("/")
 def read_root():
     return {"message": "Chào mừng đến với BKTI"}
 
