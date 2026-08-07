@@ -58,7 +58,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
         {/* Khối Logo & CSE bên trái */}
         <div className="bkti-navbar__logo-area">
           <div className="bkti-navbar__logo" onClick={() => handleItemClick('home')}>
-            <img src="/image/bkti_logo.png" alt="BKTI Logo" className="bkti-navbar__logo-img" />
+            <img src="../../image/bkti_logo.png" alt="BKTI Logo" className="bkti-navbar__logo-img" />
             <div className="bkti-navbar__logo-text-group">
               <span className="bkti-navbar__logo-title">BKTI</span>
               <span className="bkti-navbar__logo-subtitle">Bach Khoa Type Indicator</span>
@@ -67,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
 
           {/* Nút CSE logo kích hoạt Easter Egg */}
           <button className="bkti-navbar__cse-btn" onClick={handleCseClick} aria-label="CSE Multimedia">
-            <img src="/image/cse-small.png" alt="CSE Logo" className="bkti-navbar__cse-img" />
+            <img src="../../image/cse-small.png" alt="CSE Logo" className="bkti-navbar__cse-img" />
           </button>
         </div>
 
