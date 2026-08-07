@@ -1436,7 +1436,7 @@
   box-sizing: border-box;
   
   /* Ảnh nền */
-  background-image: url('/image/bg.jpg');
+  background-image: url('/image/bg.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center center; /* Cắt đều trên dưới để cân đối họa tiết */
