@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './footerstyle.css';
-import FB from "../../image/facebook.svg";
-import TT from "../../image/tiktok.svg";
-import Mail from "../../image/mail.svg";
-import Ins from "../../image/ins.svg";
-import Git from "../../image/github.svg";
+import FB from "/image/facebook.svg";
+import TT from "/image/tiktok.svg";
+import Mail from "/image/mail.svg";
+import Ins from "/image/ins.svg";
+import Git from "/image/github.svg";
 import Personality from '../page/personality_popup';
 
 export interface Personality {
