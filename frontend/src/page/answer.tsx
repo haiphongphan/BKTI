@@ -43,7 +43,7 @@ function Answer(){
 
   const currentQuestion = questions[currentIndex];
   const totalQuestions = questions.length;
-  const isCurrentQuestionAnswered = !!userAnswers[currentQuestion.id.toString()];
+  const isCurrentQuestionAnswered = Boolean(currentQuestion?.id != null && userAnswers[String(currentQuestion.id)]);
 
   const answers = currentQuestion.answers || [];
 
