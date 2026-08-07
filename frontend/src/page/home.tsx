@@ -166,7 +166,7 @@ export default function Home({
     const getRankingFromBackend = async () => {
       try {
         const respond = await axios.get(`${API_URL}/quiz/ranking`);
-        setRanking(respond.data.ranking);
+        setRanking(respond.data.ranking || []);
       } catch (error) {
         console.error("Lỗi kết nối lấy bảng xếp hạng", error);
       } finally {
