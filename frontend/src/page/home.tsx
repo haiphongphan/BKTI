@@ -77,7 +77,7 @@ export default function Home({
 
   // Slide đoàn hội
   const [DHSlideIndex, setDHSlideIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
+  const [, setSlideDirection] = useState<"next" | "prev">("next");
   const [isDHAnimating, setIsDHAnimating] = useState(false); // animate trượt slide
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoplayTimerRef = useRef<any>(null);

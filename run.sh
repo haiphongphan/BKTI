@@ -15,11 +15,14 @@ trap clean INT TERM EXIT
 (
     cd backend
     export PYTHONIOENCODING=utf-8
-    .venv/bin/python -m uvicorn app.main:app --reload
+    source .venv/bin/activate
+    pip install -r requirements.txt
+    uvicorn app.main:app --reload
 ) & BACKEND_PID=$!
 
 (
     cd frontend
+    npm install
     npm run dev
 ) & FRONTEND_PID=$!
 

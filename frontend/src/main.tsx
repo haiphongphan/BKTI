@@ -6,7 +6,7 @@ import Answer from './page/answer.tsx'
 import Result from './page/result.tsx'
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'answer' | 'result'>('home')
+  const [, setCurrentPage] = useState<'home' | 'answer' | 'result'>('home')
   const [displayPage, setDisplayPage] = useState<'home' | 'answer' | 'result'>('home')
   const [showPopup, setShowPopUp] = useState<boolean>(true)
   const [fadeState, setFadeState] = useState<'fade-in' | 'fade-out'>('fade-in')
