@@ -200,7 +200,7 @@ function Answer() {
       <div className="quiz-intro-section">
         <div className="quiz-intro-header">
           <img
-            src="/image/bkti_logo.png"
+            src="/image/bkti_logo.webp"
             alt="BKTI Logo"
             className="quiz-intro-logo"
           />
@@ -217,7 +217,7 @@ function Answer() {
           {/* Bước 1 */}
           <TiltCard className="quiz-step-card step-card-blue">
             <div className="step-image-wrap">
-              <img src="/image/step1.png" alt="Step 1" className="step-image" />
+              <img src="/image/step1.webp" alt="Step 1" className="step-image" />
             </div>
             <span className="step-badge">BƯỚC 1</span>
             <h3 className="step-title">
@@ -233,7 +233,7 @@ function Answer() {
           {/* Bước 2 */}
           <TiltCard className="quiz-step-card step-card-green">
             <div className="step-image-wrap">
-              <img src="/image/step2.png" alt="Step 2" className="step-image" />
+              <img src="/image/step2.webp" alt="Step 2" className="step-image" />
             </div>
             <span className="step-badge">BƯỚC 2</span>
             <h3 className="step-title">
@@ -249,7 +249,7 @@ function Answer() {
           {/* Bước 3 */}
           <TiltCard className="quiz-step-card step-card-purple">
             <div className="step-image-wrap">
-              <img src="/image/step3.png" alt="Step 3" className="step-image" />
+              <img src="/image/step3.webp" alt="Step 3" className="step-image" />
             </div>
             <span className="step-badge">BƯỚC 3</span>
             <h3 className="step-title">

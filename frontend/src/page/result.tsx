@@ -45,10 +45,10 @@ export default function Result() {
         el.tagName?.toLowerCase() === "footer",
     });
 
-    const dataUrl = canvas.toDataURL("image/png");
+    const dataUrl = canvas.toDataURL("image/webp");
     const link = document.createElement("a");
     link.href = dataUrl;
-    link.download = `BKTI-${result.code || "result"}.png`;
+    link.download = `BKTI-${result.code || "result"}.webp`;
     link.click();
   };
 
@@ -229,7 +229,7 @@ export default function Result() {
           {/* Dải thương hiệu chèn dưới chân ảnh chụp lưu trữ chia sẻ */}
           <div className="result-share-branding">
             <div className="branding-left">
-              <img src="/image/bkti_logo.png" alt="BKTI Logo" className="branding-logo" />
+              <img src="/image/bkti_logo.webp" alt="BKTI Logo" className="branding-logo" />
               <div className="branding-text">
                 <span className="brand-name">BKTI</span>
                 <span className="brand-desc">Trắc nghiệm tính cách SV Bách khoa</span>
