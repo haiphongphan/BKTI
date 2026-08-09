@@ -29,7 +29,7 @@ const DH_SLIDES = [
     content: (
       <>
         <img
-          src="/image/Doan_hoi.jpg"
+          src="/image/Doan_hoi.webp"
           alt="Doan hoi"
           className="dh-slide-img"
         />
@@ -78,7 +78,7 @@ export default function Home({
 
   // Slide đoàn hội
   const [DHSlideIndex, setDHSlideIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
+  const [, setSlideDirection] = useState<"next" | "prev">("next");
   const [isDHAnimating, setIsDHAnimating] = useState(false); // animate trượt slide
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoplayTimerRef = useRef<any>(null);
