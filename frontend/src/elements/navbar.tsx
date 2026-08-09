@@ -29,11 +29,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
         image_url: "/image/mochi/Nha_tham_hiem.webp",
         music_url: "/music/bk.mp3",
         dimension1_nguoi_im_lang: 67,
-        dimension1_nguoi_hay_noi: 101,
-        dimension2_vibecoder: 36,
-        dimension2_handmade: 101,
-        dimension3_chua_lanh: 26,
-        dimension3_mutant: 101
+        dimension1_nguoi_hay_noi: 36,
+        dimension2_vibecoder: 85.45,
+        dimension2_handmade: 84.98,
+        dimension3_chua_lanh: 84.23,
+        dimension3_mutant: 81.54
       };
 
       localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));

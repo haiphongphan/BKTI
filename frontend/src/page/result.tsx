@@ -48,7 +48,7 @@ export default function Result() {
     const dataUrl = canvas.toDataURL("image/webp");
     const link = document.createElement("a");
     link.href = dataUrl;
-    link.download = `BKTI-${result.code || "result"}.webp`;
+    link.download = `BKTI-${result.code || "result"}.png`;
     link.click();
   };
 
