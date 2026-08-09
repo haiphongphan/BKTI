@@ -36,3 +36,34 @@ html, body {
 .page-transition-container.fade-in {
   opacity: 1;
 }
+
+/* ══════════════════════════════════════════
+   Glassmorphism Unified Card Styles
+   ══════════════════════════════════════════ */
+.homepage .bkti-about-container,
+.homepage .dh-slide-wrapper,
+.homepage .ranking-board-container,
+.homepage .bkti-register-container,
+.test-page .quiz-step-card,
+.result-block-1,
+.result-block-2,
+
+.result-share-branding,
+.FAQ {
+  background: rgba(255, 255, 255, 0.38) !important;
+  backdrop-filter: blur(28px) !important;
+  -webkit-backdrop-filter: blur(28px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  box-shadow: 0 8px 32px 0 rgba(153, 143, 199, 0.15) !important;
+}
+
+/* Bảo toàn viền màu trên đỉnh của các thẻ bước trắc nghiệm */
+.test-page .step-card-blue {
+  border-top: 5px solid #3E53A0 !important;
+}
+.test-page .step-card-green {
+  border-top: 5px solid #28a745 !important;
+}
+.test-page .step-card-purple {
+  border-top: 5px solid #8b5cf6 !important;
+}

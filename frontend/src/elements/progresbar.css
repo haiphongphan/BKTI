@@ -25,7 +25,7 @@
 
 .progress-fill {
   height: 100%;
-  background-color: #d4c2fc;
+  background-color: #7C41E7;
   border-radius: 20px;
-  transition: width 0.3s ease-in-out;
+  transition: width 0.5s linear;
 }

@@ -260,3 +260,17 @@
     top: 60px;
   }
 }
+
+/* Các liên kết bị vô hiệu hóa trong lúc làm bài trắc nghiệm */
+.bkti-navbar__link--disabled,
+.bkti-navbar__mobile-link--disabled {
+  text-decoration: line-through !important;
+  color: #a8a2c2 !important;
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+.bkti-navbar__link--disabled::after {
+  display: none !important;
+}

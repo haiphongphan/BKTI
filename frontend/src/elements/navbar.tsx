@@ -4,9 +4,10 @@ import './navbarstyle.css';
 interface NavbarProps {
   onNavClick: (target: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => void;
   activeItem?: 'home' | 'ranking' | 'personality' | 'faq' | 'credit';
+  isAnswerPage?: boolean;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswerPage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -55,6 +56,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
   ] as const;
 
   const handleItemClick = (id: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => {
+    // Ngăn chặn chuyển hướng trang chủ/bảng xếp hạng khi đang ở trang làm bài
+    if (isAnswerPage && (id === 'home' || id === 'ranking')) {
+      return;
+    }
     onNavClick(id);
     setIsOpen(false); // Đóng menu mobile drawer
   };
@@ -64,8 +69,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
       <div className="bkti-navbar__container">
         {/* Khối Logo & CSE bên trái */}
         <div className="bkti-navbar__logo-area">
-          <div className="bkti-navbar__logo" onClick={() => handleItemClick('home')}>
-            <img src="../../image/bkti_logo.webp" alt="BKTI Logo" className="bkti-navbar__logo-img" />
+          <div 
+            className="bkti-navbar__logo" 
+            style={isAnswerPage ? { cursor: 'default', pointerEvents: 'none' } : {}}
+            onClick={isAnswerPage ? undefined : () => handleItemClick('home')}
+          >
+            <img src="/image/bkti_logo.png" alt="BKTI Logo" className="bkti-navbar__logo-img" />
             <div className="bkti-navbar__logo-text-group">
               <span className="bkti-navbar__logo-title">BKTI</span>
               <span className="bkti-navbar__logo-subtitle">Bach Khoa Type Indicator</span>
@@ -80,15 +89,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
 
         {/* Menu giữa cho Desktop */}
         <div className="bkti-navbar__menu">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              className={`bkti-navbar__link ${activeItem === item.id ? 'bkti-navbar__link--active' : ''}`}
-              onClick={() => handleItemClick(item.id)}
-            >
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item) => {
+            const isDisabled = isAnswerPage && (item.id === 'home' || item.id === 'ranking');
+            return (
+              <button
+                key={item.id}
+                className={`bkti-navbar__link ${activeItem === item.id ? 'bkti-navbar__link--active' : ''} ${isDisabled ? 'bkti-navbar__link--disabled' : ''}`}
+                onClick={isDisabled ? undefined : () => handleItemClick(item.id)}
+                disabled={isDisabled}
+              >
+                {item.label}
+              </button>
+            );
+          })}
         </div>
 
         {/* Burger Icon cho Mobile */}
@@ -105,15 +118,19 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem }) => {
 
       {/* Mobile Drawer Menu */}
       <div className={`bkti-navbar__mobile-menu ${isOpen ? 'bkti-navbar__mobile-menu--open' : ''}`}>
-        {navItems.map((item) => (
-          <button
-            key={item.id}
-            className={`bkti-navbar__mobile-link ${activeItem === item.id ? 'bkti-navbar__mobile-link--active' : ''}`}
-            onClick={() => handleItemClick(item.id)}
-          >
-            {item.label}
-          </button>
-        ))}
+        {navItems.map((item) => {
+          const isDisabled = isAnswerPage && (item.id === 'home' || item.id === 'ranking');
+          return (
+            <button
+              key={item.id}
+              className={`bkti-navbar__mobile-link ${activeItem === item.id ? 'bkti-navbar__mobile-link--active' : ''} ${isDisabled ? 'bkti-navbar__mobile-link--disabled' : ''}`}
+              onClick={isDisabled ? undefined : () => handleItemClick(item.id)}
+              disabled={isDisabled}
+            >
+              {item.label}
+            </button>
+          );
+        })}
       </div>
     </nav>
   );

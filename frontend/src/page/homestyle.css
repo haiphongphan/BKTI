@@ -42,7 +42,7 @@
   left: calc(50.00% + 61px);
   top: 420.5px;
   width: 425px;
-  height: 784px;
+  height: 795px;
   background-color: var(--color-bg-card);
   border-radius: var(--card-radius);
   box-shadow: var(--color-shadow-card);
@@ -1559,7 +1559,7 @@
 }
 
 .homepage .bkti-register-container {
-  max-width: 968px !important;
+  max-width: 980px !important;
   height: auto !important;
   margin: 0 auto !important;
 }
@@ -1580,6 +1580,8 @@
     min-height: 440px !important;
     max-height: none !important;
     padding: 80px 16px 40px 16px !important;
+    margin-top: 60px !important; /* Chạm mí dưới của navbar di động cao 60px */
+    margin-bottom: 0px !important; /* Giảm lề dưới cho cân đối với các khối bên dưới */
   }
 
   .hero-title {
