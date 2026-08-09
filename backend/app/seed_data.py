@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
 from sqlmodel import Session, create_engine, SQLModel, text
-from app.models import Trait, Personality, Dimension, Question, Answer, User_ans
-from app.config import settings
+from models import Trait, Personality, Dimension, Question, Answer, User_ans
+from config import settings
 
 # Lấy đường dẫn trong file .env
 DATABASE_URL = settings.DATABASE_URL
