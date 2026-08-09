@@ -3,11 +3,12 @@ import "./FAQstyle.css";
 function Faq({onClose} : any) {
   return (
     <div className="FAQ">
-        {onClose && (
-            <button className="FAQ-close-btn-absolute" onClick={onClose} aria-label="Close">
-            &times;
-            </button>
-        )}
+      <h2 className="faq-title">Giải đáp thắc mắc (FAQ)</h2>
+      {onClose && (
+        <button className="FAQ-close-btn-absolute" onClick={onClose} aria-label="Close">
+          &times;
+        </button>
+      )}
       <div className="faq-item">
         <p className="text-wrapper">BKTI là gì vậy nhỉ?</p>
         <p className="vi-t-t-t-c-a-bach">

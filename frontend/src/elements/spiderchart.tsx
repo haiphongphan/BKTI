@@ -16,23 +16,52 @@ const options: ChartOptions<'radar'> = {
     legend: {
       display: false, // Ẩn nhãn
     },
+    tooltip: {
+      enabled: true,
+      backgroundColor: 'rgba(30, 21, 72, 0.95)', // Màu tím đậm thương hiệu
+      titleColor: '#ffffff',
+      bodyColor: '#ffffff',
+      titleFont: {
+        family: 'Inter, sans-serif',
+        size: 14,
+        weight: 'bold',
+      },
+      bodyFont: {
+        family: 'Inter, sans-serif',
+        size: 13,
+        weight: 'normal',
+      },
+      padding: 12,
+      cornerRadius: 12,
+      displayColors: false, // Ẩn biểu tượng màu
+      borderWidth: 1,
+      borderColor: 'rgba(153, 143, 199, 0.3)',
+      callbacks: {
+        title: (tooltipItems: any) => {
+          return tooltipItems[0].label; // Tên thuộc tính làm tiêu đề
+        },
+        label: (context: any) => {
+          return ` Tỉ lệ: ${Math.round(context.raw)}%`; // Giá trị phần trăm làm tròn
+        }
+      }
+    }
   },
   scales: {
     r: {
       angleLines: {
         display: true,
-        color: 'rgba(0, 0, 0, 0.1)',
+        color: 'rgba(153, 143, 199, 0.25)', // Tím nhạt đồng bộ
       },
       grid: {
-        color: 'rgba(0, 0, 0, 0.05)',
+        color: 'rgba(153, 143, 199, 0.15)', // Tím nhạt đồng bộ
       },
       pointLabels: {
         font: {
-          family: '"Inter-SemiBold", Helvetica, Arial, sans-serif',
-          size: 14,
-          weight: 600,
+          family: '"Inter", Helvetica, Arial, sans-serif',
+          size: 13,
+          weight: 700,
         },
-        color: '#4B5563', 
+        color: '#1e1548', // Màu tím thẫm thương hiệu
       },
       ticks: {
         display: false, // Ẩn các số thang đo
@@ -79,9 +108,17 @@ export const Chart: React.FC<ChartProps> = ({ scores = [0, 0, 0, 0, 0, 0] }) => 
       {
         label: SPIDER_CHART_CONFIG.employeeName,
         data: scores,
-        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-        borderColor: 'rgba(59, 130, 246, 1)',
-        borderWidth: 2,
+        backgroundColor: 'rgba(124, 65, 231, 0.15)', // Màu nền tím nhạt đồng bộ thương hiệu
+        borderColor: '#7c41e7', // Màu viền tím đậm thương hiệu
+        borderWidth: 3, // Viền dày hơn trông xịn hơn
+        pointBackgroundColor: '#ffffff', // Các điểm có nền trắng
+        pointBorderColor: '#7c41e7', // Viền điểm màu tím
+        pointBorderWidth: 2,
+        pointRadius: 4, // Điểm to vừa phải để dễ hover
+        pointHoverBackgroundColor: '#7c41e7', // Khi hover điểm đổi thành tím
+        pointHoverBorderColor: '#ffffff', // Viền hover màu trắng
+        pointHoverBorderWidth: 2,
+        pointHoverRadius: 7, // Phóng to điểm khi hover để tạo micro-animation
       },
     ],
   };

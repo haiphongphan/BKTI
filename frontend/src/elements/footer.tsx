@@ -12,6 +12,13 @@ export interface Personality {
   name: string;
   description: string;
   image_url: string;
+  music_url: string;
+  dimension1_nguoi_im_lang: number;
+  dimension1_nguoi_hay_noi: number;
+  dimension2_vibecoder: number;
+  dimension2_handmade: number;
+  dimension3_chua_lanh: number;
+  dimension3_mutant: number;
 }
 
 interface MemberSocials {
@@ -144,8 +151,15 @@ const CREDIT_MEMBERS : Member[] = [
         code: "LMAO",
         name: "JZTR",
         description:
-          "Chúc mừng bạn! Bạn là cá thể hiếm nhất mà chúng tôi trong quá trình tạo ra bộ khảo sát này cũng không phát hiện ra. Trong thế giới vận hành bởi tư duy nhị nguyên - đen hoặc trắng, không hoặc có, đúng hoặc sai - bạn là điểm trung vị hoàn hảo của nó. Nghiên cứu của chúng tôi chỉ ra rằng đây không phải là sự ba phải hay thiếu chính kiến, mà nó là...ờm...cái gì đó...ở giữa...ờm...thì nói chung là vậy đó. Chúng tôi tạm đặt tên cho bạn là JZTR - một minh họa hoàn hảo cho cảm giác khó hiểu của cả nhóm. Trong lúc chờ chúng tôi tìm ra cụ thể bạn là gì, bạn có thể...ờm...đi làm một bài khảo sát khác như MBTI chẳng hạn? Hoặc bạn cũng có thể đến một phòng lab nào đó ở 2 cơ sở của Bách khoa và đề xuất trở thành vật nghiên cứu chăng? Ở Bách khoa có rất nhiều cao thủ ẩn mình, có thể họ sẽ có câu trả lời cho bạn, và cho chúng tôi nữa.",
+          "Đó chính xác là tiếng lòng mà những chủ nhân của BKTI dành cho bạn. Trong khi người khác đang miệt mài trả lời những câu hỏi khảo sát để tìm ra bản ngã, bạn lại lục lọi phần Credit của một chiếc web. Rốt cuộc mục đích của bạn là gì vậy? Tìm chúng mình \"hỏi tội\" vì bài test không chính xác? Hay bạn là nhà tuyển dụng đang tìm thông tin của những con người xuất sắc này để chiêu mộ về công ty? Dù mục đích của bạn là gì đi chăng nữa, chúc mừng bạn đã tìm ra 1 trong 2 tính cách ẩn của bài test lần này!",
         image_url: "/image/mochi/Jztr.webp",
+        music_url: "/music/jztr.mp3",
+        dimension1_nguoi_im_lang: 101,
+        dimension1_nguoi_hay_noi: 101,
+        dimension2_vibecoder: 101,
+        dimension2_handmade: 101,
+        dimension3_chua_lanh: 101,
+        dimension3_mutant: 101
       },
     },
   },
@@ -261,7 +275,7 @@ const Footer: React.FC = () => {
           <p className="footer__description_01">
             {" "}
             BKTI - gồm nội dung trang web, thiết kế và các hình ảnh minh họa là
-            sản phẩm thuộc quyền sở hữu của 9 nhân vật phản diện thuộc BTT - khả
+            sản phẩm thuộc quyền sở hữu của 9 nhân vật phản diện và 1 kẻ gánh team thuộc BTT - khả
             ái và ngây ngất lòng người.
           </p>
 
@@ -450,7 +464,7 @@ const Footer: React.FC = () => {
             </a>
             <span className="footer__separator_01">|</span>
             <span className="footer__copyright_01">
-              © {new Date().getFullYear()} BTT. All rights reserved.
+              © {new Date().getFullYear()} CSE-Multimedia. All rights reserved.
             </span>
           </div>
         </div>

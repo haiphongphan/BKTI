@@ -9,6 +9,7 @@ import Footer from "../elements/footer";
 import TiltCard from "../elements/tiltcard";
 import Navbar from "../elements/navbar";
 import API_URL from "../api";
+import TechBackground from "../elements/techbackground";
 
 // Luôn hiện 2 cái này dù chưa có ai ra
 const SPECIAL_PERSONALITIES = [
@@ -77,7 +78,7 @@ export default function Home({
 
   // Slide đoàn hội
   const [DHSlideIndex, setDHSlideIndex] = useState(0);
-  const [slideDirection, setSlideDirection] = useState<"next" | "prev">("next");
+  const [, setSlideDirection] = useState<"next" | "prev">("next");
   const [isDHAnimating, setIsDHAnimating] = useState(false); // animate trượt slide
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoplayTimerRef = useRef<any>(null);
@@ -264,6 +265,7 @@ export default function Home({
 
   return (
     <div className="home-container">
+      <TechBackground />
       {isPopupOpen && (
         <div className="popup-overlay" onClick={handleClose}>
           <div onClick={(e) => e.stopPropagation()}>
@@ -389,8 +391,8 @@ export default function Home({
                     <div
                       className="group"
                       style={{
-                        top: `${NORMAL_RANKING_TOPS[0]}px`,
-                        width: "395px",
+                        width: "100%",
+                        height: "auto",
                         display: "flex",
                         flexDirection: "column",
                         alignItems: "center",

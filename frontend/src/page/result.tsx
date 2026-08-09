@@ -7,6 +7,7 @@ import TiltCard from "../elements/tiltcard";
 import Navbar from "../elements/navbar";
 import Footer from "../elements/footer.tsx";
 import confetti from 'canvas-confetti';
+import TechBackground from "../elements/techbackground";
 
 export default function Result() {
   const [result, setResult] = useState<any>(null);
@@ -21,15 +22,21 @@ export default function Result() {
 
     const element = captureRef.current;
     const canvas = await html2canvas(element, {
-      backgroundColor: "#ffffff", // Bổ sung nền trắng phía sau ảnh chụp
+      backgroundColor: "#ebdfff", // Đổi từ #ffffff sang #ebdfff để khớp màu nền, ẩn vết nứt/lệch trắng bên phải
       scale: 2,
       useCORS: true,
       allowTaint: true,
-      // Chụp đủ chiều cao/rộng của cả trang
-      width: element.scrollWidth,
-      height: element.scrollHeight,
-      windowWidth: element.scrollWidth,
-      windowHeight: element.scrollHeight,
+      onclone: (clonedDoc) => {
+        const shareArea = clonedDoc.querySelector(".result-share-area") as HTMLElement;
+        if (shareArea) {
+          // Chỉ áp dụng nền gradient cho bản sao được chụp ảnh
+          shareArea.style.setProperty(
+            "background",
+            "linear-gradient(252deg, rgba(249, 248, 251, 1) 0%, rgba(235, 221, 255, 1) 100%)",
+            "important"
+          );
+        }
+      },
       ignoreElements: (el) =>
         el.classList?.contains("result-actions") ||
         el.classList?.contains("save-answer-btn") ||
@@ -38,7 +45,7 @@ export default function Result() {
         el.tagName?.toLowerCase() === "footer",
     });
 
-    const dataUrl = canvas.toDataURL("image/png");
+    const dataUrl = canvas.toDataURL("image/webp");
     const link = document.createElement("a");
     link.href = dataUrl;
     link.download = `BKTI-${result.code || "result"}.png`;
@@ -156,75 +163,104 @@ export default function Result() {
 
   return (
     <div className="result-page-wrapper">
+      <TechBackground />
+      <Navbar onNavClick={handleNavClick} />
+
+      {/* ── Hero Section đặt ngoài để fill hết chiều ngang ── */}
+      <section className="result-hero-section">
+        <div className="result-hero-content">
+          <h1 className="result-hero-title">Đã tìm thấy bản ngã của bạn!</h1>
+          <p className="result-hero-subtitle">
+            Xem chi tiết phân tích tính cách sinh viên Bách khoa của bạn bên dưới, tải ảnh kết quả về để chia sẻ cùng bạn bè nhé!
+          </p>
+        </div>
+      </section>
+
       <div className="resultpage">
-        <Navbar onNavClick={handleNavClick} />
+        {/* Vùng chụp ảnh lưu trữ (không bao gồm các nút bấm hành động) */}
+        <div className="result-share-area" ref={captureRef}>
+          <main className="result-container">
+            {/* Khối 1: Hình ảnh & Thông tin tính cách */}
+            <TiltCard className="result-block-1">
+              {result.image_url && (
+                <img 
+                  src={result.image_url} 
+                  alt={result.name} 
+                  className="personality-img" 
+                  style={{ maxWidth: '200px', marginBottom: '20px' }}
+                />
+              )}
+              <span className="subtitle">Kiểu tính cách của bạn</span>
+              
+              {/* Hiển thị Tên nhóm tính cách + Mã Code */}
+              <h1 className="title">
+                {result.name} {result.code ? `(${result.code})` : ''}
+              </h1>
+              
+              {/* Hiển thị đoạn Mô tả tính cách thực tế từ Backend */}
+              <p className="desc">
+                {result.description}
+              </p>
+            </TiltCard>
 
-        <main className="result-container" ref={captureRef}>
-          {/* Khối 1: Hình ảnh & Thông tin tính cách */}
-          <TiltCard className="result-block-1">
-            {result.image_url && (
-              <img 
-                src={result.image_url} 
-                alt={result.name} 
-                className="personality-img" 
-                style={{ maxWidth: '200px', marginBottom: '20px' }}
-              />
-            )}
-            <span className="subtitle">Kiểu tính cách của bạn</span>
-            
-            {/* Hiển thị Tên nhóm tính cách + Mã Code */}
-            <h1 className="title">
-              {result.name} {result.code ? `(${result.code})` : ''}
-            </h1>
-            
-            {/* Hiển thị đoạn Mô tả tính cách thực tế từ Backend */}
-            <p className="desc">
-              {result.description}
-            </p>
-          </TiltCard>
+            {/* Khối 2: Biểu đồ spider & hệ 6 thanh thống kê */}
+            <TiltCard className="result-block-2">
+              <div className="result-chart">
+                <Chart scores={scores} /> 
+              </div>
 
-          {/* Khối 2: Biểu đồ spider, hệ 6 thanh thống kê và các button chức năng */}
-          <TiltCard className="result-block-2">
-            <div className="result-chart">
-              <Chart scores={scores} /> 
-            </div>
-
-            {/* Hệ thống 6 thanh thống kê ProgressBar */}
-            <div className="stats-container">
-              {stats.map(stat => (
-                <div className="stat-row" key={stat.label}>
-                  <div className="stat-info">
-                    <span className="stat-label">{stat.label}</span>
-                    <span className="stat-value">{Math.round(stat.value)}%</span>
+              {/* Hệ thống 6 thanh thống kê ProgressBar */}
+              <div className="stats-container">
+                {stats.map(stat => (
+                  <div className="stat-row" key={stat.label}>
+                    <div className="stat-info">
+                      <span className="stat-label">{stat.label}</span>
+                      <span className="stat-value">{Math.round(stat.value)}%</span>
+                    </div>
+                    <div className="stat-progress">
+                      <ProgressBar current={stat.value} total={100} showText={false} />
+                    </div>
                   </div>
-                  <div className="stat-progress">
-                    <ProgressBar current={stat.value} total={100} showText={false} />
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </TiltCard>
+          </main>
+
+          {/* Dải thương hiệu chèn dưới chân ảnh chụp lưu trữ chia sẻ */}
+          <div className="result-share-branding">
+            <div className="branding-left">
+              <img src="/image/bkti_logo.webp" alt="BKTI Logo" className="branding-logo" />
+              <div className="branding-text">
+                <span className="brand-name">BKTI</span>
+                <span className="brand-desc">Trắc nghiệm tính cách SV Bách khoa</span>
+              </div>
             </div>
-
-            <div className="result-actions">
-              <button className="retry-btn" onClick={() => {
-                localStorage.removeItem("quiz_result");
-                (window as any).navigateToAnswer?.();
-              }}>
-                Làm lại
-              </button>
-
-              <button className="save-answer-btn" onClick={handleDownload}>
-                Tải ảnh kết quả
-              </button>
-
-              <button className="back-btn" onClick={() => {
-                localStorage.removeItem("quiz_result");
-                (window as any).navigateToHome?.();
-              }}>
-                Quay lại Trang chủ
-              </button>
+            <div className="branding-right">
+              <span className="brand-url">bkti.cse.vn</span>
             </div>
-          </TiltCard>
-        </main>
+          </div>
+        </div>
+
+        {/* Các nút hành động nằm ngoài vùng chụp ảnh */}
+        <div className="result-actions-outer">
+          <button className="retry-btn" onClick={() => {
+            localStorage.removeItem("quiz_result");
+            (window as any).navigateToAnswer?.();
+          }}>
+            Làm lại
+          </button>
+
+          <button className="save-answer-btn" onClick={handleDownload}>
+            Tải ảnh kết quả
+          </button>
+
+          <button className="back-btn" onClick={() => {
+            localStorage.removeItem("quiz_result");
+            (window as any).navigateToHome?.();
+          }}>
+            Quay lại Trang chủ
+          </button>
+        </div>
       </div>
       <Footer />
     </div>

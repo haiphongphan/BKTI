@@ -1,12 +1,12 @@
 .spider-chart-wrapper {
-  background-color: #ffffff;
-  border-radius: 20px;
-  box-shadow: 1px 4px 21.2px rgba(153, 143, 199, 0.4);
-  padding: 8px;
-  max-width: 500px;
+  background-color: transparent !important; /* Trong suốt hoàn toàn để hòa với nền của result-block-2 */
+  border-radius: 0 !important;
+  box-shadow: none !important; /* Loại bỏ bóng đổ lồng nhau */
+  padding: 0 !important;
+  max-width: 100% !important;
   width: 100%;
-  height: 400px;
-  margin: px auto;
+  height: 420px !important; /* Tăng chiều cao từ 400px lên 420px để biểu đồ to hơn */
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;

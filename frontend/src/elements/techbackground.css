@@ -1,0 +1,65 @@
+/* ══════════════════════════════════════════
+   TechBackground Component — Stylesheet
+   ══════════════════════════════════════════ */
+
+.tech-background-wrapper {
+  position: fixed; /* Bám chặt vào khung hình viewport để phủ toàn màn hình */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0; /* Nằm dưới mọi nội dung chính như card (z-index: 10) và navbar */
+  box-sizing: border-box;
+}
+
+.tech-background-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Lưới tọa độ kỹ thuật, Gradient phủ chiều sâu & Gradient nền đồng bộ toàn dự án */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(244, 240, 255, 0.9) 0, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(230, 220, 255, 0.8) 0, transparent 50%),
+    linear-gradient(rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.04) 1px, transparent 1px),
+    linear-gradient(252deg, rgba(249, 248, 251, 1) 0%, rgba(235, 221, 255, 1) 100%);
+  background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px, 100% 100%;
+}
+
+.tech-background-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.floating-particle {
+  position: absolute;
+  font-family: "Courier New", Courier, monospace, "Inter", sans-serif;
+  font-weight: 700;
+  color: rgba(139, 92, 246, 0.18); /* Tăng độ đục từ 0.12 lên 0.28 để nổi bật hơn */
+  user-select: none;
+  animation: float-around-3d ease-in-out infinite alternate;
+  display: inline-block;
+  will-change: transform;
+  filter: drop-shadow(0 2px 6px rgba(139, 92, 246, 0.12)); /* Thêm hiệu ứng phát sáng nhẹ */
+}
+
+@keyframes float-around-3d {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(15px, -20px, 0) rotate(180deg);
+    color: rgba(99, 102, 241, 0.32); /* Tăng độ đục từ 0.15 lên 0.32 */
+  }
+  100% {
+    transform: translate3d(-15px, -40px, 0) rotate(360deg);
+  }
+}

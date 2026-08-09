@@ -2,38 +2,69 @@
 
 ## Cài đặt
 
-## Chạy backend
+## Chạy bằng Docker
 
-`cd backend`  
+Cần Docker + Docker Compose.
+
+Ở thư mục gốc:
+
+```bash
+cp .env.example .env
+docker compose up --build -d
+docker compose exec backend python -m app.seed_data
+```
+
+Mở: `http://localhost`  
+Nếu port 80 bị chiếm, sửa `FRONTEND_PORT=8080` trong `.env` rồi `docker compose up -d`, mở `http://localhost:8080`.
+
+Lệnh hay dùng:
+
+```bash
+docker compose ps
+docker compose logs -f
+docker compose down
+```
+
+---
+
+## Chạy backend (local)
+
+`cd backend`
 
 ### venv
 
 `python3 -m venv .venv`  
-`source backend/.venv/bin/activate`
+`source .venv/bin/activate`
 
 ### Thư viện
 
-`pip3 install -r requirement.txt`
+`pip3 install -r requirements.txt`
 
 ### PostgreSQL
 
-Cài postgre trước ((gemini đi t quên r :))  
-Cài xong chạy các lệnh dưới:  
-`psql -d postgres`  
-`DROP DATABASE bkti_db;`
-`CREATE DATABASE bkti_db;`
+Cài postgres trước.  
+Cấu hình `backend/.env` (xem `backend/.env.example`).
+
+```bash
+psql -d postgres
+DROP DATABASE bkti_db;
+CREATE DATABASE bkti_db;
+\q
+```
 
 ### Nạp data
 
-`python3 app/seed_data.py`  
+Từ thư mục `backend` (đã activate venv):
+
+`python -m app.seed_data`
 
 ### Khởi tạo
 
-Chạy lệnh `uvicorn app.main:app --reload`  
+`uvicorn app.main:app --reload`
 
-## Chạy frontend
+## Chạy frontend (local)
 
-`cd frontend`  
+`cd frontend`
 
 ### Tải thư viện
 
@@ -42,8 +73,8 @@ Chạy lệnh `uvicorn app.main:app --reload`
 ### Chạy frontend
 
 `npm run dev`  
-Mở đường dẫn và khen: `http://localhost:5173/`
+Mở: `http://localhost:5173/`
 
+## Cách chạy cả hai local
 
-## Cách chạy mới
-mở thư mục gốc và `./run.sh`
+Ở thư mục gốc: `./run.sh`
