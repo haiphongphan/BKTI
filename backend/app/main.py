@@ -34,7 +34,8 @@ origins = [
     "http://127.0.0.1:5500",
     "http://localhost:4173",
     "http://127.0.0.1:5500",
-    "https://bkti-flax.vercel.app"
+    "https://bkti-flax.vercel.app",
+    "https://bkti-chqdr4fdr-cse-multimedia.vercel.app"
 ]
 
 app.add_middleware(
