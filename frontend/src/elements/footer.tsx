@@ -261,7 +261,7 @@ const Footer: React.FC = () => {
           <p className="footer__description_01">
             {" "}
             BKTI - gồm nội dung trang web, thiết kế và các hình ảnh minh họa là
-            sản phẩm thuộc quyền sở hữu của 9 nhân vật phản diện thuộc BTT - khả
+            sản phẩm thuộc quyền sở hữu của 9 nhân vật phản diện và 1 kẻ gánh team thuộc BTT - khả
             ái và ngây ngất lòng người.
           </p>
 

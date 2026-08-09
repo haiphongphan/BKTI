@@ -1,41 +1,67 @@
+/* ══════════════════════════════════════════
+   FAQ Popup Component — Stylesheet
+   ══════════════════════════════════════════ */
+
 .FAQ {
-  align-items: flex-start;
-  border-radius: 25px;
-  background-color: #ffffff;
+  align-items: stretch;
+  border-radius: 24px !important;
+  background-color: #ffffff !important;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   
   width: 600px;
-  max-width: 90vw;
+  max-width: 92vw;
   max-height: 80vh;
   height: auto;
   
-  padding: 25px 25px;
+  padding: 28px 24px;
   position: relative;
   box-sizing: border-box;
   
   overflow-y: auto;   
+  box-shadow: 0 10px 40px rgba(153, 143, 199, 0.25) !important;
+  border: 1px solid rgba(153, 143, 199, 0.2) !important;
   animation: popupShow 0.35s ease-in-out forwards;
 }
 
+/* Tiêu đề popup */
+.FAQ .faq-title {
+  color: #1e1548 !important;
+  font-family: "Inter", sans-serif;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  text-align: center;
+  margin: 0 0 12px 0 !important;
+  padding: 0 32px !important; /* Tránh đè nút đóng */
+}
+
+/* Từng khối câu hỏi */
 .FAQ .faq-item {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
+  border-bottom: 1px solid rgba(153, 143, 199, 0.12);
+  padding-bottom: 14px;
 }
 
+.FAQ .faq-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+/* Nút đóng góc trên bên phải */
 .FAQ-close-btn-absolute {
   position: absolute;
-  top: 15px;
-  right: 16px;
+  top: 20px;
+  right: 20px;
   width: 32px;
   height: 32px;
   background: transparent;
   border: none;
   font-size: 28px;
   line-height: 1;
-  color: #888888;
+  color: #998fc7;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -47,36 +73,39 @@
 
 .FAQ-close-btn-absolute:hover {
   transform: scale(1.1);
+  color: #7b61ff;
+  background-color: rgba(153, 143, 199, 0.1);
 }
 
-
+/* Thanh cuộn nội bộ mượt mà */
 .FAQ::-webkit-scrollbar {
   width: 6px;
 }
 .FAQ::-webkit-scrollbar-thumb {
-  background-color: rgba(153, 143, 199, 0.4);
+  background-color: rgba(153, 143, 199, 0.3);
   border-radius: 3px;
 }
 .FAQ::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(153, 143, 199, 0.7);
+  background-color: rgba(153, 143, 199, 0.6);
 }
 
+/* Kiểu chữ cho Tiêu đề các câu hỏi */
 .FAQ .text-wrapper,
 .FAQ .div,
 .FAQ .text-wrapper-3,
 .FAQ .text-wrapper-5,
 .FAQ .text-wrapper-9 {
-  color: #000000;
-  font-family: "Inter", sans-serif;
-  text-align: justify;
-  font-size: 16px;
-  font-weight: 900;
-  line-height: 1.4;
-  position: relative;
-  width: 100%;
+  color: #1e1548 !important; /* Đổi thành màu tím đậm thương hiệu */
+  font-family: "Inter", sans-serif !important;
+  text-align: left !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1.4 !important;
   margin: 0 0 2px 0 !important;
+  word-wrap: break-word;
 }
 
+/* Kiểu chữ cho Phần câu trả lời */
 .FAQ .vi-t-t-t-c-a-bach,
 .FAQ .p,
 .FAQ .text-wrapper-2,
@@ -85,21 +114,17 @@
 .FAQ .text-wrapper-7,
 .FAQ .text-wrapper-8,
 .FAQ .text-wrapper-10 {
-  color: #333333;
-  font-family: "Inter", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.6;
-  position: relative;
-  width: 100%;
-  text-align: justify;
-  
-  height: auto !important;
+  color: #4b5563 !important; /* Màu xám thẫm dễ chịu hơn đen kịt */
+  font-family: "Inter", sans-serif !important;
+  font-size: 13.5px !important;
+  font-weight: 400 !important;
+  line-height: 1.6 !important;
+  text-align: justify !important;
   margin: 0 !important;
-  
   white-space: normal;
   word-break: break-word;
 }
+
 @keyframes popupShow {
   0% {
     opacity: 0;
@@ -108,5 +133,24 @@
   100% {
     opacity: 1;
     transform: scale(1) translateY(0);
+  }
+}
+
+/* Tương thích màn hình di động nhỏ */
+@media (max-width: 580px) {
+  .FAQ {
+    padding: 24px 18px;
+    border-radius: 20px !important;
+  }
+  
+  .FAQ .faq-title {
+    font-size: 18px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .FAQ-close-btn-absolute {
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
   }
 }
