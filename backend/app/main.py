@@ -1,27 +1,34 @@
-from fastapi import FastAPI, Depends, APIRouter
+from contextlib import asynccontextmanager
+from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
-from sqlmodel import Session, select
-from app.database import get_db, engine
-from app.models import SQLModel, Question
+from sqlmodel.ext.asyncio.session import AsyncSession
+
+# Import async_engine và get_db từ database đã nâng cấp async
+from app.database import get_db, async_engine
+from app.models import SQLModel
 from app.routers import quiz, questions
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Tạo bảng bất đồng bộ khi ứng dụng vừa khởi động (chỉ chạy 1 lần)
+    async with async_engine.begin() as conn:
+        await conn.run_sync(SQLModel.metadata.create_all)
+    yield
+
 # Khởi tạo backend
-app = FastAPI(title="bkti")
+app = FastAPI(title="BKTI API", lifespan=lifespan)
 app.include_router(questions.router)
+app.include_router(quiz.router)
 
 @app.get("/")
 @app.head("/")
-def read_root():
+async def read_root():
     return {"message": "Chào mừng đến với BKTI"}
 
+
 @app.get("/test-db")
-def test_db(db: Session = Depends(get_db)):
-    return {"status": "Kết nối PostgreSQL bằng SQLModel thành công!"}
-
-# Khởi tạo database
-SQLModel.metadata.create_all(engine)
-
-app.include_router(quiz.router)
+async def test_db(db: AsyncSession = Depends(get_db)):
+    return {"status": "Kết nối PostgreSQL bằng Async SQLModel thành công!"}
 
 # Khai báo danh sách các địa chỉ fe được phép gọi vào be
 origins = [
@@ -33,7 +40,6 @@ origins = [
     "http://127.0.0.1:80",
     "http://127.0.0.1:5500",
     "http://localhost:4173",
-    "http://127.0.0.1:5500",
     "https://bkti-flax.vercel.app"
 ]
 
