@@ -70,7 +70,7 @@ export default function Result() {
   if (parsedResult.music_url) {
     // 1. Khai báo Audio
     const audio = new Audio(parsedResult.music_url);
-    audio.loop = true;
+    audio.loop = false;
     audio.volume = 0.7;
     audioRef.current = audio;
 
@@ -187,7 +187,7 @@ export default function Result() {
                   src={result.image_url} 
                   alt={result.name} 
                   className="personality-img" 
-                  style={{ maxWidth: '200px', marginBottom: '20px' }}
+                  style={{ maxWidth: '450px', marginBottom: '20px' }}
                 />
               )}
               <span className="subtitle">Kiểu tính cách của bạn</span>

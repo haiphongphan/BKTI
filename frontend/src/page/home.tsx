@@ -502,7 +502,7 @@ export default function Home({
               Mấy cổ đông click vào đây để đăng kí vào BTT nhen!
             </a>
             <a
-              href="https://www.facebook.com/BKCSE.Multimedia"
+              href="https://forms.gle/Wwdkfgu4RtjiCKsn6"
               className="btt-reg-link"
               target="_blank"
               rel="noopener noreferrer"
