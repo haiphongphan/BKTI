@@ -187,12 +187,12 @@ export default function Home({
     }
   }, []);
 
-  if (loading)
-    return (
-      <div style={{ padding: "50px", alignContent: "center" }}>
-        Đang cập nhật bảng xếp hạng
-      </div>
-    );
+  // if (loading)
+  //   return (
+  //     <div style={{ padding: "50px", alignContent: "center" }}>
+  //       Đang cập nhật bảng xếp hạng
+  //     </div>
+  //   );
 
   const normalRank = ranking
     .filter((item) => !SPECIAL_CODES.includes(item.code))
@@ -400,8 +400,8 @@ export default function Home({
                       }}
                     >
                       <p className="ranking-empty-text">
-                        Chưa có lượt xếp hạng nào hoặc không kết nối được server.
-                        Hãy bắt đầu làm bài test đầu tiên!
+                        Chưa có lượt làm bài.
+                        Hãy trở thành người đầu tiên ghi danh vào bảng xếp hạng!
                       </p>
                     </div>
                   </div>

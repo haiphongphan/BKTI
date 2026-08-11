@@ -7,6 +7,8 @@ import Ins from "/image/ins.svg";
 import Git from "/image/github.svg";
 import Personality from '../page/personality_popup';
 
+const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:8000";
+
 export interface Personality {
   code: string;
   name: string;
@@ -171,14 +173,21 @@ const Footer: React.FC = () => {
   const [isCreditAnimating, setIsCreditAnimating] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const autoplayTimerRef = useRef<any>(null);
-  const handleEasterEggClick = (
+  const handleEasterEggClick = async (
     e: React.MouseEvent,
     secretJZTR: Personality,
   ) => {
     e.preventDefault();
     // Chuyển hướng tới trang kết quả tính cách đặc biệt (ví dụ: /result/JZTR)
     localStorage.setItem("quiz_result", JSON.stringify(secretJZTR));
-
+    try {
+        await fetch(`${API_URL}/quiz/secret-submit/LMAO`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+      } catch (error) {
+        console.error("Lỗi gửi Easter Egg:", error);
+      }
     // Chuyển ngay sang trang Result
     if ((window as any).navigateToResult) {
       (window as any).navigateToResult();

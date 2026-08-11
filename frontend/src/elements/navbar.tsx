@@ -6,13 +6,14 @@ interface NavbarProps {
   activeItem?: 'home' | 'ranking' | 'personality' | 'faq' | 'credit';
   isAnswerPage?: boolean;
 }
+const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:8000";
 
 export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswerPage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCseClick = () => {
+  const handleCseClick = async () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
@@ -37,6 +38,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
       };
 
       localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));
+      try {
+        await fetch(`${API_URL}/quiz/secret-submit/NSFW`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+      } catch (error) {
+        console.error("Lỗi gửi Easter Egg:", error);
+      }
       if ((window as any).navigateToResult) {
         (window as any).navigateToResult();
       }
