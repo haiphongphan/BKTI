@@ -1,6 +1,6 @@
 import time
 from typing import Dict, Any
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from sqlmodel import select, func
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.database import get_db
@@ -121,3 +121,27 @@ async def ranking(db: AsyncSession = Depends(get_db)):
     RANKING_CACHE["last_updated"] = current_time
 
     return response_data
+
+@router.post("/secret-submit/{code}", status_code=status.HTTP_201_CREATED)
+async def submit_secret(code: str, db: AsyncSession = Depends(get_db)):
+    # 1. Kiểm tra xem mã code này có tồn tại trong bảng Personality không (tránh spam code rác)
+    statement = select(Personality).where(Personality.code == code)
+    exec_result = await db.exec(statement)
+    existing_personality = exec_result.first()
+
+    if not existing_personality:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Không tìm thấy mã Easter Egg '{code}' trong hệ thống"
+        )
+
+    # 2. Ghi nhận lượt làm bài với code tương ứng
+    result_db = User_ans(p_code=code)
+    db.add(result_db)
+    await db.commit()
+
+    # 3. Xóa Cache của Ranking để Bảng xếp hạng cập nhật
+    global RANKING_CACHE
+    RANKING_CACHE["data"] = None
+
+    return {"message": f"Đã ghi nhận Easter Egg '{code}' thành công!"}
