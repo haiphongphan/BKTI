@@ -1,0 +1,46 @@
+DANH SÁCH ĐỀ XUẤT CẢI TIẾN TOÀN DIỆN UI/UX TRANG TRẮC NGHIỆM (ANSWER PAGE)
+========================================================================
+
+Dưới đây là ghi chép chi tiết về các đề xuất cải tiến thiết kế mỹ thuật và trải nghiệm người dùng trên trang làm bài trắc nghiệm BKTI để làm tài liệu tham khảo cho việc nâng cấp tiếp theo:
+
+1. Nền trang (Background & Decor) - Đã triển khai
+-------------------------------------------------
+* Đề xuất: Thay nền gradient trơn phẳng bằng lưới tọa độ kỹ thuật mỏng và các ký tự trôi lơ lửng đại diện cho sinh viên Bách khoa cùng chủ đề trắc nghiệm tính cách.
+* Chi tiết triển khai:
+  - Technical Grid Background: Lưới sọc mảnh kẻ ô ly kỹ thuật 30px x 30px kết hợp ánh sáng tỏa từ các góc.
+  - Floating Particles: 16 ký hiệu toán tin (Σ, π, ∫, √, f(x), { }, < />, 01, 10) và chữ cái nhóm tính cách (E, I, S, N, T, F, J, P) lơ lửng, chuyển động xoay 3D ngẫu nhiên chậm rãi ở nền sau.
+  - Responsive & Viewport: Sử dụng position: fixed phủ tràn 100% màn hình, không bị giới hạn bởi độ phân giải hay chiều rộng container.
+
+2. Thẻ chứa câu hỏi chính (Main Card) - Đã triển khai
+-----------------------------------------------------
+* Đề xuất: Biến đổi chiếc card trắng phẳng đục nguyên bản sang phong cách Glassmorphism (kính mờ) hiện đại và sang trọng.
+* Chi tiết triển khai:
+  - Nền kính mờ: Nền trắng trong suốt cao cấp rgba(255, 255, 255, 0.38) kết hợp backdrop-filter: blur(28px) nhìn thấy cực rõ họa tiết hạt lơ lửng chuyển màu ở phía sau.
+  - Viền phát sáng nổi bật: Border 1px solid rgba(255, 255, 255, 0.5) mô phỏng chuẩn cạnh kính phản chiếu.
+  - Bóng đổ kép siêu mịn: box-shadow 0 8px 32px 0 rgba(153, 143, 199, 0.15) tạo độ nổi sâu tự nhiên.
+  - Đồng bộ mobile: Áp dụng đầy đủ hiệu ứng kính mờ trong suốt cao cho responsive trên điện thoại.
+
+3. Nút chọn đáp án (Interactive Buttons) - Đã triển khai & Tinh chỉnh bo góc
+--------------------------------------------------------------------------
+* Đề xuất: Thêm hiệu ứng hover tương tác vật lý (tactile feedback) và làm nổi bật trạng thái khi đáp án được nhấp chọn.
+* Chi tiết triển khai:
+  - Hover State: Di chuột nút nẩy nhẹ lên trên (translateY(-2px)), phóng to vi mô (scale(1.01)), viền đổi sang màu tím nhạt phát sáng nhẹ.
+  - Selected State: Đáp án được chọn đổi sang màu tím gradient cực nhạt, viền tím sáng #8b5cf6 rõ ràng. Nhãn chữ cái A, B, C bên trái đổi từ nền xám chữ đen thành nền tím đậm gradient chữ trắng nổi bật.
+  - Khớp khít bo góc: Thêm overflow: hidden cho nút đáp án và đặt border-radius: 0 20px 20px 0 cho nhãn chữ cái bên trong để phần highlight ôm khít tuyệt đối theo cung bo của viền nút ngoài, không bị đè lấn lệch viền.
+
+4. Hiệu ứng chuyển câu hỏi (Slide Transition & Auto-advance) - Chưa triển khai
+------------------------------------------------------------------------------
+* Đề xuất: Loại bỏ việc thay đổi câu hỏi đột ngột, nâng cấp thành hoạt họa trượt mượt mà và tự động hóa thao tác chuyển tiếp.
+* Cách thức triển khai:
+  - Slide Transition: Khi nhấn chuyển câu, câu hỏi cũ sẽ mờ dần và trượt sang bên trái (translateX(-30px)), cùng lúc câu hỏi mới sẽ từ bên phải trượt vào tâm card (translateX(0)).
+  - Auto-advance: Khi người dùng bấm lựa chọn xong một đáp án, hệ thống sẽ chờ khoảng 350ms (đủ để người dùng nhìn thấy hiệu ứng đổi màu nút đã chọn), sau đó tự động kích hoạt hiệu ứng trượt chuyển sang câu tiếp theo mà không bắt buộc họ phải bấm nút "Câu kế tiếp" bằng tay.
+
+5. Linh vật Mochi Mascot tương tác (Gamification) - Chưa triển khai
+-------------------------------------------------------------------
+* Đề xuất: Tích hợp hình ảnh linh vật Mochi chuyển động nhẹ ở góc dưới Card câu hỏi để trang trắc nghiệm bớt khô khan.
+* Cách thức triển khai:
+  - Biểu cảm động: Mascot Mochi sẽ thay đổi trạng thái cảm xúc tương thích với tiến trình làm bài của người dùng:
+    + Câu 1 - 7: Mochi vui vẻ chào mừng, tạo động lực khởi động.
+    + Câu 8 - 14: Mochi đeo kính chống cằm suy nghĩ, tượng trưng giai đoạn tăng tốc.
+    + Câu 15 - 20: Mochi toát mồ hôi hồi hộp, cổ vũ chặng đường về đích.
+    + Câu 21 (Nộp bài): Mochi hân hoan vẫy cờ chúc mừng.

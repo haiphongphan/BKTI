@@ -10,7 +10,7 @@
   --color-accent: #7b61ff;
   --color-accent-dark: #554880;
 
-  --color-bg-card: #ffffff;
+  --color-bg-card: rgb(255, 255, 255, 0.4);
   --color-bg-card-inner: #fcfbfe;
   --color-bg-gradient-start: rgba(249, 248, 251, 1);
   --color-bg-gradient-end: rgba(235, 221, 255, 1);
