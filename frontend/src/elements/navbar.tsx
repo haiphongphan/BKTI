@@ -6,13 +6,14 @@ interface NavbarProps {
   activeItem?: 'home' | 'ranking' | 'personality' | 'faq' | 'credit';
   isAnswerPage?: boolean;
 }
+const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:8000";
 
 export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswerPage }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [clickCount, setClickCount] = useState(0);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const handleCseClick = () => {
+  const handleCseClick = async () => {
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
@@ -27,16 +28,24 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
         description:
           'Chúc mừng! Bạn đã chính thức đi chệch khỏi kịch bản và tìm ra Easter Egg giấu kín của hệ thống. Trong khi những người bình thường ngoan ngoãn điền từng câu trắc nghiệm để nhận kết quả, thì bạn lại chọn cách... "test nhân phẩm" của cả cái website này. Với đôi tay không biết mỏi, bản tính tò mò vô cực và khả năng thao tác vặn vẹo mọi luồng UX/UI thông thường, bạn không đi tìm bản ngã của mình, bạn đi tìm... bug. Hệ thống xin đầu hàng trước bạn. Có thể bạn là một pháp sư chuyên mở F12 để soi code, một QA Tester bẩm sinh, hoặc đơn giản là bạn quá rảnh và thích click lung tung khắp màn hình. Dù lý do là gì, tư duy out trình và không chịu gò bó vào khuôn khổ đã biến bạn thành một Nhà thám hiểm vĩ đại thực thụ. Bách khoa rất cần những bộ óc thích khám phá như bạn để tạo ra những đột phá mới (hoặc làm sập server lúc đăng ký môn, tùy tâm trạng). Tóm lại, bạn không thuộc về bất kỳ nhóm tính cách nào ở trên. Xin nhận của team Developer một lạy!',
         image_url: "/image/mochi/Nha_tham_hiem.webp",
-        music_url: "/music/bk.mp3",
+        music_url: "/music/Nha_tham_hiem.mp3",
         dimension1_nguoi_im_lang: 67,
-        dimension1_nguoi_hay_noi: 36,
-        dimension2_vibecoder: 85.45,
-        dimension2_handmade: 84.98,
-        dimension3_chua_lanh: 84.23,
-        dimension3_mutant: 81.54
+        dimension1_nguoi_hay_noi: 33,
+        dimension2_vibecoder: 36,
+        dimension2_handmade: 64,
+        dimension3_chua_lanh: 26,
+        dimension3_mutant: 71
       };
 
       localStorage.setItem("quiz_result", JSON.stringify(secretPersonality));
+      try {
+        await fetch(`${API_URL}/quiz/secret-submit/NSFW`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" }
+        });
+      } catch (error) {
+        console.error("Lỗi gửi Easter Egg:", error);
+      }
       if ((window as any).navigateToResult) {
         (window as any).navigateToResult();
       }

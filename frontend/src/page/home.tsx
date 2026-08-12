@@ -187,12 +187,12 @@ export default function Home({
     }
   }, []);
 
-  if (loading)
-    return (
-      <div style={{ padding: "50px", alignContent: "center" }}>
-        Đang cập nhật bảng xếp hạng
-      </div>
-    );
+  // if (loading)
+  //   return (
+  //     <div style={{ padding: "50px", alignContent: "center" }}>
+  //       Đang cập nhật bảng xếp hạng
+  //     </div>
+  //   );
 
   const normalRank = ranking
     .filter((item) => !SPECIAL_CODES.includes(item.code))
@@ -400,8 +400,8 @@ export default function Home({
                       }}
                     >
                       <p className="ranking-empty-text">
-                        Chưa có lượt xếp hạng nào hoặc không kết nối được server.
-                        Hãy bắt đầu làm bài test đầu tiên!
+                        Chưa có lượt làm bài.
+                        Hãy trở thành người đầu tiên ghi danh vào bảng xếp hạng!
                       </p>
                     </div>
                   </div>
@@ -502,7 +502,7 @@ export default function Home({
               Mấy cổ đông click vào đây để đăng kí vào BTT nhen!
             </a>
             <a
-              href="https://www.facebook.com/BKCSE.Multimedia"
+              href="https://forms.gle/Wwdkfgu4RtjiCKsn6"
               className="btt-reg-link"
               target="_blank"
               rel="noopener noreferrer"
