@@ -159,7 +159,9 @@ function Answer() {
   const handleNavClick = (
     target: "home" | "ranking" | "personality" | "faq" | "credit",
   ) => {
-    if (target === "personality") {
+    if (target === "home") {
+      (window as any).navigateToHome?.();
+    } else if (target === "personality") {
       setPersPopup(true);
     } else if (target === "faq") {
       setFaq(true);
@@ -222,7 +224,7 @@ function Answer() {
             <span className="step-badge">BƯỚC 1</span>
             <h3 className="step-title">
               {/* EDITABLE_TEXT: Tiêu đề bước 1 */}
-              Làm bài kiểm tra
+              Kéo xuống làm bài kiểm tra
             </h3>
             <p className="step-desc">
               {/* EDITABLE_TEXT: Mô tả bước 1 */}

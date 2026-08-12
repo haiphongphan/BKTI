@@ -1148,9 +1148,12 @@
     box-shadow: none !important;
     padding: var(--sp-12) 0 !important;
     box-sizing: border-box !important;
-    display: flex !important;
+    display: grid !important;
+    grid-template-columns: 32px 1fr auto !important;
+    grid-template-rows: auto auto !important;
     align-items: center !important;
-    gap: var(--sp-12) !important;
+    column-gap: var(--sp-12) !important;
+    row-gap: 2px !important;
     border-bottom: 1px solid rgba(153, 143, 199, 0.15) !important;
   }
 
@@ -1160,21 +1163,23 @@
 
   .homepage .ellipse {
     position: static !important;
-    flex-shrink: 0 !important;
     width: 32px !important;
     height: 32px !important;
+    grid-row: 1 / 3 !important;
+    grid-column: 1 !important;
   }
 
   .homepage .ranking-name,
   .homepage .special-ranking-name {
     position: static !important;
     width: auto !important;
-    flex-grow: 1 !important;
     font-size: var(--fs-body-sm) !important;
     height: auto !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
+    grid-row: 1 !important;
+    grid-column: 2 !important;
   }
 
   .homepage .ranking-light-text {
@@ -1184,17 +1189,38 @@
   }
 
   .homepage .ranking-subtitle {
-    display: none !important;
+    display: flex !important;
+    font-size: var(--fs-caption) !important;
+    color: var(--color-text-secondary) !important;
+    grid-row: 2 !important;
+    grid-column: 2 !important;
   }
 
   .homepage .ranking-score {
     font-weight: var(--fw-semibold) !important;
     font-size: var(--fs-body-sm) !important;
+    grid-row: 1 / 3 !important;
+    grid-column: 3 !important;
+    align-self: center !important;
   }
 
   .homepage .ranking-progress,
   .homepage .rectangle-7 {
     display: none !important;
+  }
+
+  /* Sít rịt: layout 1 hàng, chỉ tên + score */
+  .homepage .ranking-card-special .group {
+    grid-template-rows: auto !important;
+    align-items: center !important;
+  }
+
+  .homepage .ranking-card-special .ellipse {
+    grid-row: 1 !important;
+  }
+
+  .homepage .ranking-card-special .ranking-score {
+    grid-row: 1 !important;
   }
 
   /* --- Khối 3: Slide Đoàn hội --- */
@@ -1454,7 +1480,7 @@
 }
 
 .hero-title {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-family);
   font-size: 48px;
   font-weight: 800;
   color: #1e1b4b;
@@ -1464,7 +1490,7 @@
 }
 
 .hero-subtitle {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-family);
   font-size: 18px;
   font-weight: 600;
   color: #374151;
@@ -1475,28 +1501,28 @@
 }
 
 .hero-start-btn {
-  background-color: #8b5cf6;
+  background-color: var(--color-accent);
   color: #ffffff;
   border: none;
   border-radius: 9999px;
   padding: 18px 48px;
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-family);
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.4);
+  box-shadow: var(--color-shadow-btn-primary);
   transition: all 0.2s ease;
   margin-top: 12px;
   outline: none;
 }
 
 .hero-start-btn:hover {
-  background-color: #7c3aed;
+  background-color: var(--color-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(139, 92, 246, 0.6);
+  box-shadow: 0 6px 20px rgba(123, 97, 255, 0.4);
 }
 
 .hero-arrow {

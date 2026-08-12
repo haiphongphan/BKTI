@@ -65,8 +65,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
   ] as const;
 
   const handleItemClick = (id: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => {
-    // Ngăn chặn chuyển hướng trang chủ/bảng xếp hạng khi đang ở trang làm bài
-    if (isAnswerPage && (id === 'home' || id === 'ranking')) {
+    // Ngăn chặn chuyển hướng bảng xếp hạng khi đang ở trang làm bài
+    if (isAnswerPage && id === 'ranking') {
       return;
     }
     onNavClick(id);
@@ -80,8 +80,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
         <div className="bkti-navbar__logo-area">
           <div 
             className="bkti-navbar__logo" 
-            style={isAnswerPage ? { cursor: 'default', pointerEvents: 'none' } : {}}
-            onClick={isAnswerPage ? undefined : () => handleItemClick('home')}
+            onClick={() => handleItemClick('home')}
           >
             <img src="/image/bkti_logo.webp" alt="BKTI Logo" className="bkti-navbar__logo-img" />
             <div className="bkti-navbar__logo-text-group">
@@ -99,7 +98,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
         {/* Menu giữa cho Desktop */}
         <div className="bkti-navbar__menu">
           {navItems.map((item) => {
-            const isDisabled = isAnswerPage && (item.id === 'home' || item.id === 'ranking');
+            const isDisabled = isAnswerPage && item.id === 'ranking';
             return (
               <button
                 key={item.id}
@@ -128,7 +127,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswer
       {/* Mobile Drawer Menu */}
       <div className={`bkti-navbar__mobile-menu ${isOpen ? 'bkti-navbar__mobile-menu--open' : ''}`}>
         {navItems.map((item) => {
-          const isDisabled = isAnswerPage && (item.id === 'home' || item.id === 'ranking');
+          const isDisabled = isAnswerPage && item.id === 'ranking';
           return (
             <button
               key={item.id}

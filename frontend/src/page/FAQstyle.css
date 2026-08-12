@@ -4,8 +4,8 @@
 
 .FAQ {
   align-items: stretch;
-  border-radius: 24px !important;
-  background-color: #ffffff !important;
+  border-radius: var(--card-radius) !important;
+  background-color: var(--color-bg-card-inner) !important;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -20,17 +20,17 @@
   box-sizing: border-box;
   
   overflow-y: auto;   
-  box-shadow: 0 10px 40px rgba(153, 143, 199, 0.25) !important;
-  border: 1px solid rgba(153, 143, 199, 0.2) !important;
+  box-shadow: var(--color-shadow-card) !important;
+  border: 1px solid var(--color-border-subtle) !important;
   animation: popupShow 0.35s ease-in-out forwards;
 }
 
 /* Tiêu đề popup */
 .FAQ .faq-title {
-  color: #1e1548 !important;
-  font-family: "Inter", sans-serif;
-  font-size: 20px !important;
-  font-weight: 800 !important;
+  color: var(--color-accent-dark) !important;
+  font-family: var(--font-family);
+  font-size: var(--fs-heading-sm) !important;
+  font-weight: var(--fw-bold) !important;
   text-align: center;
   margin: 0 0 12px 0 !important;
   padding: 0 32px !important; /* Tránh đè nút đóng */
@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  border-bottom: 1px solid rgba(153, 143, 199, 0.12);
+  border-bottom: 1px solid var(--color-border-subtle);
   padding-bottom: 14px;
 }
 
@@ -61,7 +61,7 @@
   border: none;
   font-size: 28px;
   line-height: 1;
-  color: #998fc7;
+  color: var(--color-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -73,8 +73,8 @@
 
 .FAQ-close-btn-absolute:hover {
   transform: scale(1.1);
-  color: #7b61ff;
-  background-color: rgba(153, 143, 199, 0.1);
+  color: var(--color-accent);
+  background-color: var(--color-border-subtle);
 }
 
 /* Thanh cuộn nội bộ mượt mà */
@@ -95,11 +95,11 @@
 .FAQ .text-wrapper-3,
 .FAQ .text-wrapper-5,
 .FAQ .text-wrapper-9 {
-  color: #1e1548 !important; /* Đổi thành màu tím đậm thương hiệu */
-  font-family: "Inter", sans-serif !important;
+  color: var(--color-accent-dark) !important; /* Đổi thành màu tím đậm thương hiệu */
+  font-family: var(--font-family) !important;
   text-align: left !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
+  font-size: var(--fs-body) !important;
+  font-weight: var(--fw-bold) !important;
   line-height: 1.4 !important;
   margin: 0 0 2px 0 !important;
   word-wrap: break-word;
@@ -114,10 +114,10 @@
 .FAQ .text-wrapper-7,
 .FAQ .text-wrapper-8,
 .FAQ .text-wrapper-10 {
-  color: #4b5563 !important; /* Màu xám thẫm dễ chịu hơn đen kịt */
-  font-family: "Inter", sans-serif !important;
+  color: var(--color-text-secondary) !important; /* Màu xám thẫm dễ chịu hơn đen kịt */
+  font-family: var(--font-family) !important;
   font-size: 13.5px !important;
-  font-weight: 400 !important;
+  font-weight: var(--fw-regular) !important;
   line-height: 1.6 !important;
   text-align: justify !important;
   margin: 0 !important;
@@ -140,7 +140,7 @@
 @media (max-width: 580px) {
   .FAQ {
     padding: 24px 18px;
-    border-radius: 20px !important;
+    border-radius: var(--card-radius-sm) !important;
   }
   
   .FAQ .faq-title {

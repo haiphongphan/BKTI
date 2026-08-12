@@ -2,17 +2,37 @@ import { Chart } from "../elements/spiderchart.tsx";
 import { useEffect, useState, useRef } from 'react';
 import "./resultstyle.css";
 import html2canvas from "html2canvas";
-import { ProgressBar } from "../elements/progressbar.tsx";
+import { DualBar } from "../elements/dualbar.tsx";
 import TiltCard from "../elements/tiltcard";
 import Navbar from "../elements/navbar";
 import Footer from "../elements/footer.tsx";
 import confetti from 'canvas-confetti';
 import TechBackground from "../elements/techbackground";
+import { ADVICE_MAP } from "./advicedata.ts";
+import Pers_popup from "./personality_popup";
+import FAQ from "./FAQ";
+
+
+// Ở đây là advice cho mỗi chiều tính cách
+// 3 chiều tâm lý — mỗi chiều là 1 cặp đối lập
+const DIMENSIONS = [
+  { leftLabel: "Im Lặng", rightLabel: "Hay Nói", leftKey: "dimension1_nguoi_im_lang", rightKey: "dimension1_nguoi_hay_noi" },
+  { leftLabel: "VibeCoder", rightLabel: "Handmade", leftKey: "dimension2_vibecoder", rightKey: "dimension2_handmade" },
+  { leftLabel: "Chữa Lành", rightLabel: "Mutant", leftKey: "dimension3_chua_lanh", rightKey: "dimension3_mutant" },
+];
+// Phong xem ở đây và file advice.ts
 
 export default function Result() {
   const [result, setResult] = useState<any>(null);
   const captureRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Expand/collapse description trên mobile
+  const [descExpanded, setDescExpanded] = useState(false);
+
+  // Trạng thái hiển thị popup ngay tại trang
+  const [persPopup, setPersPopup] = useState(false);
+  const [faq, setFaq] = useState(false);
 
   const handleDownload = async () => {
     if (!captureRef.current) return;
@@ -29,12 +49,7 @@ export default function Result() {
       onclone: (clonedDoc) => {
         const shareArea = clonedDoc.querySelector(".result-share-area") as HTMLElement;
         if (shareArea) {
-          // Chỉ áp dụng nền gradient cho bản sao được chụp ảnh
-          shareArea.style.setProperty(
-            "background",
-            "linear-gradient(252deg, rgba(249, 248, 251, 1) 0%, rgba(235, 221, 255, 1) 100%)",
-            "important"
-          );
+          shareArea.classList.add("is-capturing");
         }
       },
       ignoreElements: (el) =>
@@ -134,15 +149,6 @@ export default function Result() {
 
   if (!result) return <div style={{ padding: '50px' }}>Đang tải kết quả...</div>;
 
-  const stats = [
-    { label: 'Im Lặng', value: result.dimension1_nguoi_im_lang || 0 },
-    { label: 'Hay Nói', value: result.dimension1_nguoi_hay_noi || 0 },
-    { label: 'VibeCoder', value: result.dimension2_vibecoder || 0 },
-    { label: 'Handmade', value: result.dimension2_handmade || 0 },
-    { label: 'Chữa Lành', value: result.dimension3_chua_lanh || 0 },
-    { label: 'Mutant', value: result.dimension3_mutant || 0 },
-  ];
-
   const scores = [
     result.dimension1_nguoi_im_lang || 0,
     result.dimension1_nguoi_hay_noi || 0,
@@ -152,12 +158,33 @@ export default function Result() {
     result.dimension3_mutant || 0,
   ];
 
+  const adviceList = [
+    (result.dimension1_nguoi_im_lang || 0) >= (result.dimension1_nguoi_hay_noi || 0)
+      ? ADVICE_MAP.dimension1_nguoi_im_lang
+      : ADVICE_MAP.dimension1_nguoi_hay_noi,
+    (result.dimension2_vibecoder || 0) >= (result.dimension2_handmade || 0)
+      ? ADVICE_MAP.dimension2_vibecoder
+      : ADVICE_MAP.dimension2_handmade,
+    (result.dimension3_chua_lanh || 0) >= (result.dimension3_mutant || 0)
+      ? ADVICE_MAP.dimension3_chua_lanh
+      : ADVICE_MAP.dimension3_mutant,
+  ];
+
   const handleNavClick = (target: 'home' | 'ranking' | 'personality' | 'faq' | 'credit') => {
     if (target === 'home') {
       (window as any).navigateToHome?.();
-    } else {
+    } else if (target === 'ranking') {
       localStorage.setItem("nav_target", target);
       (window as any).navigateToHome?.();
+    } else if (target === 'personality') {
+      setPersPopup(true);
+    } else if (target === 'faq') {
+      setFaq(true);
+    } else if (target === 'credit') {
+      const el = document.querySelector(".footer__container_01");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
@@ -165,6 +192,22 @@ export default function Result() {
     <div className="result-page-wrapper">
       <TechBackground />
       <Navbar onNavClick={handleNavClick} />
+
+      {persPopup && (
+        <div className="popup-overlay" onClick={() => setPersPopup(false)}>
+          <div onClick={(e) => e.stopPropagation()}>
+            <Pers_popup onClose={() => setPersPopup(false)} />
+          </div>
+        </div>
+      )}
+
+      {faq && (
+        <div className="popup-overlay" onClick={() => setFaq(false)}>
+          <div onClick={(e) => e.stopPropagation()}>
+            <FAQ onClose={() => setFaq(false)} />
+          </div>
+        </div>
+      )}
 
       {/* ── Hero Section đặt ngoài để fill hết chiều ngang ── */}
       <section className="result-hero-section">
@@ -197,31 +240,61 @@ export default function Result() {
                 {result.name} {result.code ? `(${result.code})` : ''}
               </h1>
               
-              {/* Hiển thị đoạn Mô tả tính cách thực tế từ Backend */}
-              <p className="desc">
+              {/* Hiển thị đoạn Mô tả tính cách — thu gọn trên mobile */}
+              <p className={`desc ${descExpanded ? "desc--expanded" : ""}`}>
                 {result.description}
               </p>
+              <button
+                className="desc-toggle-btn"
+                onClick={() => setDescExpanded(!descExpanded)}
+              >
+                {descExpanded ? "Thu gọn ▲" : "Xem thêm ▼"}
+              </button>
             </TiltCard>
 
-            {/* Khối 2: Biểu đồ spider & hệ 6 thanh thống kê */}
+            {/* Khối 2: Biểu đồ spider & 3 cặp stats đối lập */}
             <TiltCard className="result-block-2">
-              <div className="result-chart">
-                <Chart scores={scores} /> 
+              {/* Section 1: Spider Chart */}
+              <div className="result-section">
+                <h3 className="result-section-title">Bản đồ đa chiều</h3>
+                <p className="result-section-desc">Trực quan hóa mức độ phân bố của bạn trên cả 6 chiều tính cách đặc trưng.</p>
+                <div className="result-chart">
+                  <Chart scores={scores} /> 
+                </div>
               </div>
 
-              {/* Hệ thống 6 thanh thống kê ProgressBar */}
-              <div className="stats-container">
-                {stats.map(stat => (
-                  <div className="stat-row" key={stat.label}>
-                    <div className="stat-info">
-                      <span className="stat-label">{stat.label}</span>
-                      <span className="stat-value">{Math.round(stat.value)}%</span>
+              {/* Section 2: DualBar Stats */}
+              <div className="result-section">
+                <h3 className="result-section-title">Chỉ số tâm lý đối lập</h3>
+                <p className="result-section-desc">Đánh giá chi tiết tỉ lệ phần trăm giữa các xu hướng hành vi đối lập.</p>
+                <div className="stats-container">
+                  {DIMENSIONS.map((dim) => (
+                    <DualBar
+                      key={dim.leftKey}
+                      leftLabel={dim.leftLabel}
+                      rightLabel={dim.rightLabel}
+                      leftValue={result[dim.leftKey] || 0}
+                      rightValue={result[dim.rightKey] || 0}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Section 3: Advice List */}
+              <div className="result-section">
+                <h3 className="result-section-title">Lời khuyên phát triển</h3>
+                <p className="result-section-desc">Gợi ý tối ưu hóa thế mạnh và cải thiện bản thân trong môi trường Bách khoa.</p>
+                <div className="result-advice-container">
+                  {adviceList.map((adv, idx) => (
+                    <div className="result-advice-item" key={idx}>
+                      <span className="result-advice-bullet">✦</span>
+                      <div className="result-advice-content">
+                        <strong className="result-advice-title">{adv.title}: </strong>
+                        <span className="result-advice-text">{adv.text}</span>
+                      </div>
                     </div>
-                    <div className="stat-progress">
-                      <ProgressBar current={stat.value} total={100} showText={false} />
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </TiltCard>
           </main>

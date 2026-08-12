@@ -87,9 +87,9 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
+  font-family: var(--font-family);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   justify-content: center;
   letter-spacing: 0;
   line-height: normal;
@@ -154,9 +154,9 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
+  font-family: var(--font-family);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   height: 16px;
   justify-content: center;
   left: 43px;
@@ -172,9 +172,9 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-Light", Helvetica;
-  font-size: 10px;
-  font-weight: 300;
+  font-family: var(--font-family);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-light);
   height: 12px;
   justify-content: center;
   left: 44px;
@@ -264,9 +264,9 @@
   align-items: center;
   color: #ffffff;
   display: flex;
-  font-family: "Inter-Bold", Helvetica;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-family);
+  font-size: var(--fs-heading-sm);
+  font-weight: var(--fw-bold);
   height: 24px;
   justify-content: center;
   letter-spacing: 0;
@@ -337,9 +337,9 @@
 .test-page .lorem-ipsum-dolor-3 {
   box-sizing: border-box;
   color: #000000;
-  font-family: "Inter-SemiBold", Helvetica;
+  font-family: var(--font-family);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: 0;
   line-height: 1.5;
   margin: 0;
@@ -495,9 +495,9 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-Bold", Helvetica;
-  font-size: 20px;
-  font-weight: 700;
+  font-family: var(--font-family);
+  font-size: var(--fs-heading-sm);
+  font-weight: var(--fw-bold);
   justify-content: center;
   letter-spacing: 0;
   line-height: normal;
@@ -535,9 +535,9 @@
 /* Đáp án text — class chung (answer-text) */
 .test-page .answer-text {
   color: #000000;
-  font-family: "Inter-SemiBold", Helvetica;
+  font-family: var(--font-family);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   letter-spacing: 0;
   line-height: 1.4;
   position: absolute;
@@ -627,9 +627,9 @@
   align-items: center;
   color: #000000;
   display: flex;
-  font-family: "Inter-SemiBold", Helvetica;
+  font-family: var(--font-family);
   font-size: 16px;
-  font-weight: 600;
+  font-weight: var(--fw-semibold);
   height: 36px;
   justify-content: center;
   letter-spacing: 0;
@@ -719,17 +719,18 @@
 }
 
 .test-page .quiz-intro-title {
-  font-family: "Inter-Bold", Helvetica;
+  font-family: var(--font-family);
   font-size: 36px;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   color: #1e1548;
   margin: 0;
   letter-spacing: -0.5px;
 }
 
 .test-page .quiz-intro-subtitle {
-  font-family: "Inter-Medium", Helvetica;
+  font-family: var(--font-family);
   font-size: 18px;
+  font-weight: var(--fw-medium);
   color: #6d62a9;
   margin: 0;
 }
@@ -786,9 +787,9 @@
 }
 
 .test-page .step-badge {
-  font-family: "Inter-Bold", Helvetica;
+  font-family: var(--font-family);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   letter-spacing: 1px;
   padding: 4px 10px;
   border-radius: 12px;
@@ -812,16 +813,17 @@
 }
 
 .test-page .step-title {
-  font-family: "Inter-Bold", Helvetica;
+  font-family: var(--font-family);
   font-size: 18px;
-  font-weight: 700;
+  font-weight: var(--fw-bold);
   color: #1e1548;
   margin: 0 0 10px 0;
 }
 
 .test-page .step-desc {
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 14px;
+  font-family: var(--font-family);
+  font-size: var(--fs-body-sm);
+  font-weight: var(--fw-regular);
   color: #5c538a;
   line-height: 1.5;
   margin: 0;
@@ -1021,10 +1023,10 @@
   }
 
   .test-page .question-text {
-    font-family: "Inter-SemiBold", Helvetica !important;
+    font-family: var(--font-family) !important;
     font-size: 16px !important; /* Tăng cỡ chữ lên 16px cho dễ đọc trên mobile */
     line-height: 1.5 !important;
-    font-weight: 600 !important; /* Giữ đúng độ đậm SemiBold như desktop */
+    font-weight: var(--fw-semibold) !important; /* Giữ đúng độ đậm SemiBold như desktop */
     color: #1e1548 !important;
     text-align: left !important;
   }
