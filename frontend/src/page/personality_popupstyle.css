@@ -1,18 +1,4 @@
 /* Container chính */
-.personality-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  -webkit-overflow-scrolling: touch;
-}
-
 .personality {
   background-color: var(--color-bg-card-inner);
   border-radius: var(--card-radius);
@@ -24,7 +10,6 @@
   position: relative;
   box-sizing: border-box;
   animation: popupShow 0.35s ease-in-out forwards;
-  will-change: transform, opacity;
 }
 
 /* Tiêu đề chính */
