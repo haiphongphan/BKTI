@@ -60,7 +60,7 @@ Từ thư mục `backend` (đã activate venv):
 
 ### Khởi tạo
 
-`uvicorn app.main:app --reload`
+`uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 5`
 
 ## Chạy frontend (local)
 
@@ -78,3 +78,9 @@ Mở: `http://localhost:5173/`
 ## Cách chạy cả hai local
 
 Ở thư mục gốc: `./run.sh`
+
+## Convert image to webp
+`npx sharp -i ./public/image/mochi/*.png -o ./public/image/mochi -f webp`
+
+## Remove database
+`TRUNCATE TABLE user_ans RESTART IDENTITY CASCADE;`
