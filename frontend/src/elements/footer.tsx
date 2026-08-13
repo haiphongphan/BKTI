@@ -458,7 +458,7 @@ const Footer: React.FC = () => {
           <p className="footer__text_01">
             Sản phẩm được thực hiện bởi{" "}
             <strong>
-              Ban Truyền thông khoa Khoa học và Kỹ thuật Máy tính (BTT)
+              Ban Truyền thông khoa Khoa học và Kỹ thuật Máy tính
             </strong>
             .
           </p>
@@ -476,6 +476,9 @@ const Footer: React.FC = () => {
               © {new Date().getFullYear()} CSE-Multimedia. All rights reserved.
             </span>
           </div>
+          <p className="footer__special-thanks_01">
+            Special thanks: <span>Sơn Tùng MTP</span> • <span>Max Verstappen</span> • <span>MCK</span> • <span>Prod. Gaz</span> • <span>Cô Xuân Anh</span> • <span>Nhà Thám Hiểm - ATVNCG</span> • <span>Trần My</span> • <span>Gemini</span> • <span>Sona</span>
+          </p>
         </div>
       </div>
     </footer>
