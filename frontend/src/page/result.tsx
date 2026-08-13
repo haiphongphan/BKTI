@@ -151,10 +151,10 @@ export default function Result() {
 
   const scores = [
     result.dimension1_nguoi_im_lang || 0,
-    result.dimension1_nguoi_hay_noi || 0,
     result.dimension2_vibecoder || 0,
-    result.dimension2_handmade || 0,
     result.dimension3_chua_lanh || 0,
+    result.dimension1_nguoi_hay_noi || 0,
+    result.dimension2_handmade || 0,
     result.dimension3_mutant || 0,
   ];
 
