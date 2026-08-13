@@ -302,7 +302,7 @@ export default function Result() {
           {/* Dải thương hiệu chèn dưới chân ảnh chụp lưu trữ chia sẻ */}
           <div className="result-share-branding">
             <div className="branding-left">
-              <img src="/image/bkti_logo.webp" alt="BKTI Logo" className="branding-logo" />
+              <img src="/image/bkti_logo.webp?v=2" alt="BKTI Logo" className="branding-logo" />
               <div className="branding-text">
                 <span className="brand-name">BKTI</span>
                 <span className="brand-desc">Trắc nghiệm tính cách SV Bách khoa</span>
