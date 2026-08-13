@@ -227,7 +227,7 @@ export default function Result() {
             <TiltCard className="result-block-1">
               {result.image_url && (
                 <img 
-                  src={result.image_url} 
+                  src={`${result.image_url}?v=2`} 
                   alt={result.name} 
                   className="personality-img" 
                   style={{ maxWidth: '450px', marginBottom: '20px' }}

@@ -144,7 +144,7 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Mochi",
     role: "Kéo Tương Tác Cho Page",
     quote: "\"Bí mật nằm đâu đó quanh đây...\"",
-    avatar: "/image/credit_members/Mochi.webp",
+    avatar: "/image/credit_members/Mochi.webp?v=2",
     socials: {
       facebook: "https://www.facebook.com/BKCSE.Multimedia",
       tiktok: "https://www.tiktok.com/@csemultimedia",
