@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./personality_popupstyle.css";
 
+// Helper lấy đường dẫn tĩnh
 const getMochiImg = (path: string) => `/image/mochi/${path}?v=2`;
 
 const PERSONALITY_ITEMS = [
@@ -17,29 +18,39 @@ const PERSONALITY_ITEMS = [
 ];
 
 export default function Personality({ onClose }: { onClose: () => void }) {
-  return (
-    <div className="personality">
-      <p className="title">Các kiểu tính cách trong bài kiểm tra</p>
-      <button className="close-btn" onClick={onClose} aria-label="Đóng">
-        &times;
-      </button>
+  // Preload toàn bộ 10 ảnh vào RAM ngay khi Popup được mount
+  useEffect(() => {
+    PERSONALITY_ITEMS.forEach((item) => {
+      const img = new Image();
+      img.src = item.img;
+    });
+  }, []);
 
-      {/* Lưới chứa 10 hình mẫu tính cách */}
-      <div className="personality-grid">
-        {PERSONALITY_ITEMS.map((item, index) => (
-          <div className="personality-item" key={index}>
-            <div className="img-wrapper">
-              <img 
-                src={item.img} 
-                alt={typeof item.label === 'string' ? item.label : "Personality Avatar"} 
-                className="rectangle-img"
-                loading="lazy"      /* Giúp tải nhẹ nhàng trên di động */
-                decoding="async"    /* Giải mã ảnh không gây đơ/khựng UI */
-              />
+  return (
+    // Bọc lớp overlay để chống lỗi Stacking Context trên Safari iOS
+    <div className="personality-overlay" onClick={onClose}>
+      <div className="personality" onClick={(e) => e.stopPropagation()}>
+        <p className="title">Các kiểu tính cách trong bài kiểm tra</p>
+        <button className="close-btn" onClick={onClose} aria-label="Đóng">
+          &times;
+        </button>
+
+        <div className="personality-grid">
+          {PERSONALITY_ITEMS.map((item, index) => (
+            <div className="personality-item" key={index}>
+              <div className="img-wrapper">
+                <img 
+                  src={item.img} 
+                  alt="Personality Avatar" 
+                  className="rectangle-img"
+                  loading="eager"       /* Dùng eager thay cho lazy trong Popup */
+                  decoding="async"      /* Xử lý giải mã ảnh ngầm */
+                />
+              </div>
+              <span className="item-label">{item.label}</span>
             </div>
-            <span className="item-label">{item.label}</span>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
