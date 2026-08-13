@@ -29,7 +29,7 @@ const DH_SLIDES = [
     content: (
       <>
         <img
-          src="/image/Doan_hoi.webp"
+          src="/image/Doan_hoi.webp?v=2"
           alt="Doan hoi"
           className="dh-slide-img"
         />
