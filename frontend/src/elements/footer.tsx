@@ -477,7 +477,7 @@ const Footer: React.FC = () => {
             </span>
           </div>
           <p className="footer__special-thanks_01">
-            Special thanks to: <span>Dé Sontune Montepré (Sơn Tùng MTP)</span> • <span>Max Verstappen</span> • <span>Cô Xuân Anh</span> • <span>Nhà Thám Hiểm - ATVNCG</span> • <span>Trần My</span> • <span>Gemini 3.6 Flash</span> • <span>Suno-AI</span>
+            Special thanks to: <span>Dé Sontune Montepré (Sơn Tùng MTP)</span> • <span>Max Verstappen</span> • <span>なみりん (*namirin)</span> • <span>Cô Xuân Anh</span> • <span>Nhà Thám Hiểm - ATVNCG</span> • <span>Trần My</span> • <span>Gemini 3.6 Flash</span> • <span>Suno-AI</span>
           </p>
         </div>
       </div>

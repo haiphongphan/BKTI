@@ -1,11 +1,11 @@
-import co_be from "/image/mochi/Co_be.webp";
-import lgbt from "/image/mochi/Lgbt.webp";
-import onfa from "/image/mochi/Onfa.webp";
+import co_be from "/image/mochi/Co_be_small.webp";
+import lgbt from "/image/mochi/Lgbt_small.webp";
+import onfa from "/image/mochi/onfa_small.webp";
 import max from "/image/mochi/max_square.webp";
-import tkka from "/image/mochi/Tkka.webp";
-import svn8 from "/image/mochi/Svn8.webp";
-import mtp from "/image/mochi/Mtp.webp";
-import bugs from "/image/mochi/Bugs.webp";
+import tkka from "/image/mochi/Tkka_small.webp";
+import svn8 from "/image/mochi/Svn8_small.webp";
+import mtp from "/image/mochi/Mtp_small.webp";
+import bugs from "/image/mochi/Bugs_small.webp";
 import secret from "/image/mochi/secret.webp"
 import "./personality_popupstyle.css";
 
