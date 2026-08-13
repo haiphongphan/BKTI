@@ -1,13 +1,13 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.sql import func
-from sqlmodel import Session, select
-from app.database import get_db, engine
-from app.models import Question, Answer
-from pydantic import BaseModel
-from typing import List
 import random
+from typing import List
+from fastapi import APIRouter, Depends
+from sqlmodel import select
+from sqlmodel.ext.asyncio.session import AsyncSession
+from pydantic import BaseModel
+from app.database import get_db
+from app.models import Question, Answer
 
-router = APIRouter(prefix = "/questions", tags = ["questions"])
+router = APIRouter(prefix="/questions", tags=["questions"])
 
 # Khuôn để return answer
 class AnswerResponse(BaseModel):
@@ -19,23 +19,57 @@ class QuestionResponse(BaseModel):
     content: str
     answers: List[AnswerResponse] = []
 
+# ── BIẾN CACHE LƯU CÂU HỎI TRÊN RAM ──
+QUESTIONS_CACHE: List[QuestionResponse] = []
+
+
 @router.get("", response_model=List[QuestionResponse])
-def get_questions(db: Session = Depends(get_db)):
-    # all_questions = db.exec(select(Question)).all()
-    # all_answers = db.exec(select(Answer)).all()
+async def get_questions(db: AsyncSession = Depends(get_db)):
+    global QUESTIONS_CACHE
 
-    # result = []
-    # for q in all_questions:
-    #     q_answer = [AnswerResponse(id=a.id, content=a.content) for a in all_answers if a.question_id == q.id]
-    #     result.append(QuestionResponse(id=q.id, content=q.content, answers=q_answer))
-    
-    # return result
-    questions = db.exec(select(Question).order_by(func.random())).all()
+    # 1. Nếu chưa có Cache, chỉ query DB đúng 2 câu lệnh duy nhất để gộp dữ liệu
+    if not QUESTIONS_CACHE:
+        # Query 1: Lấy toàn bộ Question
+        q_stmt = select(Question)
+        q_res = await db.exec(q_stmt)
+        questions = q_res.all()
 
+        # Query 2: Lấy toàn bộ Answer trong 1 câu lệnh (Giải quyết triệt để N+1)
+        a_stmt = select(Answer)
+        a_res = await db.exec(a_stmt)
+        answers = a_res.all()
+
+        # Nhóm Answer theo question_id trên RAM
+        answers_by_q = {}
+        for a in answers:
+            answers_by_q.setdefault(a.question_id, []).append(
+                AnswerResponse(id=a.id, content=a.content)
+            )
+
+        # Xây dựng danh sách Cache
+        cached_list = []
+        for q in questions:
+            q_ans = answers_by_q.get(q.id, [])
+            cached_list.append(
+                QuestionResponse(id=q.id, content=q.content, answers=q_ans)
+            )
+
+        QUESTIONS_CACHE = cached_list
+
+    # 2. Xáo trộn câu hỏi và đáp án hoàn toàn trên RAM (Tốc độ phản hồi ~1ms, KHÔNG tốn query DB)
     result = []
-    for q in questions:
-        answers = db.exec(select(Answer).where(Answer.question_id == q.id).order_by(func.random())).all()
-        q_answer = [AnswerResponse(id=a.id, content=a.content) for a in answers]
+    shuffled_questions = list(QUESTIONS_CACHE)
+    random.shuffle(shuffled_questions)
 
-        result.append(QuestionResponse(id=q.id, content=q.content, answers=q_answer))
+    for item in shuffled_questions:
+        shuffled_answers = list(item.answers)
+        random.shuffle(shuffled_answers)
+        result.append(
+            QuestionResponse(
+                id=item.id,
+                content=item.content,
+                answers=shuffled_answers
+            )
+        )
+
     return result

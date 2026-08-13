@@ -1,17 +1,31 @@
-import os
 # pyrefly: ignore [missing-import]
-from dotenv import load_dotenv
 # pyrefly: ignore [missing-import]
-from sqlmodel import create_engine, Session
 from .config import settings
+from sqlalchemy.ext.asyncio import create_async_engine
+from sqlmodel.ext.asyncio.session import AsyncSession
+from sqlalchemy.orm import sessionmaker
 
 
 # Lấy đường dẫn trong file .env
 DATABASE_URL = settings.DATABASE_URL
+ASYNC_DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
 
 # Tạo engine
-engine = create_engine(DATABASE_URL, echo=True)
+async_engine = create_async_engine(
+    ASYNC_DATABASE_URL,
+    pool_size=10,
+    max_overflow=5,
+    pool_timeout=10,
+    pool_recycle=1800,
+    connect_args={
+        "statement_cache_size": 0,
+        "prepared_statement_cache_size": 0,
+    },
+)
 
-def get_db(): 
-    with Session(engine) as session:
+async def get_db():
+    async_session = sessionmaker(
+        bind=async_engine, class_=AsyncSession, expire_on_commit=False
+    )
+    async with async_session() as session:
         yield session
