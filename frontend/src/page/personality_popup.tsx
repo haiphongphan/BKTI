@@ -1,32 +1,26 @@
-import co_be from "/image/mochi/Co_be.webp";
-import lgbt from "/image/mochi/Lgbt.webp";
-import onfa from "/image/mochi/Onfa.webp";
-import max from "/image/mochi/max_square.webp";
-import tkka from "/image/mochi/Tkka.webp";
-import svn8 from "/image/mochi/Svn8.webp";
-import mtp from "/image/mochi/Mtp.webp";
-import bugs from "/image/mochi/Bugs.webp";
-import secret from "/image/mochi/secret.webp"
+import React from "react";
 import "./personality_popupstyle.css";
 
+const getMochiImg = (path: string) => `/image/mochi/${path}?v=2`;
+
 const PERSONALITY_ITEMS = [
-  { img: co_be + "?v=2", label: "Cô bé đi lạc" },
-  { img: lgbt + "?v=2", label: "LGBT" },
-  { img: onfa + "?v=2", label: "ONFA" },
-  { img: max + "?v=2", label: <>Tối đa<br />Verstappen</> },
-  { img: tkka + "?v=2", label: <>TKKA<br />(Thủ khoa khối A)</> },
-  { img: svn8 + "?v=2", label: "SVN8" },
-  { img: mtp + "?v=2", label: "Núi Rừng MTV" },
-  { img: bugs + "?v=2", label: "BUGS" },
-  { img: secret + "?v=2", label: "Bí mật hehe" },
-  { img: secret + "?v=2", label: "Bí mật hehe" },
+  { img: getMochiImg("Co_be.webp"), label: "Cô bé đi lạc" },
+  { img: getMochiImg("Lgbt.webp"), label: "LGBT" },
+  { img: getMochiImg("Onfa.webp"), label: "ONFA" },
+  { img: getMochiImg("max_square.webp"), label: <>Tối đa<br />Verstappen</> },
+  { img: getMochiImg("Tkka.webp"), label: <>TKKA<br />(Thủ khoa khối A)</> },
+  { img: getMochiImg("Svn8.webp"), label: "SVN8" },
+  { img: getMochiImg("Mtp.webp"), label: "Núi Rừng MTV" },
+  { img: getMochiImg("Bugs.webp"), label: "BUGS" },
+  { img: getMochiImg("secret.webp"), label: "Bí mật hehe" },
+  { img: getMochiImg("secret.webp"), label: "Bí mật hehe" },
 ];
 
 export default function Personality({ onClose }: { onClose: () => void }) {
   return (
     <div className="personality">
       <p className="title">Các kiểu tính cách trong bài kiểm tra</p>
-      <button className="close-btn" onClick={onClose}>
+      <button className="close-btn" onClick={onClose} aria-label="Đóng">
         &times;
       </button>
 
@@ -35,7 +29,13 @@ export default function Personality({ onClose }: { onClose: () => void }) {
         {PERSONALITY_ITEMS.map((item, index) => (
           <div className="personality-item" key={index}>
             <div className="img-wrapper">
-              <img src={item.img} alt="Personality Avatar" className="rectangle-img" />
+              <img 
+                src={item.img} 
+                alt={typeof item.label === 'string' ? item.label : "Personality Avatar"} 
+                className="rectangle-img"
+                loading="lazy"      /* Giúp tải nhẹ nhàng trên di động */
+                decoding="async"    /* Giải mã ảnh không gây đơ/khựng UI */
+              />
             </div>
             <span className="item-label">{item.label}</span>
           </div>
