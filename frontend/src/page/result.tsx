@@ -67,13 +67,6 @@ export default function Result() {
     link.click();
   };
 
-  useEffect(() => {
-    // Lấy dữ liệu kết quả đã lưu từ localStorage khi trang Result vừa mở lên
-    const savedResult = localStorage.getItem("quiz_result");
-    if (savedResult) {
-      setResult(JSON.parse(savedResult));
-    }
-  }, []);
 
   useEffect(() => {
   const savedResult = localStorage.getItem("quiz_result");

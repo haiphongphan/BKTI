@@ -46,7 +46,7 @@ function Answer() {
   if (loading)
     return (
       <div style={{ padding: "50px", alignContent: "center" }}>
-        Đang cập nhật câu hỏi
+        {/* Đang cập nhật câu hỏi */}
       </div>
     );
   if (questions.length === 0)
@@ -256,7 +256,7 @@ function Answer() {
             <span className="step-badge">BƯỚC 3</span>
             <h3 className="step-title">
               {/* EDITABLE_TEXT: Tiêu đề bước 3 */}
-              Bức phá tiềm năng của bạn
+              Bứt phá tiềm năng của bạn
             </h3>
             <p className="step-desc">
               {/* EDITABLE_TEXT: Mô tả bước 3 */}
