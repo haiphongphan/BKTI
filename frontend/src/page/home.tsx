@@ -330,7 +330,7 @@ export default function Home({
                 người sử dụng BKTI phiên bản Beta cho thấy: 67,67% người tham gia
                 sử dụng BKTI như một chủ đề để tán gẫu hay mở lời hẹn hò. Khi bạn
                 nói "BKTI của tôi là JZTR" với nhà tuyển dụng, có thể họ sẽ không
-                ấn tượng mấy, nhưng nếu nói với crush thì cô ấy/ anh ấy sẽ đổ bạn
+                ấn tượng mấy, nhưng nếu nói với crush thì cô ấy/anh ấy sẽ đổ bạn
                 ngay lập tức, vì đó là 1 trong 2 kiểu tính cách ẩn của chúng tôi.
               </p>
             </TiltCard>
