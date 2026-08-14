@@ -5,4 +5,5 @@ psycopg2-binary
 pydantic
 python-dotenv
 pydantic-settings
-asyncpg "sqlalchemy[asyncio]"
+asyncpg
+sqlalchemy[asyncio]

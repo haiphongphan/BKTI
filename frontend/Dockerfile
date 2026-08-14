@@ -7,8 +7,8 @@ RUN npm ci
 
 COPY . .
 
-ARG VITE_API_URL=/api 
-ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_API_BASE_URL=/api 
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
 
 RUN npm run build
 
@@ -18,6 +18,12 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /app/dist /usr/share/nginx/html 
 
-EXPOSE 80
+RUN sed -i 's/^user /#user /' /etc/nginx/nginx.conf
+
+RUN chown -R nginx:nginx /run && chown -R nginx:nginx /var/cache/nginx && chown -R nginx:nginx /var/log/nginx && chown -R nginx:nginx /usr/share/nginx/html
+
+USER nginx
+
+EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
