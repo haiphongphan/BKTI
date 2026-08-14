@@ -190,7 +190,7 @@ export default function Home({
   // if (loading)
   //   return (
   //     <div style={{ padding: "50px", alignContent: "center" }}>
-  //       Đang cập nhật bảng xếp hạng
+  //       Trang web đang khởi động. Bạn vui lòng chờ 30s sau đó tải lại trang để sử dụng nhé!
   //     </div>
   //   );
 
