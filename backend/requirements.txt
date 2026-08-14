@@ -7,3 +7,4 @@ python-dotenv
 pydantic-settings
 asyncpg 
 sqlalchemy[asyncio]
+slowapi

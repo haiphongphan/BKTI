@@ -1,6 +1,6 @@
 import os
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel.ext.asyncio.session import AsyncSession
 
@@ -8,6 +8,13 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.database import get_db, async_engine
 from app.models import SQLModel
 from app.routers import quiz, questions
+from app.limiter import limiter
+from slowapi import _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+
+import logging
+from fastapi.responses import JSONResponse
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -17,6 +24,7 @@ async def lifespan(app: FastAPI):
     yield
 
 # Khởi tạo backend
+
 IS_PRODUCTION = os.getenv("ENVIRONMENT") == "production"
 app = FastAPI(title="BKTI API", lifespan=lifespan,
     docs_url=None if IS_PRODUCTION else "/docs",
@@ -25,6 +33,20 @@ app = FastAPI(title="BKTI API", lifespan=lifespan,
 )
 app.include_router(questions.router)
 app.include_router(quiz.router)
+
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# Ghi log ra màn hình console của Render để bạn đọc debug
+logger = logging.getLogger("uvicorn.error")
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    logger.error(f"Lỗi không xác định tại {request.url.path}: {str(exc)}")
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Máy chủ đang bận hoặc có lỗi xảy ra. Vui lòng thử lại sau!"},
+    )
 
 @app.get("/")
 @app.head("/")
