@@ -7,7 +7,7 @@ import Ins from "/image/ins.svg";
 import Git from "/image/github.svg";
 import Personality from '../page/personality_popup';
 
-const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export interface Personality {
   code: string;

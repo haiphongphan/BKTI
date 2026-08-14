@@ -6,7 +6,7 @@ interface NavbarProps {
   activeItem?: 'home' | 'ranking' | 'personality' | 'faq' | 'credit';
   isAnswerPage?: boolean;
 }
-const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export const Navbar: React.FC<NavbarProps> = ({ onNavClick, activeItem, isAnswerPage }) => {
   const [isOpen, setIsOpen] = useState(false);
