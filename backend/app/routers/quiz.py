@@ -16,7 +16,7 @@ CACHE_TTL = 5  # Cache tồn tại trong 5 giây
 router = APIRouter(prefix="/quiz", tags=["Quiz"])
 
 @router.post("/submit", status_code=status.HTTP_201_CREATED)
-@limiter.limit("10/minute")
+@limiter.limit("5/minute")
 async def submit(request: Request, submission: QuizSubmit, db: AsyncSession = Depends(get_db)):
     # A là nghiêng trái, C là nghiêng phải, B là ở giữa (Dựa vào sheet câu hỏi)
     dimension_1_A = dimension_1_B = dimension_2_A = dimension_2_B = dimension_3_A = dimension_3_B = 0
