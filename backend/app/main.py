@@ -1,3 +1,4 @@
+import os
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,7 +17,12 @@ async def lifespan(app: FastAPI):
     yield
 
 # Khởi tạo backend
-app = FastAPI(title="BKTI API", lifespan=lifespan)
+IS_PRODUCTION = os.getenv("ENVIRONMENT") == "production"
+app = FastAPI(title="BKTI API", lifespan=lifespan,
+    docs_url=None if IS_PRODUCTION else "/docs",
+    redoc_url=None if IS_PRODUCTION else "/redoc",
+    openapi_url=None if IS_PRODUCTION else "/openapi.json",
+)
 app.include_router(questions.router)
 app.include_router(quiz.router)
 
