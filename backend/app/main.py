@@ -8,7 +8,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.database import get_db, async_engine
 from app.models import SQLModel
 from app.routers import quiz, questions
-from app.limiter import limiter
+from app.limiter import limiter, get_real_ip
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
@@ -44,9 +44,8 @@ logger = logging.getLogger("uvicorn.error")
 
 @app.middleware("http")
 async def log_real_client_ip(request: Request, call_next):
-    # Lấy IP thật
-    forwarded = request.headers.get("X-Forwarded-For")
-    client_ip = forwarded.split(",")[0].strip() if forwarded else (request.client.host if request.client else "unknown")
+    # Tái sử dụng hàm lấy IP chuẩn
+    client_ip = get_real_ip(request)
     
     response = await call_next(request)
     
@@ -56,35 +55,56 @@ async def log_real_client_ip(request: Request, call_next):
         
     return response
 
-IP_VIOLATIONS = defaultdict(int)
+# Cấu hình Auto Ban
+BAN_DURATION = 600       # Thời gian cấm: 10 phút (600 giây)
+MAX_VIOLATIONS = 5       # Số lần 429 tối đa trước khi bị cấm
+VIOLATION_WINDOW = 60    # Chỉ tính các lần 429 diễn ra trong vòng 60 giây
+
+# Lưu lịch sử vi phạm: { ip: [timestamp_1, timestamp_2, ...] }
+IP_VIOLATION_TIMESTAMPS = defaultdict(list)
 TEMP_BANNED_IPS = {}
 
-# @app.middleware("http")
-# async def auto_ban_middleware(request: Request, call_next):
-#     client_ip = request.headers.get("X-Forwarded-For", "").split(",")[0].strip() or request.client.host
-#     now = time.time()
+@app.middleware("http")
+async def auto_ban_middleware(request: Request, call_next):
+    # Lấy IP an toàn bằng hàm get_real_ip đã có
+    client_ip = get_real_ip(request)
+    now = time.time()
 
-#     # Kiểm tra xem IP có đang trong thời gian bị phạt cấm không (10 phút)
-#     if client_ip in TEMP_BANNED_IPS:
-#         if now < TEMP_BANNED_IPS[client_ip]:
-#             return JSONResponse(
-#                 status_code=403,
-#                 content={"detail": "Bạn đã bị tạm khóa do gửi quá nhiều request. Vui lòng thử lại sau 10 phút."}
-#             )
-#         else:
-#             del TEMP_BANNED_IPS[client_ip]
-#             IP_VIOLATIONS[client_ip] = 0
+    # 1. Kiểm tra nếu IP đang trong thời gian bị cấm
+    if client_ip in TEMP_BANNED_IPS:
+        ban_until = TEMP_BANNED_IPS[client_ip]
+        if now < ban_until:
+            remaining = int(ban_until - now)
+            return JSONResponse(
+                status_code=403,
+                content={
+                    "detail": f"Bạn đã bị tạm khóa do spam request. Vui lòng thử lại sau {remaining} giây."
+                }
+            )
+        else:
+            # Hết hạn cấm -> xóa khỏi danh sách cấm và reset lịch sử vi phạm
+            del TEMP_BANNED_IPS[client_ip]
+            IP_VIOLATION_TIMESTAMPS.pop(client_ip, None)
 
-#     response = await call_next(request)
+    # 2. Cho request đi tiếp vào route
+    response = await call_next(request)
 
-#     # Nếu request trả về 429 (vượt rate limit), tăng điểm vi phạm
-#     if response.status_code == 429:
-#         IP_VIOLATIONS[client_ip] += 1
-#         # Nếu vượt rate limit quá 5 lần -> Khóa tạm thời 10 phút (600s)
-#         if IP_VIOLATIONS[client_ip] >= 5:
-#             TEMP_BANNED_IPS[client_ip] = now + 600
+    # 3. Nếu route trả về mã 429 (SlowAPI chặn), ghi nhận vi phạm
+    if response.status_code == 429:
+        # Lọc bỏ các mốc thời gian vi phạm đã quá 60 giây
+        valid_timestamps = [
+            t for t in IP_VIOLATION_TIMESTAMPS[client_ip] 
+            if now - t < VIOLATION_WINDOW
+        ]
+        valid_timestamps.append(now)
+        IP_VIOLATION_TIMESTAMPS[client_ip] = valid_timestamps
 
-#     return response
+        # Nếu vi phạm đủ 5 lần trong 60 giây -> Ban 10 phút
+        if len(valid_timestamps) >= MAX_VIOLATIONS:
+            TEMP_BANNED_IPS[client_ip] = now + BAN_DURATION
+            IP_VIOLATION_TIMESTAMPS.pop(client_ip, None)
+
+    return response
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
