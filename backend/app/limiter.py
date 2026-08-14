@@ -1,5 +1,13 @@
-# app/limiter.py
 from slowapi import Limiter
-from slowapi.util import get_remote_address
+from starlette.requests import Request
 
-limiter = Limiter(key_func=get_remote_address)
+# Hàm bóc tách IP thật của người dùng đứng sau Render Proxy
+def get_real_ip(request: Request) -> str:
+    forwarded = request.headers.get("X-Forwarded-For")
+    if forwarded:
+        # Lấy IP đầu tiên trong chuỗi (IP gốc của client)
+        return forwarded.split(",")[0].strip()
+    return request.client.host if request.client else "127.0.0.1"
+
+# Khởi tạo limiter với hàm get_real_ip chuẩn
+limiter = Limiter(key_func=get_real_ip)
