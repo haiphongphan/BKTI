@@ -14,6 +14,8 @@ from slowapi.errors import RateLimitExceeded
 
 import logging
 from fastapi.responses import JSONResponse
+import time
+from collections import defaultdict
 
 
 @asynccontextmanager
@@ -39,6 +41,50 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Ghi log ra màn hình console của Render để bạn đọc debug
 logger = logging.getLogger("uvicorn.error")
+
+@app.middleware("http")
+async def log_real_client_ip(request: Request, call_next):
+    # Lấy IP thật
+    forwarded = request.headers.get("X-Forwarded-For")
+    client_ip = forwarded.split(",")[0].strip() if forwarded else (request.client.host if request.client else "unknown")
+    
+    response = await call_next(request)
+    
+    # In ra log nổi bật nếu có request POST hoặc bị 429
+    if request.method == "POST" or response.status_code == 429:
+        logger.info(f"🌐 [CLIENT IP]: {client_ip} | {request.method} {request.url.path} | Status: {response.status_code}")
+        
+    return response
+
+IP_VIOLATIONS = defaultdict(int)
+TEMP_BANNED_IPS = {}
+
+# @app.middleware("http")
+# async def auto_ban_middleware(request: Request, call_next):
+#     client_ip = request.headers.get("X-Forwarded-For", "").split(",")[0].strip() or request.client.host
+#     now = time.time()
+
+#     # Kiểm tra xem IP có đang trong thời gian bị phạt cấm không (10 phút)
+#     if client_ip in TEMP_BANNED_IPS:
+#         if now < TEMP_BANNED_IPS[client_ip]:
+#             return JSONResponse(
+#                 status_code=403,
+#                 content={"detail": "Bạn đã bị tạm khóa do gửi quá nhiều request. Vui lòng thử lại sau 10 phút."}
+#             )
+#         else:
+#             del TEMP_BANNED_IPS[client_ip]
+#             IP_VIOLATIONS[client_ip] = 0
+
+#     response = await call_next(request)
+
+#     # Nếu request trả về 429 (vượt rate limit), tăng điểm vi phạm
+#     if response.status_code == 429:
+#         IP_VIOLATIONS[client_ip] += 1
+#         # Nếu vượt rate limit quá 5 lần -> Khóa tạm thời 10 phút (600s)
+#         if IP_VIOLATIONS[client_ip] >= 5:
+#             TEMP_BANNED_IPS[client_ip] = now + 600
+
+#     return response
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
