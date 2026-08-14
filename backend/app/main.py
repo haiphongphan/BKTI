@@ -8,7 +8,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from app.database import get_db, async_engine
 from app.models import SQLModel
 from app.routers import quiz, questions
-from app.limiter import limiter, get_real_ip
+from app.limiter import limiter, get_identifier
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
@@ -33,6 +33,22 @@ app = FastAPI(title="BKTI API", lifespan=lifespan,
     redoc_url=None if IS_PRODUCTION else "/redoc",
     openapi_url=None if IS_PRODUCTION else "/openapi.json",
 )
+
+# Khai báo danh sách các địa chỉ fe được phép gọi vào be
+origins = [
+    "http://localhost:5173",
+    "https://bkti-flax.vercel.app",
+    "https://bkti.id.vn"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"], # Cho phép tất cả các lệnh GET, POST, PUT, DELETE...
+    allow_headers=["*"], # Cho phép tất cả các loại dữ liệu truyền lên
+)
+
 app.include_router(questions.router)
 app.include_router(quiz.router)
 
@@ -41,19 +57,6 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 # Ghi log ra màn hình console của Render để bạn đọc debug
 logger = logging.getLogger("uvicorn.error")
-
-@app.middleware("http")
-async def log_real_client_ip(request: Request, call_next):
-    # Tái sử dụng hàm lấy IP chuẩn
-    client_ip = get_real_ip(request)
-    
-    response = await call_next(request)
-    
-    # In ra log nổi bật nếu có request POST hoặc bị 429
-    if request.method == "POST" or response.status_code == 429:
-        logger.info(f"🌐 [CLIENT IP]: {client_ip} | {request.method} {request.url.path} | Status: {response.status_code}")
-        
-    return response
 
 # Cấu hình Auto Ban
 BAN_DURATION = 600       # Thời gian cấm: 10 phút (600 giây)
@@ -64,45 +67,56 @@ VIOLATION_WINDOW = 60    # Chỉ tính các lần 429 diễn ra trong vòng 60 g
 IP_VIOLATION_TIMESTAMPS = defaultdict(list)
 TEMP_BANNED_IPS = {}
 
+
 @app.middleware("http")
-async def auto_ban_middleware(request: Request, call_next):
-    # Lấy IP an toàn bằng hàm get_real_ip đã có
-    client_ip = get_real_ip(request)
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
+
+@app.middleware("http")
+async def auto_ban_and_log_middleware(request: Request, call_next):
+    client_id = get_identifier(request)
     now = time.time()
 
-    # 1. Kiểm tra nếu IP đang trong thời gian bị cấm
-    if client_ip in TEMP_BANNED_IPS:
-        ban_until = TEMP_BANNED_IPS[client_ip]
+    # 3.1. Kiểm tra nếu client đang bị tạm cấm
+    if client_id in TEMP_BANNED_IPS:
+        ban_until = TEMP_BANNED_IPS[client_id]
         if now < ban_until:
             remaining = int(ban_until - now)
             return JSONResponse(
                 status_code=403,
                 content={
-                    "detail": f"Bạn đã bị tạm khóa do spam request. Vui lòng thử lại sau {remaining} giây."
+                    "detail": f"Thiết bị của bạn đã bị tạm khóa do thao tác quá nhanh. Vui lòng thử lại sau {remaining} giây."
                 }
             )
         else:
-            # Hết hạn cấm -> xóa khỏi danh sách cấm và reset lịch sử vi phạm
-            del TEMP_BANNED_IPS[client_ip]
-            IP_VIOLATION_TIMESTAMPS.pop(client_ip, None)
+            del TEMP_BANNED_IPS[client_id]
+            IP_VIOLATION_TIMESTAMPS.pop(client_id, None)
 
-    # 2. Cho request đi tiếp vào route
+    # 3.2. Thực thi request
     response = await call_next(request)
 
-    # 3. Nếu route trả về mã 429 (SlowAPI chặn), ghi nhận vi phạm
+    # 3.3. Ghi log nếu là POST hoặc bị dính 429
+    if request.method == "POST" or response.status_code == 429:
+        logger.info(f"🌐 [CLIENT]: {client_id} | {request.method} {request.url.path} | Status: {response.status_code}")
+
+    # 3.4. Xử lý vi phạm rate limit
     if response.status_code == 429:
-        # Lọc bỏ các mốc thời gian vi phạm đã quá 60 giây
         valid_timestamps = [
-            t for t in IP_VIOLATION_TIMESTAMPS[client_ip] 
+            t for t in IP_VIOLATION_TIMESTAMPS[client_id] 
             if now - t < VIOLATION_WINDOW
         ]
         valid_timestamps.append(now)
-        IP_VIOLATION_TIMESTAMPS[client_ip] = valid_timestamps
+        IP_VIOLATION_TIMESTAMPS[client_id] = valid_timestamps
 
-        # Nếu vi phạm đủ 5 lần trong 60 giây -> Ban 10 phút
         if len(valid_timestamps) >= MAX_VIOLATIONS:
-            TEMP_BANNED_IPS[client_ip] = now + BAN_DURATION
-            IP_VIOLATION_TIMESTAMPS.pop(client_ip, None)
+            TEMP_BANNED_IPS[client_id] = now + BAN_DURATION
+            IP_VIOLATION_TIMESTAMPS.pop(client_id, None)
+            logger.warning(f"🚫 [BANNED]: {client_id} bị khóa trong {BAN_DURATION} giây.")
 
     return response
 
@@ -124,17 +138,3 @@ async def read_root():
 async def test_db(db: AsyncSession = Depends(get_db)):
     return {"status": "Kết nối PostgreSQL bằng Async SQLModel thành công!"}
 
-# Khai báo danh sách các địa chỉ fe được phép gọi vào be
-origins = [
-    "http://localhost:5173",
-    "https://bkti-flax.vercel.app",
-    "https://bkti.id.vn"
-]
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"], # Cho phép tất cả các lệnh GET, POST, PUT, DELETE...
-    allow_headers=["*"], # Cho phép tất cả các loại dữ liệu truyền lên
-)
