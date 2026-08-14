@@ -70,6 +70,15 @@ function Answer() {
     }
   };
 
+  const getClientId = (): string => {
+    let clientId = localStorage.getItem("quiz_client_id");
+    if (!clientId) {
+      clientId = crypto.randomUUID();
+      localStorage.setItem("quiz_client_id", clientId);
+    }
+    return clientId;
+  };
+
   const handleSubmitQuiz = async () => {
     setSubmitting(true);
     try {
@@ -78,7 +87,12 @@ function Answer() {
       };
 
       // Gọi API POST nộp bài lên Backend
-      const response = await axios.post(`${API_URL}/quiz/submit`, payload);
+      const response = await axios.post(`${API_URL}/quiz/submit`, payload, {
+        headers: {
+          "Content-Type": "application/json",
+          "X-Client-ID": getClientId(),
+        },
+      });
 
       if (response.data) {
         // Lưu kết quả tính cách vào localStorage để trang Result hiển thị
@@ -89,9 +103,27 @@ function Answer() {
           (window as any).navigateToResult();
         }
       }
-    } catch (error) {
-      console.error("Lỗi khi nộp bài:", error);
-      alert("Đã xảy ra lỗi hệ thống khi nộp bài, vui lòng thử lại!");
+    } catch (error: any) {
+    console.error("Lỗi khi nộp bài:", error);
+
+    // 2. Phân loại mã lỗi trả về từ Backend
+    if (error.response) {
+      const status = error.response.status;
+      const data = error.response.data;
+
+      if (status === 429) {
+        alert("Bạn đang thao tác quá nhanh! Vui lòng đợi 30 giây rồi mới bấm nộp lại.");
+      } else if (status === 403) {
+        // Thông báo từ middleware auto-ban (kèm số giây bị cấm)
+        const msg = data?.detail || "Bạn đã bị tạm khóa do spam gửi bài. Vui lòng thử lại sau 10 phút.";
+        alert(`${msg}`);
+      } else {
+        alert(data?.detail || "Đã xảy ra lỗi khi nộp bài, vui lòng kiểm tra lại!");
+      }
+    } else {
+      // Trường hợp mất mạng hoặc không kết nối được tới server
+      alert("Không thể kết nối đến máy chủ. Vui lòng kiểm tra lại kết nối mạng!");
+    }
     } finally {
       setSubmitting(false);
     }
