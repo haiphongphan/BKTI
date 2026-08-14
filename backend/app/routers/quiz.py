@@ -1,19 +1,23 @@
 import time
 from typing import Dict, Any
-from fastapi import APIRouter, Depends, status, HTTPException
+from fastapi import APIRouter, Depends, status, HTTPException, Request
 from sqlmodel import select, func
 from sqlmodel.ext.asyncio.session import AsyncSession
 from app.database import get_db
 from app.models import User_ans, Personality
 from app.schemas import QuizSubmit
+from app.limiter import limiter
+
 
 RANKING_CACHE: Dict[str, Any] = {"data": None, "last_updated": 0}
 CACHE_TTL = 5  # Cache tồn tại trong 5 giây
 
+
 router = APIRouter(prefix="/quiz", tags=["Quiz"])
 
 @router.post("/submit", status_code=status.HTTP_201_CREATED)
-async def submit(submission: QuizSubmit, db: AsyncSession = Depends(get_db)):
+@limiter.limit("10/minute")
+async def submit(request: Request, submission: QuizSubmit, db: AsyncSession = Depends(get_db)):
     # A là nghiêng trái, C là nghiêng phải, B là ở giữa (Dựa vào sheet câu hỏi)
     dimension_1_A = dimension_1_B = dimension_2_A = dimension_2_B = dimension_3_A = dimension_3_B = 0
     for str_q_id, user_ans in submission.answers.items():
@@ -123,7 +127,8 @@ async def ranking(db: AsyncSession = Depends(get_db)):
     return response_data
 
 @router.post("/secret-submit/{code}", status_code=status.HTTP_201_CREATED)
-async def submit_secret(code: str, db: AsyncSession = Depends(get_db)):
+@limiter.limit("5/minute")
+async def submit_secret(request: Request, code: str, db: AsyncSession = Depends(get_db)):
     # 1. Kiểm tra xem mã code này có tồn tại trong bảng Personality không (tránh spam code rác)
     statement = select(Personality).where(Personality.code == code)
     exec_result = await db.exec(statement)
