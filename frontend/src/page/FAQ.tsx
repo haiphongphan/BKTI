@@ -51,7 +51,7 @@ function Faq({onClose} : any) {
         </p>
         <p className="text-wrapper-6">
             Hoàn toàn có thể. Chúng tôi có lựa chọn lưu hình ảnh minh họa cho tính
-            cách của bạn dưới dạng PDF.
+            cách của bạn dưới dạng PNG.
         </p>
       </div>
       <div className="faq-item">

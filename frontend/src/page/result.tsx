@@ -309,7 +309,7 @@ export default function Result() {
               </div>
             </div>
             <div className="branding-right">
-              <span className="brand-url">bkti.cse.vn</span>
+              <span className="brand-url">bkti.id.vn</span>
             </div>
           </div>
         </div>
