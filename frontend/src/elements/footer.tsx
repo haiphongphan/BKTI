@@ -146,7 +146,7 @@ const CREDIT_MEMBERS : Member[] = [
     quote: "\"Bí mật nằm đâu đó quanh đây...\"",
     avatar: "/image/credit_members/Mochi.webp?v=2",
     socials: {
-      facebook: "https://www.facebook.com/BKCSE.Multimedia",
+      facebook: "https://www.facebook.com/share/p/1PfTtGMXdx/",
       tiktok: "https://www.tiktok.com/@csemultimedia",
       email: "mailto:dtn-ktmt@hcmut.edu.vn",
       easterEgg: {
