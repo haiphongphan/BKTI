@@ -25,7 +25,7 @@ const SPECIAL_RANKING_TOPS = [1078, 1146];
 const DH_SLIDES = [
   {
     id: 1,
-    title: "Đoàn hội khoa Khoa học và Kỹ thuật Máy tính",
+    title: "Đoàn - Hội khoa Khoa học và Kỹ thuật Máy tính",
     content: (
       <>
         <img
