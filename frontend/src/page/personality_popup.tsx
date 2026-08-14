@@ -1,25 +1,25 @@
-import co_be from "/image/mochi/Co_be.webp";
-import lgbt from "/image/mochi/Lgbt.webp";
-import onfa from "/image/mochi/Onfa.webp";
+import co_be from "/image/mochi/Co_be_small.webp";
+import lgbt from "/image/mochi/Lgbt_small.webp";
+import onfa from "/image/mochi/onfa_small.webp";
 import max from "/image/mochi/max_square.webp";
-import tkka from "/image/mochi/Tkka.webp";
-import svn8 from "/image/mochi/Svn8.webp";
-import mtp from "/image/mochi/Mtp.webp";
-import bugs from "/image/mochi/Bugs.webp";
+import tkka from "/image/mochi/Tkka_small.webp";
+import svn8 from "/image/mochi/Svn8_small.webp";
+import mtp from "/image/mochi/Mtp_small.webp";
+import bugs from "/image/mochi/Bugs_small.webp";
 import secret from "/image/mochi/secret.webp"
 import "./personality_popupstyle.css";
 
 const PERSONALITY_ITEMS = [
-  { img: co_be, label: "Cô bé đi lạc" },
-  { img: lgbt, label: "LGBT" },
-  { img: onfa, label: "ONFA" },
-  { img: max, label: <>Tối đa<br />Verstappen</> },
-  { img: tkka, label: <>TKKA<br />(Thủ khoa khối A)</> },
-  { img: svn8, label: "SVN8" },
-  { img: mtp, label: "Núi Rừng MTV" },
-  { img: bugs, label: "BUGS" },
-  { img: secret, label: "Bí mật hehe" },
-  { img: secret, label: "Bí mật hehe" },
+  { img: co_be + "?v=2", label: "Cô bé đi lạc" },
+  { img: lgbt + "?v=2", label: "LGBT" },
+  { img: onfa + "?v=2", label: "ONFA" },
+  { img: max + "?v=2", label: <>Tối đa<br />Verstappen</> },
+  { img: tkka + "?v=2", label: <>TKKA<br />(Thủ khoa khối A)</> },
+  { img: svn8 + "?v=2", label: "SVN8" },
+  { img: mtp + "?v=2", label: "Núi Rừng MTV" },
+  { img: bugs + "?v=2", label: "BUGS" },
+  { img: secret + "?v=2", label: "Bí mật hehe" },
+  { img: secret + "?v=2", label: "Bí mật hehe" },
 ];
 
 export default function Personality({ onClose }: { onClose: () => void }) {

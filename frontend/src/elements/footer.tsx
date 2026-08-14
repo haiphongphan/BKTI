@@ -7,7 +7,7 @@ import Ins from "/image/ins.svg";
 import Git from "/image/github.svg";
 import Personality from '../page/personality_popup';
 
-const API_URL = import.meta.env.VITE_BASE_API_URL || "http://localhost:8000";
+const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 export interface Personality {
   code: string;
@@ -144,9 +144,9 @@ const CREDIT_MEMBERS : Member[] = [
     name: "Mochi",
     role: "Kéo Tương Tác Cho Page",
     quote: "\"Bí mật nằm đâu đó quanh đây...\"",
-    avatar: "/image/credit_members/Mochi.webp",
+    avatar: "/image/credit_members/Mochi.webp?v=2",
     socials: {
-      facebook: "https://www.facebook.com/BKCSE.Multimedia",
+      facebook: "https://www.facebook.com/share/p/1PfTtGMXdx/",
       tiktok: "https://www.tiktok.com/@csemultimedia",
       email: "mailto:dtn-ktmt@hcmut.edu.vn",
       easterEgg: {
@@ -458,7 +458,7 @@ const Footer: React.FC = () => {
           <p className="footer__text_01">
             Sản phẩm được thực hiện bởi{" "}
             <strong>
-              Ban Truyền thông khoa Khoa học và Kỹ thuật Máy tính (BTT)
+              Ban Truyền thông khoa Khoa học và Kỹ thuật Máy tính
             </strong>
             .
           </p>
@@ -476,6 +476,9 @@ const Footer: React.FC = () => {
               © {new Date().getFullYear()} CSE-Multimedia. All rights reserved.
             </span>
           </div>
+          <p className="footer__special-thanks_01">
+            Special thanks to: <span>Dé Sontune Montepré (Sơn Tùng MTP)</span> • <span>Max Verstappen</span> • <span>なみりん (*namirin)</span> • <span>Cô Xuân Anh</span> • <span>Nhà Thám Hiểm - ATVNCG</span> • <span>Trần My</span> • <span>Gemini 3.6 Flash</span> • <span>Suno-AI</span>
+          </p>
         </div>
       </div>
     </footer>

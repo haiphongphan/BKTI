@@ -10,17 +10,23 @@ from sqlalchemy.orm import sessionmaker
 DATABASE_URL = settings.DATABASE_URL
 ASYNC_DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+asyncpg://")
 
-# Tạo engine
+connect_args = {
+    "statement_cache_size": 0,
+    "prepared_statement_cache_size": 0,
+    "timeout": 5,
+    "command_timeout": 5,
+    "server_settings": {"statement_timeout": "5000"},
+}
+if "supabase.co" in DATABASE_URL:
+    connect_args["ssl"] = True
+
 async_engine = create_async_engine(
     ASYNC_DATABASE_URL,
-    pool_size=10,
+    pool_size=5,
     max_overflow=5,
-    pool_timeout=10,
+    pool_timeout=5,
     pool_recycle=1800,
-    connect_args={
-        "statement_cache_size": 0,
-        "prepared_statement_cache_size": 0,
-    },
+    connect_args=connect_args,
 )
 
 async def get_db():

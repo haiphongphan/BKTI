@@ -1,11 +1,12 @@
 import random
 from typing import List
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Request
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from pydantic import BaseModel
 from app.database import get_db
 from app.models import Question, Answer
+from app.limiter import limiter
 
 router = APIRouter(prefix="/questions", tags=["questions"])
 
@@ -24,7 +25,8 @@ QUESTIONS_CACHE: List[QuestionResponse] = []
 
 
 @router.get("", response_model=List[QuestionResponse])
-async def get_questions(db: AsyncSession = Depends(get_db)):
+@limiter.limit("30/minute")
+async def get_questions(request: Request, db: AsyncSession = Depends(get_db)):
     global QUESTIONS_CACHE
 
     # 1. Nếu chưa có Cache, chỉ query DB đúng 2 câu lệnh duy nhất để gộp dữ liệu

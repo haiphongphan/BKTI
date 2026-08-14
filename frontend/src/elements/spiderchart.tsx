@@ -103,7 +103,7 @@ export const Chart: React.FC<ChartProps> = ({ scores = [0, 0, 0, 0, 0, 0] }) => 
   }, []);
 
   const chartData: ChartData<'radar'> = {
-    labels: ['Im Lặng', 'Hay Nói', 'VibeCoder', 'Handmade', 'Chữa Lành', 'Mutant'],
+    labels: ['Im Lặng', 'VibeCoder', 'Chữa Lành', 'Hay Nói', 'Handmade', 'Mutant'],
     datasets: [
       {
         label: SPIDER_CHART_CONFIG.employeeName,

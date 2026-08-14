@@ -46,7 +46,7 @@ function Answer() {
   if (loading)
     return (
       <div style={{ padding: "50px", alignContent: "center" }}>
-        Đang cập nhật câu hỏi
+        {/* Đang cập nhật câu hỏi */}
       </div>
     );
   if (questions.length === 0)
@@ -159,7 +159,9 @@ function Answer() {
   const handleNavClick = (
     target: "home" | "ranking" | "personality" | "faq" | "credit",
   ) => {
-    if (target === "personality") {
+    if (target === "home") {
+      (window as any).navigateToHome?.();
+    } else if (target === "personality") {
       setPersPopup(true);
     } else if (target === "faq") {
       setFaq(true);
@@ -200,7 +202,7 @@ function Answer() {
       <div className="quiz-intro-section">
         <div className="quiz-intro-header">
           <img
-            src="/image/bkti_logo.webp"
+            src="/image/bkti_logo.webp?v=2"
             alt="BKTI Logo"
             className="quiz-intro-logo"
           />
@@ -217,12 +219,12 @@ function Answer() {
           {/* Bước 1 */}
           <TiltCard className="quiz-step-card step-card-blue">
             <div className="step-image-wrap">
-              <img src="/image/step1.webp" alt="Step 1" className="step-image" />
+              <img src="/image/step1.webp?v=2" alt="Step 1" className="step-image" />
             </div>
             <span className="step-badge">BƯỚC 1</span>
             <h3 className="step-title">
               {/* EDITABLE_TEXT: Tiêu đề bước 1 */}
-              Làm bài kiểm tra
+              Kéo xuống làm bài kiểm tra
             </h3>
             <p className="step-desc">
               {/* EDITABLE_TEXT: Mô tả bước 1 */}
@@ -233,7 +235,7 @@ function Answer() {
           {/* Bước 2 */}
           <TiltCard className="quiz-step-card step-card-green">
             <div className="step-image-wrap">
-              <img src="/image/step2.webp" alt="Step 2" className="step-image" />
+              <img src="/image/step2.webp?v=2" alt="Step 2" className="step-image" />
             </div>
             <span className="step-badge">BƯỚC 2</span>
             <h3 className="step-title">
@@ -249,12 +251,12 @@ function Answer() {
           {/* Bước 3 */}
           <TiltCard className="quiz-step-card step-card-purple">
             <div className="step-image-wrap">
-              <img src="/image/step3.webp" alt="Step 3" className="step-image" />
+              <img src="/image/step3.webp?v=2" alt="Step 3" className="step-image" />
             </div>
             <span className="step-badge">BƯỚC 3</span>
             <h3 className="step-title">
               {/* EDITABLE_TEXT: Tiêu đề bước 3 */}
-              Bức phá tiềm năng của bạn
+              Bứt phá tiềm năng của bạn
             </h3>
             <p className="step-desc">
               {/* EDITABLE_TEXT: Mô tả bước 3 */}
