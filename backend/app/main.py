@@ -33,14 +33,8 @@ async def test_db(db: AsyncSession = Depends(get_db)):
 # Khai báo danh sách các địa chỉ fe được phép gọi vào be
 origins = [
     "http://localhost:5173",
-    "http://127.0.0.1:5173",
-    "http://localhost",
-    "http://127.0.0.1",
-    "http://localhost:80",
-    "http://127.0.0.1:80",
-    "http://127.0.0.1:5500",
-    "http://localhost:4173",
-    "https://bkti-flax.vercel.app"
+    "https://bkti-flax.vercel.app",
+    "https://bkti.id.vn"
 ]
 
 app.add_middleware(
