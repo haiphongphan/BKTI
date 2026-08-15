@@ -1,5 +1,3 @@
-# Render Free sleeps after ~15 minutes idle. Ping /health so the dyno stays warm.
-# GitHub only runs schedule on the repo DEFAULT branch (usually main).
 name: Keep Render awake
 
 on:
@@ -13,6 +11,4 @@ jobs:
     timeout-minutes: 2
     steps:
       - name: GET /health
-        run: |
-          curl -fsS --retry 3 --retry-delay 5 --max-time 45 \ 
-          "https://api.bkti.id.vn/health"
+        run: curl -fsS --retry 3 --retry-delay 5 --max-time 45 https://api.bkti.id.vn/health
