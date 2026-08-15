@@ -15,6 +15,7 @@ import logging
 from fastapi import FastAPI, Depends, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from sqlalchemy import text
 from sqlmodel.ext.asyncio.session import AsyncSession
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 from slowapi import _rate_limit_exceeded_handler
@@ -40,6 +41,15 @@ async def lifespan(app: FastAPI):
     if settings.should_create_tables:
         async with async_engine.begin() as conn:
             await conn.run_sync(SQLModel.metadata.create_all)
+    try:
+        async with async_engine.connect() as conn:
+            await conn.execute(text("SELECT 1"))
+        logger.info("Database connection OK")
+    except Exception:
+        logger.exception(
+            "Database connection failed. Dùng URI pooler Supabase "
+            "(*.pooler.supabase.com:6543), không dùng Direct IPv6."
+        )
     yield
 
 # Khởi tạo backend
