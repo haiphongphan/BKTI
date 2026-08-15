@@ -98,6 +98,16 @@ async def _read_body_capped(request: Request) -> bytes | None:
     return b"".join(chunks)
 
 
+
+@app.middleware("http")
+async def add_security_headers(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["X-Content-Type-Options"] = "nosniff"
+    response.headers["X-Frame-Options"] = "DENY"
+    response.headers["X-XSS-Protection"] = "1; mode=block"
+    response.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
+    return response
+
 @app.middleware("http")
 async def security_and_ban_middleware(request: Request, call_next):
     """Cap body → chặn IP đang ban → ghi 429 vào BanStore → luôn gắn security header.
