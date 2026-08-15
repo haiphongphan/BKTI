@@ -77,7 +77,7 @@ connect_args = {
     "prepared_statement_cache_size": 0,
     "timeout": 10,
     "command_timeout": 10,
-    "server_settings": {"statement_timeout": "5000"},
+    #"server_settings": {"statement_timeout": "5000"},
 }
 if use_ssl:
     connect_args["ssl"] = True
