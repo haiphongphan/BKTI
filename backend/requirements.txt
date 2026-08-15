@@ -1,10 +1,10 @@
 fastapi
-uvicorn
+uvicorn[standard]
 sqlmodel
 psycopg2-binary
 pydantic
 python-dotenv
 pydantic-settings
-asyncpg 
+asyncpg
 sqlalchemy[asyncio]
 slowapi

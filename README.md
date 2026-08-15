@@ -17,12 +17,33 @@ docker compose exec backend python -m app.seed_data
 Mở: `http://localhost`  
 Nếu port 80 bị chiếm, sửa `FRONTEND_PORT=8080` trong `.env` rồi `docker compose up -d`, mở `http://localhost:8080`.
 
+### Đã có container rồi
+
+Chỉ cần bật lại (không build lại):
+
+```bash
+docker compose up -d
+```
+
+Đổi code / Dockerfile / nginx thì build lại:
+
+```bash
+docker compose up --build -d
+```
+
+Seed chỉ cần lần đầu (hoặc khi muốn nạp lại data):
+
+```bash
+docker compose exec backend python -m app.seed_data
+```
+
 Lệnh hay dùng:
 
 ```bash
 docker compose ps
 docker compose logs -f
-docker compose down
+docker compose down          # dừng, giữ data DB
+docker compose down -v       # dừng + xóa volume DB (mất data)
 ```
 
 ---
@@ -80,7 +101,7 @@ Mở: `http://localhost:5173/`
 Ở thư mục gốc: `./run.sh`
 
 ## Convert image to webp
-`npx sharp -i ./public/image/mochi/*.png -o ./public/image/mochi -f webp`
+`npx --yes sharp-cli -i ./public/image/mochi/*.png -o ./public/image/mochi -f webp`
 
 ## Remove database
 `TRUNCATE TABLE user_ans RESTART IDENTITY CASCADE;`
