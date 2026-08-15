@@ -1,3 +1,15 @@
+"""Entry FastAPI: giới hạn body, CORS whitelist, ẩn docs, header, ban, proxy.
+
+Lỗ hổng đã vá (tóm tắt):
+- Body cap 32 KiB kể cả khi thiếu ``Content-Length`` (đọc từng chunk ASGI).
+- CORS chỉ origin env; method/header hẹp; ``credentials=False``.
+- ``/docs`` ``/redoc`` ``/openapi.json`` tắt trên production.
+- ``/test-db`` chỉ mount khi không production (tránh lộ health DB).
+- Header chống clickjacking/MIME sniff; HSTS khi production.
+- 500 không leak traceback ra client.
+- ``ProxyHeadersMiddleware`` chỉ khi ``TRUST_PROXY`` — không tin XFF mặc định.
+"""
+
 import logging
 
 from fastapi import FastAPI, Depends, Request
@@ -19,11 +31,12 @@ from app.ban import ban_store
 
 logger = logging.getLogger("uvicorn.error")
 
-MAX_BODY_BYTES = 32 * 1024
+MAX_BODY_BYTES = 32 * 1024  # chặn POST khổng lồ làm đầy RAM worker
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    """Startup: chỉ ``create_all`` khi ``should_create_tables`` (không prod mặc định)."""
     if settings.should_create_tables:
         async with async_engine.begin() as conn:
             await conn.run_sync(SQLModel.metadata.create_all)
@@ -34,10 +47,12 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="BKTI API",
     lifespan=lifespan,
+    # Ẩn Swagger/ReDoc/OpenAPI trên production — tránh lộ schema + thử endpoint.
     docs_url=None if settings.is_production else "/docs",
     redoc_url=None if settings.is_production else "/redoc",
     openapi_url=None if settings.is_production else "/openapi.json",
 )
+
 app.include_router(questions.router)
 app.include_router(quiz.router)
 
@@ -46,6 +61,7 @@ app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 
 def _apply_security_headers(response):
+    """Gắn header chống clickjack / MIME sniff / HSTS. Gọi cả trên response lỗi sớm."""
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["X-Frame-Options"] = "DENY"
     response.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
@@ -59,7 +75,12 @@ def _apply_security_headers(response):
 
 
 async def _read_body_capped(request: Request) -> bytes | None:
-    """Consume the ASGI body with a hard cap so missing Content-Length cannot fill RAM."""
+    """Đọc body theo chunk, cắt ở ``MAX_BODY_BYTES``.
+
+    ``Content-Length`` có thể thiếu hoặc giả. Nếu chỉ check header rồi
+    ``await request.body()``, attacker gửi stream không giới hạn → OOM.
+    Trả ``None`` khi vượt cap.
+    """
     chunks: list[bytes] = []
     total = 0
     while True:
@@ -79,6 +100,11 @@ async def _read_body_capped(request: Request) -> bytes | None:
 
 @app.middleware("http")
 async def security_and_ban_middleware(request: Request, call_next):
+    """Cap body → chặn IP đang ban → ghi 429 vào BanStore → luôn gắn security header.
+
+    Phải ``return`` mọi nhánh (413/403/response). Middleware thiếu return từng
+    làm response rơi và NameError khi gọi helper chưa định nghĩa.
+    """
     if request.method in {"POST", "PUT", "PATCH"}:
         content_length = request.headers.get("content-length")
         # kiểm tra để ban
@@ -122,7 +148,7 @@ async def security_and_ban_middleware(request: Request, call_next):
             )
         )
 
-    # 2. Cho request đi tiếp vào route
+    # 3.2. Thực thi request
     response = await call_next(request)
 
     #3. Nếu route trả về mã 429 (SlowAPI chặn), ghi nhận vi phạm
@@ -145,6 +171,7 @@ async def security_and_ban_middleware(request: Request, call_next):
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
+    """500 generic cho client; traceback chỉ ghi log. Không lộ stack/SQL."""
     logger.exception("Unhandled error at %s", request.url.path)
     return _apply_security_headers(
         JSONResponse(
@@ -163,24 +190,29 @@ async def read_root():
 @app.get("/health")
 @limiter.exempt
 async def health():
+    """Probe Render/load balancer. Exempt limiter để health check không tự 429."""
     return {"status": "ok"}
 
 
 if not settings.is_production:
     @app.get("/test-db")
     async def test_db(db: AsyncSession = Depends(get_db)):
+        """Chỉ dev: ping DB. Production không mount — tránh lộ trạng thái nội bộ."""
         return {"status": "ok"}
 
+# CORS whitelist từ env. ``X-Client-ID`` chỉ để frontend gửi UUID localStorage;
+# limiter KHÔNG dùng header này làm key (tránh xoay ID né quota).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.cors_origin_list,
     allow_credentials=False,
     allow_methods=["GET", "POST", "HEAD", "OPTIONS"],
-    allow_headers=["Content-Type", "Accept"],
+    allow_headers=["Content-Type", "Accept", "X-Client-ID"],
     max_age=600,
 )
 app.add_middleware(SlowAPIMiddleware)
 if settings.TRUST_PROXY:
+    # Chỉ tin X-Forwarded-* khi đứng sau Render. Không bật trên origin lộ thẳng.
     app.add_middleware(
         ProxyHeadersMiddleware,
         trusted_hosts=settings.FORWARDED_ALLOW_IPS,

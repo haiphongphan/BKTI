@@ -1,3 +1,13 @@
+"""Quiz submit / ranking / easter-egg. Rate-limit + whitelist + cache chống DoS DB.
+
+Lỗ hổng đã vá:
+- Submit: 5/phút + 20/giờ theo IP (không theo ``X-Client-ID``).
+- Ranking: 20/phút + cache 60s + lock — tránh stampede query COUNT khi flood GET.
+- Secret-submit: whitelist ``LMAO``/``NSFW``, path chỉ alphanumeric, 3/phút +
+  10/giờ; tắt bằng ``ENABLE_SECRET_SUBMIT``. Response không echo code lạ.
+- 500 khi thiếu personality: message generic, không lộ chi tiết DB.
+"""
+
 import asyncio
 import time
 from typing import Dict, Any
@@ -23,6 +33,7 @@ router = APIRouter(prefix="/quiz", tags=["Quiz"])
 @limiter.limit("20/hour")
 @limiter.limit("5/minute")
 async def submit(request: Request, submission: QuizSubmit, db: AsyncSession = Depends(get_db)):
+    """Nộp bài. Body đã validate ở ``QuizSubmit``; quota theo IP ở decorator."""
     # A là nghiêng trái, C là nghiêng phải, B là ở giữa (Dựa vào sheet câu hỏi)
     dimension_1_A = dimension_1_B = dimension_2_A = dimension_2_B = dimension_3_A = dimension_3_B = 0
     for str_q_id, user_ans in submission.answers.items():
@@ -94,6 +105,7 @@ async def submit(request: Request, submission: QuizSubmit, db: AsyncSession = De
 @router.get("/ranking")
 @limiter.limit("20/minute")
 async def ranking(request: Request, db: AsyncSession = Depends(get_db)):
+    """Bảng xếp hạng. Cache + lock: một request refresh DB, các request khác dùng RAM."""
     global RANKING_CACHE
     current_time = time.time()
 
@@ -150,6 +162,7 @@ async def submit_secret(
     code: str = Path(..., min_length=2, max_length=16, pattern=r"^[A-Za-z0-9]+$"),
     db: AsyncSession = Depends(get_db),
 ):
+    """Easter egg. Code ngoài whitelist → 404 (không tiết lộ danh sách). Không echo input."""
     if not settings.ENABLE_SECRET_SUBMIT:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
 
@@ -169,4 +182,4 @@ async def submit_secret(
     db.add(result_db)
     await db.commit()
 
-    return {"message": f"Đã ghi nhận Easter Egg {normalized} thành công!"}
+    return {"message": "Đã ghi nhận Easter Egg thành công!"}

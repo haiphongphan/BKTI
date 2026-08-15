@@ -1,3 +1,15 @@
+"""Engine Postgres async. Timeout + SSL để DoS/pooler không giữ connection chết.
+
+Lỗ hổng đã vá:
+- ``timeout`` / ``command_timeout`` / ``statement_timeout``: query treo không
+  chiếm pool mãi (DoS gián tiếp khi saturating DB).
+- ``ssl=True`` khi URL chứa ``supabase.co``: bắt buộc TLS tới pooler, không
+  gửi password/query plaintext.
+- ``statement_cache_size=0``: tương thích PgBouncer/Supabase transaction pooler
+  (prepared statement lệch cache gây lỗi hoặc hành vi lạ).
+- Pool nhỏ + ``pool_timeout``: không mở hàng trăm connection khi bị flood.
+"""
+
 # pyrefly: ignore [missing-import]
 # pyrefly: ignore [missing-import]
 from .config import settings
@@ -30,6 +42,7 @@ async_engine = create_async_engine(
 )
 
 async def get_db():
+    """Session ngắn; đóng khi request xong để không giữ connection khi bị flood."""
     async_session = sessionmaker(
         bind=async_engine, class_=AsyncSession, expire_on_commit=False
     )

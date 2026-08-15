@@ -104,7 +104,7 @@ def import_traits_csv(file_path: str):
     print(" Đã import thành công bảng Trait!")
 
 def clear_all_tables():
-    """Xóa sạch toàn bộ dữ liệu và reset sequence ID về đầu (1)."""
+    """TRUNCATE mọi bảng quiz. Nguy hiểm trên production — chỉ gọi từ ``__main__`` seed local."""
     print("--- Đang dọn dẹp toàn bộ dữ liệu cũ trong Database ---")
 
     with Session(engine) as session:
