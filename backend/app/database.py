@@ -14,6 +14,8 @@ Lỗ hổng đã vá:
 
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
+import ssl
+from pathlib import Path
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlalchemy.orm import sessionmaker
 from sqlmodel.ext.asyncio.session import AsyncSession
@@ -30,6 +32,10 @@ LIBPQ_ONLY_QUERY_KEYS = {
     "gssencmode",
 }
 
+CA_CERT_PATH = Path(__file__).resolve().parent / "certs" / "prod-ca-2021.crt"
+ssl_context = ssl.create_default_context(cafile=str(CA_CERT_PATH))
+ssl_context.check_hostname = True
+ssl_context.verify_mode = ssl.CERT_REQUIRED
 
 def _to_asyncpg_url(url: str) -> str:
     if url.startswith("postgresql+asyncpg://"):
@@ -80,7 +86,7 @@ connect_args = {
     #"server_settings": {"statement_timeout": "5000"},
 }
 if use_ssl:
-    connect_args["ssl"] = True
+    connect_args["ssl"] = ssl_context
 
 async_engine = create_async_engine(
     ASYNC_DATABASE_URL,
