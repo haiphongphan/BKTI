@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str
 
     ENVIRONMENT: str = "development"
-    CORS_ORIGINS: str = "http://localhost:5173"
+    CORS_ORIGINS: str = "http://localhost:5173, https://bkti.id.vn, https://bkti-flax.vercel.app"
     TRUST_PROXY: bool = False
     FORWARDED_ALLOW_IPS: str = "127.0.0.1"
     ENABLE_SECRET_SUBMIT: bool = True
