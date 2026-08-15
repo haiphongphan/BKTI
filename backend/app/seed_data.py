@@ -1,8 +1,8 @@
 import csv
 from pathlib import Path
 from sqlmodel import Session, create_engine, SQLModel, text
-from app.models import Trait, Personality, Dimension, Question, Answer, User_ans
-from app.config import settings
+from models import Trait, Personality, Dimension, Question, Answer, User_ans
+from config import settings
 
 # Lấy đường dẫn trong file .env
 DATABASE_URL = settings.DATABASE_URL
@@ -104,37 +104,29 @@ def import_traits_csv(file_path: str):
     print(" Đã import thành công bảng Trait!")
 
 def clear_all_tables():
-    """TRUNCATE mọi bảng quiz. Nguy hiểm trên production — chỉ gọi từ ``__main__`` seed local."""
+    """Xóa sạch toàn bộ dữ liệu của tất cả các bảng trong database"""
     print("--- Đang dọn dẹp toàn bộ dữ liệu cũ trong Database ---")
-
-    with Session(engine) as session:
-        # Một lệnh TRUNCATE: xóa hết + RESTART IDENTITY (sequence về 1)
-        session.execute(
-            text(
-                "TRUNCATE TABLE answer, trait, question, dimension, personality, user_ans "
-                "RESTART IDENTITY CASCADE;"
-            )
-        )
-        session.commit()
-    print(" Đã dọn dẹp database sạch sẽ!")
-
-
-def sync_id_sequences():
-    """Sau khi insert ID thủ công từ CSV, đồng bộ sequence = MAX(id)."""
-    # Chỉ các bảng seed bằng ID tường minh trong CSV
-    tables = ("dimension", "question", "answer")
+    
+    tables = [
+        "answer", 
+        "trait", 
+        "question", 
+        "dimension", 
+        "personality",
+        "user_ans"
+    ]
+    
     with Session(engine) as session:
         for table in tables:
-            session.execute(
-                text(
-                    f"SELECT setval("
-                    f"pg_get_serial_sequence('{table}', 'id'), "
-                    f"COALESCE((SELECT MAX(id) FROM {table}), 1), "
-                    f"(SELECT MAX(id) FROM {table}) IS NOT NULL)"
-                )
-            )
+            try:
+                # RESTART IDENTITY giúp reset các khóa tự tăng (ID) về lại số 1
+                session.exec(text(f"TRUNCATE TABLE {table} RESTART IDENTITY CASCADE;"))
+            except Exception as e:
+                # Thay vì dùng 'pass', hãy in ra để xem nếu có lỗi thật sự xảy ra
+                # (Ví dụ: bảng chưa được khởi tạo thì in ra để biết)
+                print(f"⚠️ Lưu ý: Không thể dọn dẹp bảng {table} (Có thể bảng chưa tồn tại)")
         session.commit()
-    print(" Đã đồng bộ sequence ID!")
+    print(" Đã dọn dẹp database sạch sẽ!")
 #Test 
 def seed_mock_user_answers():
     """Tự động tạo một số kết quả khảo sát mẫu để bảng xếp hạng hoạt động ngay"""
@@ -165,8 +157,6 @@ if __name__ == "__main__":
     import_question_csv(DATA_DIR / "question.csv")
     import_traits_csv(DATA_DIR / "traits.csv")
     import_answer_csv(DATA_DIR / "answer.csv")
-
-    sync_id_sequences()
 
     # Tự động nạp dữ liệu xếp hạng mẫu
     seed_mock_user_answers()
