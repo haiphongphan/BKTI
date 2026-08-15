@@ -101,7 +101,7 @@ Mở: `http://localhost:5173/`
 Ở thư mục gốc: `./run.sh`
 
 ## Convert image to webp
-`npx sharp -i ./public/image/mochi/*.png -o ./public/image/mochi -f webp`
+`npx --yes sharp-cli -i ./public/image/mochi/*.png -o ./public/image/mochi -f webp`
 
 ## Remove database
 `TRUNCATE TABLE user_ans RESTART IDENTITY CASCADE;`
