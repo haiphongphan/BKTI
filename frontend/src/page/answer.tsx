@@ -70,6 +70,11 @@ function Answer() {
     }
   };
 
+  /**
+   * UUID ổn định trên trình duyệt (localStorage).
+   * Chỉ gửi kèm header `X-Client-ID` để debug/gắn máy — backend KHÔNG dùng
+   * header này làm key rate-limit (client xoay UUID là né được quota).
+   */
   const getClientId = (): string => {
     let clientId = localStorage.getItem("quiz_client_id");
     if (!clientId) {
