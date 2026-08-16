@@ -1,0 +1,18 @@
+name: Keep Render Backend Alive
+
+on:
+  schedule:
+    # Chạy mỗi phút (Render sleep sau 15 phút không có request)
+    - cron: '*/5 * * * *'
+  # Cho phép bấm nút chạy thủ công để test ngay lập tức
+  workflow_dispatch:
+
+jobs:
+  ping-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send keep-alive request
+        run: |
+          curl -s -o /dev/null -w "HTTP Status: %{http_code}\n" \
+            -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36" \
+            https://bkti.onrender.com/
