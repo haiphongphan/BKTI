@@ -1,0 +1,12 @@
+name: keep alive for render after 5 minutes
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS --max-time 45 --retry 3 https://bkti.onrender.com
