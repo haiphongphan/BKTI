@@ -66,7 +66,7 @@ const CREDIT_MEMBERS : Member[] = [
     socials: {
       facebook: "https://www.facebook.com/phongphanhai06",
       instagram: "https://www.instagram.com/phongphanhai06",
-      email: "mailto:phong.phan06@hcmut.edu.vn"
+      email: "mailto:phong.phanhai06@hcmut.edu.vn"
     },
   },
   {
