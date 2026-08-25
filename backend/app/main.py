@@ -38,7 +38,8 @@ app = FastAPI(title="BKTI API", lifespan=lifespan,
 origins = [
     "http://localhost:5173",
     "https://bkti-flax.vercel.app",
-    "https://bkti.id.vn"
+    "https://bkti.id.vn",
+    "https://bkti-test-deploy.vercel.app"
 ]
 
 app.add_middleware(
