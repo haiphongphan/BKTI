@@ -134,6 +134,10 @@ async def global_exception_handler(request: Request, exc: Exception):
 async def read_root():
     return {"message": "Chào mừng đến với BKTI"}
 
+@app.get("/api/health")
+async def health():
+    return {"status": "ok"}
+
 
 @app.get("/test-db")
 async def test_db(db: AsyncSession = Depends(get_db)):
